@@ -1,0 +1,6 @@
+#!/usr/bin/python
+SConscript([ 'simpleApp/SConstruct',
+             'simplePivyApp/SConstruct',
+             ])
+
+#             'SimpleHapticExample/SConstruct'

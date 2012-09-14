@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="timer" updateRate="60">
+	<V4L2Src name="V4L2Src" pixelformat="R8G8B8" width=320 height=240 fps=10> 
+		<GLUTSink name="glsink1" pixelformat="R8G8B8X8"/> 
+	</V4L2Src>
+</openvideo>
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <CORBAConfig/>
+  </configuration>
+  <PhantomLocationSink group="225.0.0.12" eid="6" pid="94" frequency="1" DEF="Marcelo">
+      <ElasticFilter force="0.1" damp="0.2">
+	<PhantomLocationSource group="225.0.0.12" eid="6" pid="100" DEF="Miguel"/>
+      </ElasticFilter>
+  </PhantomLocationSink>
+  <PushSupp name="EventChannel.Marcelo">
+    <Ref USE="Marcelo"/>
+  </PushSupp>
+  <PushSupp name="EventChannel.Miguel">
+    <Ref USE="Miguel"/>
+  </PushSupp>
+</OpenTracker>

@@ -1,0 +1,144 @@
+#Inventor V2.1 ascii
+SoDisplay 
+{
+  # Specify position (upper-left corner)
+  xoffset 0
+  yoffset 0
+  # and size of the viewer-window (in pixels)
+  width 1280	
+  height 1024
+  
+  # Enable or disable headlight
+  # headlight TRUE
+  
+  # Specify the intensity of the headlight
+  # headlightIntensity 1.0
+  
+  # Specify additional environment nodes.
+  # (SoEnvironment,SoLightModel,SoLight,SoLightKit)
+  # customEnvironment [Environment {ambientIntensity .3
+  #                                 ambientColor 1 0 0 
+  #                                }, ...]
+  
+  # Specify the background color
+ backgroundColor 0 0 0
+  
+  #  Specify transparency type that shall be used by theD:\Denis\Work\stb4 viewer
+  #  note: see documentation of SoGLRenderAction for description
+  #        of all transparencyTypes
+  #  transparencyType SCREEN_DOOR 
+  #  transparencyType ADD       
+  #  transparencyType DELAYED_ADD
+  #  transparencyType SORTED_OBJECT_ADD 
+  #  transparencyType DELAYED_BLEND     
+  #  transparencyType SORTED_OBJECT_BLEND 
+    transparencyType BLEND
+  
+  
+  # specifies visibility of the mouse cursor in within the window. 
+  # @note works only with Qt currently */
+  #showMouse TRUE
+  
+  #  specifies whether the window should be decorated orD:\Denis\Work\stb4 not
+  # (have borders, title bar, etc. ). Default value is TRUE.
+  # This is independend of the display mode.          
+  #  windowBorder TRUE
+    windowBorder FALSE
+
+  # specifies whether the window should be on top of all others or not
+  # if specified for more than one window, than the latest one is on 
+  # top of all others, but the others are also on top of "normal"
+  # windows. 
+  # Only implemented for QT currently!
+  #windowOnTop FALSE
+  
+  # specifies whether the viewer should be decorated or D:\Denis\Work\stb4not, 
+  # this enables the buttons and wheel widgets around the render area.
+  # Default value is TRUE. 
+  # This is independend of the display mode.
+#  decoration TRUE
+  decoration FALSE
+
+  
+  
+  # specifies whether to request a stencil buffer or not. 
+  # This setting is important if you use SoStencilBuffer nodes in your applications
+  #stencilBuffer FALSE
+
+#	showFrameRate TRUE
+
+	#showTriangleCount TRUE
+  
+###########################################
+###########################################
+
+
+
+###########################################
+###########################################
+
+#	useRefCamera TRUE
+    
+	sceneGraph SoSeparator {
+
+		SoSeparator {
+
+				SoStbCamera {
+					
+				controlMode SoTrackedViewpointControlMode {
+					viewpointTrackerKey "tracking"
+					viewpointTrackerValue "SGTrack"
+					eyeOffset -0.03 0 0
+				}
+
+				camera SoOffAxisCamera {
+					viewportMapping LEAVE_ALONE
+					focalDistance 10
+					nearDistance 0.1
+					farDistance 10
+					orientation 1 0 0 -0.6
+					position 0 0 0 
+#					eyepointPosition -0.03 0.6 0.7
+					size 0.4 0.29
+				}
+			}
+
+			SoFieldSequentialDisplayMode {
+				buffer LEFT
+			}
+			
+	    SoStbScene{}
+		}
+
+		SoSeparator {
+
+			SoStbCamera {
+			
+				controlMode SoTrackedViewpointControlMode {
+					viewpointTrackerKey "tracking"
+					viewpointTrackerValue "SGTrack"
+					eyeOffset 0.03 0 0
+				}
+
+				camera SoOffAxisCamera {
+					viewportMapping LEAVE_ALONE
+					focalDistance 10
+					nearDistance 0.1
+					farDistance 10
+					orientation 1 0 0 -0.6
+					position 0 0 0
+#					eyepointPosition 0.03 0.6 0.7
+					size 0.4 0.29
+				}
+			}
+
+			SoFieldSequentialDisplayMode {
+				buffer RIGHT
+			}
+
+  		SoStbScene {}
+		}
+
+	}
+	
+}#SoDisplay

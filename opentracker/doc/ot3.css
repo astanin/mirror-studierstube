@@ -1,0 +1,246 @@
+
+
+/*  body und schrift deffinitionen */
+html { 
+  padding:0px;
+  margin:0px;
+}
+
+body {
+  background-color: #E2E4E9;
+  font-size: 11px;
+  font-family: Verdana, Arial, SunSans-Regular, Sans-Serif;
+  color:#454658;  
+  padding:0px;
+  margin:0px;
+}
+
+
+#heading{
+
+  background-color: #E2E4E9;
+}
+
+#title{
+  width: 100%;
+  height:125px;
+}
+
+#short_desc{
+  width:100%;
+  
+}
+
+#short_desc h1{
+  font-size: 12px;
+  text-transform:uppercase;
+  text-align: center;
+  color: #FFFFFF;
+  background-color: #728898;
+  padding:5px 15px;
+  margin:0px
+
+}
+
+
+#wrapper {
+width: 100%; 
+padding: 10px 0px 20px 00px; 
+background-color:  #728898;
+margin: 0 auto; 
+text-align: left; 
+}
+
+#menubar {margin: 0; padding: 0; list-style: none inside; }
+#menubar li { float: left; background-color: #E2E4E9; border: solid #728898; border-width: 0 0 0 0px; padding: 0px 10px 0px 10px;  text-align: center; }
+#menubar li:first-child {border: none; padding-left: 1px; }
+#menubar li a {display: block; color: #000000} 
+#menubar li a:hover {display: block; background-color: #f7f7fa; border: solid #E2E4E9; color: #000000; border-width: 0 0 0 0px; }
+a.nav3:link {color: #f6f6ff; text-decoration: none; }
+a.nav3:visited {color: white; text-decoration: none; }
+a.nav3:hover {color: #039;}
+a.nav3:active {color: #ffcc00;}
+
+#centralx {
+background-color: #E2E4E9;
+}
+
+
+#links {
+
+width: 194px;
+color: #454658;
+margin: 0px; 
+padding: 0px;
+background-color: #E2E4E9;
+
+float:left;
+}
+
+
+#maincontent {
+margin: 0px 0px 0px 195px;
+
+border-left: 6px solid #454658;
+border-right: 6px solid #454658;
+padding: 12px;
+background-color: #ffffff;
+min-height: 600px;
+}
+
+#maincontent h1 a{
+
+font-size: 11px;
+text-transform:uppercase;
+text-decoration: none;
+text-align: right;
+color: #FFFFFF;
+
+
+}
+
+#footerx {
+clear: both;
+background-color: #FF00FF;
+}
+
+	
+#inhalt {
+margin: 0px 20px 0px 195px;
+border-left: 2px solid #454658;
+border-right: 2px solid #454658;
+padding: 0px;
+background-color: #ffffff;
+position: relative;
+float: left;
+}
+
+/* Formatting styles for text */
+
+
+p, h2, pre {
+margin: 0px; 
+padding: 0px 0px 5px 5px; 
+
+
+}
+
+
+a { 
+color: #4877C4;
+font-size: 11px;
+background-color:transparent;
+text-decoration: none; 
+}
+ 
+pre { 
+color: #454658;
+font-size: 11px;
+background-color:transparent;
+font-family: Courier, Monaco, Monospace;
+}
+
+
+a:hover {
+color: #4877C4;
+background-color:transparent;
+text-decoration: underline;
+}
+
+.custom_spc {
+	font-size: 9px;
+	padding-bottom: 24px;
+	color: #454658;
+}
+
+.small {
+margin-top: 0;
+font-size: 11px;
+}
+
+.top_names {
+	text-transform: none;
+	font-variant: normal;
+	color: #CCCFD9;
+}
+
+
+
+.pad20px {
+	margin-left: 20px;
+}
+
+
+h3 {
+	font-size: 12px;
+	padding-left: 5px;
+}
+
+
+a img{border:none;  vertical-align:top; margin:2px 2px 2px 0px;}
+
+.alignright {
+margin-top: 0; 
+text-align: right;
+font-size: 10px;
+}
+
+
+
+h2 {
+font-size:15px;
+padding-top:10px;
+text-transform:uppercase;
+color: #454658;
+background-color: transparent;
+	}
+
+
+h1 {
+font-size: 11px;
+text-transform:uppercase;
+text-align: right;
+color: #FFFFFF;
+background-color: #728898;
+padding:5px 15px;
+margin:0px
+
+}
+
+
+
+strong { 
+font-size: 13px;
+}
+
+.niceTable th
+    {background-color: #F6F6F6;
+     font-weight: bold;
+     text-align: left;
+     border: solid 1px #F6F6F6;
+    }
+
+.niceTable td
+    {border: solid 1px #F6F6F6;
+    }
+
+
+H1 { text-align: center; }
+A.qindex {}
+A.qindexRef {}
+A.el { line-height: 19px;  }
+A.code { text-decoration: none; font-weight: normal; color: #4444ee }
+A.codeRef { font-weight: normal; color: #4444ee }
+DL.el { margin-left: -1cm; padding-top: 3px; padding-bottom: 3px; }
+DIV.fragment { width: 100%; border: none; background-color: #eeeeee; font-family:"Courier New", Courier, mono; }
+DIV.ah { background-color: #cccccc; border: 1px solid black; font-size: 12pt; font-weight: bold; width: 100px;}
+TD.md { background-color: #f2f2ff }
+DIV.groupHeader { margin-left: 16; margin-top: 12; margin-bottom: 6; font-weight: bold }
+DIV.groupText { margin-left: 16; font-style: italic; font-size: smaller }
+FONT.keyword       { color: #008000 }
+FONT.keywordtype   { color: #604020 }
+FONT.keywordflow   { color: #e08000 }
+FONT.comment       { color: #800000 }
+FONT.preprocessor  { color: #806020 }
+FONT.stringliteral { color: #002080 }
+FONT.charliteral   { color: #008080 }

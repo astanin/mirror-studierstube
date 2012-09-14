@@ -1,0 +1,374 @@
+# Microsoft eMbedded Visual Tools Project File - Name="TinyXML_Mod" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE ARMV4) Dynamic-Link Library" 0xa302
+
+CFG=TinyXML_Mod - Win32 (WCE ARMV4) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "TinyXML_Mod.vcn".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "TinyXML_Mod.vcn" CFG="TinyXML_Mod - Win32 (WCE ARMV4) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "TinyXML_Mod - Win32 (WCE ARMV4) Release" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE "TinyXML_Mod - Win32 (WCE ARMV4) Debug" (based on "Win32 (WCE ARMV4) Dynamic-Link Library")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+CPP="C:\Program Files\Microsoft eMbedded C++ 4.0\EVC\WCE500\bin\xicle44"
+MTL=midl.exe
+RSC=rc.exe
+
+!IF  "$(CFG)" == "TinyXML_Mod - Win32 (WCE ARMV4) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMV4Rel"
+# PROP BASE Intermediate_Dir "ARMV4Rel"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMV4Rel"
+# PROP Intermediate_Dir "ARMV4Rel"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "NDEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "NDEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "TINYXML_MOD_EXPORTS" /YX /O2 /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /Oxs /I "../../src/TinyXML" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "TINYXML_MOD_EXPORTS" /D "TINYXML_MOD_DLL"  /M$(CECrtMT) /c
+# SUBTRACT CPP /YX
+# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32="C:\Program Files\Microsoft eMbedded C++ 4.0\EVC\WCE500\bin\xilinke44"
+# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00100000" /stack:0x10000,0x1000 /entry:"_DllMainCRTStartup" /dll /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib Ccrtrtti.lib /nologo /base:"0x00100000" /stack:0x10000,0x1000 /entry:"_DllMainCRTStartup" /dll /pdb:"../../lib/PPC2003/TinyXML_Mod.pdb" /nodefaultlib:"$(CENoDefaultLib)" /out:"../../bin/PPC2003/TinyXML_Mod.dll" /implib:"../../lib/PPC2003/TinyXML_Mod.lib" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# SUBTRACT LINK32 /pdb:none
+
+!ELSEIF  "$(CFG)" == "TinyXML_Mod - Win32 (WCE ARMV4) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMV4Dbg"
+# PROP BASE Intermediate_Dir "ARMV4Dbg"
+# PROP BASE CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMV4Dbg"
+# PROP Intermediate_Dir "ARMV4Dbg"
+# PROP CPU_ID "{ECBEA43D-CD7B-4852-AD55-D4227B5D624B}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Ignore_Export_Lib 0
+# PROP Target_Dir ""
+# ADD BASE RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "DEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD RSC /l 0x409 /d UNDER_CE=$(CEVersion) /d _WIN32_WCE=$(CEVersion) /d "DEBUG" /d "UNICODE" /d "_UNICODE" /d "$(CePlatform)" /d "ARM" /d "_ARM_" /d "ARMV4" /r
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "TINYXML_MOD_EXPORTS" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /I "../../src/TinyXML" /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D "ARMV4" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "TINYXML_MOD_EXPORTS" /D "TINYXML_MOD_DLL" /M$(CECrtMTDebug) /c
+# SUBTRACT CPP /YX
+# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+LINK32="C:\Program Files\Microsoft eMbedded C++ 4.0\EVC\WCE500\bin\xilinke44"
+# ADD BASE LINK32 commctrl.lib coredll.lib /nologo /base:"0x00100000" /stack:0x10000,0x1000 /entry:"_DllMainCRTStartup" /dll /debug /nodefaultlib:"$(CENoDefaultLib)" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# ADD LINK32 commctrl.lib coredll.lib Ccrtrtti.lib /nologo /base:"0x00100000" /stack:0x10000,0x1000 /entry:"_DllMainCRTStartup" /dll /pdb:"../../lib/PPC2003/TinyXML_Modd.pdb" /debug /nodefaultlib:"$(CENoDefaultLib)" /out:"../../bin/PPC2003/TinyXML_Modd.dll" /implib:"../../lib/PPC2003/TinyXML_Modd.lib" /subsystem:$(CESubsystem) /align:"4096" /MACHINE:ARM
+# SUBTRACT LINK32 /pdb:none
+
+!ENDIF 
+
+# Begin Target
+
+# Name "TinyXML_Mod - Win32 (WCE ARMV4) Release"
+# Name "TinyXML_Mod - Win32 (WCE ARMV4) Debug"
+# Begin Group "TinyXML"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinystr.cpp
+DEP_CPP_TINYS=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinystr.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinyxml.cpp
+DEP_CPP_TINYX=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinyxml.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinyxmlerror.cpp
+DEP_CPP_TINYXM=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\TinyXMLMemManager.cpp
+DEP_CPP_TINYXML=\
+	"..\..\src\TinyXML\TinyXMLMemManager.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\TinyXMLMemManager.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXML\tinyxmlparser.cpp
+DEP_CPP_TINYXMLP=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	
+# End Source File
+# End Group
+# Begin Group "TinyXPath"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\action_store.cpp
+DEP_CPP_ACTIO=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\action_store.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\action_store.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\byte_stream.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\lex_token.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\lex_util.cpp
+DEP_CPP_LEX_U=\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	
+NODEP_CPP_LEX_U=\
+	"..\..\src\TinyXPath\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\lex_util.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\node_set.cpp
+DEP_CPP_NODE_=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\node_set.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\node_set.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\tinyxpath_conf.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\tokenlist.cpp
+DEP_CPP_TOKEN=\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	
+NODEP_CPP_TOKEN=\
+	"..\..\src\TinyXPath\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\tokenlist.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xml_util.cpp
+DEP_CPP_XML_U=\
+	"..\..\src\TinyXPath\xml_util.h"\
+	
+NODEP_CPP_XML_U=\
+	"..\..\src\TinyXPath\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xml_util.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_expression.cpp
+DEP_CPP_XPATH=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\node_set.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\xpath_expression.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_expression.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_processor.cpp
+DEP_CPP_XPATH_=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\action_store.h"\
+	"..\..\src\TinyXPath\byte_stream.h"\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\node_set.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	"..\..\src\TinyXPath\xml_util.h"\
+	"..\..\src\TinyXPath\xpath_expression.h"\
+	"..\..\src\TinyXPath\xpath_processor.h"\
+	"..\..\src\TinyXPath\xpath_stack.h"\
+	"..\..\src\TinyXPath\xpath_stream.h"\
+	"..\..\src\TinyXPath\xpath_syntax.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_processor.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_stack.cpp
+DEP_CPP_XPATH_S=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\action_store.h"\
+	"..\..\src\TinyXPath\byte_stream.h"\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\node_set.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	"..\..\src\TinyXPath\xpath_expression.h"\
+	"..\..\src\TinyXPath\xpath_processor.h"\
+	"..\..\src\TinyXPath\xpath_stack.h"\
+	"..\..\src\TinyXPath\xpath_stream.h"\
+	"..\..\src\TinyXPath\xpath_syntax.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_stack.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_static.cpp
+DEP_CPP_XPATH_ST=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\action_store.h"\
+	"..\..\src\TinyXPath\byte_stream.h"\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\node_set.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	"..\..\src\TinyXPath\xpath_expression.h"\
+	"..\..\src\TinyXPath\xpath_processor.h"\
+	"..\..\src\TinyXPath\xpath_stack.h"\
+	"..\..\src\TinyXPath\xpath_static.h"\
+	"..\..\src\TinyXPath\xpath_stream.h"\
+	"..\..\src\TinyXPath\xpath_syntax.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_static.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_stream.cpp
+DEP_CPP_XPATH_STR=\
+	"..\..\src\TinyXML\tinystr.h"\
+	"..\..\src\TinyXML\tinyxml.h"\
+	"..\..\src\TinyXPath\byte_stream.h"\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	"..\..\src\TinyXPath\xpath_stream.h"\
+	"..\..\src\TinyXPath\xpath_syntax.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_stream.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_syntax.cpp
+DEP_CPP_XPATH_SY=\
+	"..\..\src\TinyXPath\lex_token.h"\
+	"..\..\src\TinyXPath\lex_util.h"\
+	"..\..\src\TinyXPath\tinyxpath_conf.h"\
+	"..\..\src\TinyXPath\tokenlist.h"\
+	"..\..\src\TinyXPath\xpath_syntax.h"\
+	
+NODEP_CPP_XPATH_SY=\
+	"..\..\src\TinyXPath\tinyxml.h"\
+	
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\src\TinyXPath\xpath_syntax.h
+# End Source File
+# End Group
+# End Target
+# End Project

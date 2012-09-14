@@ -1,0 +1,12 @@
+libartoolkitplus (1.0a-2) unstable; urgency=low
+
+  * new version 
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Wed, 20 Jun 2007 12:03:06 +0200
+
+libartoolkitplus (1.0a-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Alexander Bornik <bornik@icg.tugraz.at>  Wed, 09 May 2007 10:14:34 +0200
+

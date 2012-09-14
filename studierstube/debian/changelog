@@ -1,0 +1,6 @@
+studierstube (4.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Alexander Bornik <bornik@icg.tugraz.at>  Tue, 19 Jun 2007 14:28:26 +0200
+

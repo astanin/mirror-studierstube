@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="My Output" interval="1"/>
+    <WiiConfig  mode="navigator"/>
+  </configuration>
+
+  <ConsoleSink comment="Test Source 2" active="on">
+    <EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0">
+
+      <TestSource frequency="1" offset="10" noise="0.1" />
+    </EventTransform>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="WiiSource 1" active="on">
+    <EventTransform translation="0 0 0" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0"> 
+   
+	<WiiSource  />
+    </EventTransform>
+  </ConsoleSink>
+
+</OpenTracker>

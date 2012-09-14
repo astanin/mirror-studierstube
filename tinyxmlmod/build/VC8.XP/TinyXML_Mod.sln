@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TinyXML_Mod", "TinyXML_Mod.vcproj", "{A7D0F859-AF7A-4280-8F83-85938F9D5028}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TinyXML_ModLib", "TinyXML_ModLib.vcproj", "{6C11991B-C26E-49D3-AEA5-E075AB1BC70C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7D0F859-AF7A-4280-8F83-85938F9D5028}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A7D0F859-AF7A-4280-8F83-85938F9D5028}.Debug|Win32.Build.0 = Debug|Win32
+		{A7D0F859-AF7A-4280-8F83-85938F9D5028}.Release|Win32.ActiveCfg = Release|Win32
+		{A7D0F859-AF7A-4280-8F83-85938F9D5028}.Release|Win32.Build.0 = Release|Win32
+		{6C11991B-C26E-49D3-AEA5-E075AB1BC70C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6C11991B-C26E-49D3-AEA5-E075AB1BC70C}.Debug|Win32.Build.0 = Debug|Win32
+		{6C11991B-C26E-49D3-AEA5-E075AB1BC70C}.Release|Win32.ActiveCfg = Release|Win32
+		{6C11991B-C26E-49D3-AEA5-E075AB1BC70C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

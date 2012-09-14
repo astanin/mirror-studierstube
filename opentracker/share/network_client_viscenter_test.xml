@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSourceConfig/>
+    <ConsoleConfig headerline="Network Test Client - VisCenter@ICG" interval="1"/>
+    </configuration>
+  <ConsoleSink comment="NetworkSource 2">
+      <NetworkSource  mode="multicast" number="2"
+      multicast-address="224.100.200.101" port="12346" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 5">
+      <NetworkSource  mode="multicast" number="5"
+      multicast-address="224.100.200.101" port="12346" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 9">
+      <NetworkSource  mode="multicast" number="9"
+      multicast-address="224.100.200.101" port="12346" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 12">
+      <NetworkSource  mode="multicast" number="12"
+      multicast-address="224.100.200.101" port="12346" />
+  </ConsoleSink>
+</OpenTracker>

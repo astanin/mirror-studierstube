@@ -1,0 +1,40 @@
+
+
+TARGET        ARToolKitPlus.dll
+TARGETTYPE    dll
+UID           0x1000008d 0x07272491
+
+SOURCEPATH    ..\..\src
+//SOURCEPATH    ..\..\src\core
+
+SOURCE        DLL.cpp
+SOURCE        MemoryManager.cpp
+SOURCE        extra\FixedPoint.cpp
+SOURCE        extra\Hull.cpp
+SOURCE        extra\Profiler.cpp
+SOURCE        librpp\librpp.cpp
+
+
+USERINCLUDE   ..\..\src\core
+USERINCLUDE   ..\..\src\librpp
+
+SYSTEMINCLUDE   ..\..\include
+SYSTEMINCLUDE \Epoc32\include \epoc32\include\libc
+
+LIBRARY       estlib.lib euser.lib
+
+#if defined(WINS)
+CAPABILITY          AllFiles  //    AllFiles on emulator since no signing is required       
+#else
+CAPABILITY          NONE      //    No capabilities on hardware - otherwise SIS file signing is required
+#endif
+
+
+//#if defined(WINS)
+//    deffile .\MyTestwinscw.def
+//#else if defined(ARM)
+//    deffile .\MyTestARM.def
+//#endif
+nostrictdef
+
+EXPORTUNFROZEN

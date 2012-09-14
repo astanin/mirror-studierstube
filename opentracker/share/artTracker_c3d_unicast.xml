@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by IB (Vienna University of Technology) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+	<configuration>
+		<NetworkSinkConfig name="artTrackerServer"/>
+		<ConsoleConfig interval="100" display="on"/>
+		<TimeConfig sleep="1"/>
+		<ARTDataTrackerConfig port="5000"/>
+	</configuration>
+
+<ConsoleSink comment="station0:oldPrototypePen">
+		<NetworkSink port="12346" name="oldPrototypePen" mode="unicast" interface="128.131.167.189" number="1">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+			<Merge>
+				<MergeDefault>
+					<ARTDataTrackerSource number="0"/>
+				</MergeDefault>
+				<MergeAttribute attributeName="button">
+					<ButtonHoldFilter offDuration="60">
+					<ButtonFilter buttonmask               ="00000010" 
+							  buttonmap            ="77777707" 
+							  validtrans           ="1_2__3__" 
+							  radiobuttons         ="_1_22_3_" 
+							  setbuttononvalidtrans="_1______">
+						<ParButtonSource dev="0x378" DEF="button0"/>
+					</ButtonFilter>
+					</ButtonHoldFilter>
+				</MergeAttribute>
+			</Merge>
+				</EventVirtualTransform>
+			</EventTransform>			
+		</NetworkSink>
+	</ConsoleSink>
+	<ConsoleSink comment="station1:panel0">
+		<NetworkSink port="12346" name="panel0" mode="unicast" interface="128.131.167.189" number="2">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+			<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485">
+<!-- ElasticFilter force="0.08" damp="0.05" -->
+			<ARTDataTrackerSource number="1"/>
+<!-- /ElasticFilter -->
+			</EventVirtualTransform>
+			</EventTransform>		
+		</NetworkSink>
+	</ConsoleSink>
+
+	<ConsoleSink comment="station2:hmd0">
+		<NetworkSink port="12346" name="hmd0" mode="unicast" interface="128.131.167.189" number="3">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+
+<ElasticFilter force="0.08" damp="0.05">
+	<ARTDataTrackerSource number="15"/>
+</ElasticFilter>
+				</EventVirtualTransform>
+		</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+
+	<ConsoleSink comment="station3:currentPrototypePen">
+		<NetworkSink port="12346" name="currentPrototypePen" mode="unicast" interface="128.131.167.189" number="4">
+			<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485">
+			<Merge>
+				<MergeDefault>
+					<ARTDataTrackerSource number="3"/>
+				</MergeDefault>
+				<MergeAttribute attributeName="button">
+					<ButtonHoldFilter offDuration="60">
+					<ButtonFilter buttonmask               ="00010000" 
+							  buttonmap            ="77707777" 
+							  validtrans           ="1_2__3__" 
+							  radiobuttons         ="_1_22_3_" 
+							  setbuttononvalidtrans="_1______">
+						<Ref USE="button0"/>
+					</ButtonFilter>
+					</ButtonHoldFilter> 
+				</MergeAttribute>
+			</Merge>
+				</EventVirtualTransform>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+	<ConsoleSink comment="station4:panel1">
+		<NetworkSink port="12346" name="panel1" mode="unicast" interface="128.131.167.189" number="5">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+<!-- ElasticFilter force="0.08" damp="0.05" -->
+			<ARTDataTrackerSource number="4"/>
+<!-- /ElasticFilter -->
+					</EventVirtualTransform>
+			</EventTransform>		
+		</NetworkSink>
+	</ConsoleSink>
+
+	<ConsoleSink comment="station5:hmd1">
+		<NetworkSink port="12346" name="hmd1" mode="unicast" interface="128.131.167.189" number="6">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+			<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+
+				<ElasticFilter force="0.08" damp="0.05">
+					<ARTDataTrackerSource number="19"/>
+				</ElasticFilter>
+			</EventVirtualTransform>
+		</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+
+	<ConsoleSink comment="station6:ppc0">
+		<NetworkSink port="12346" name="ppc0" mode="unicast" interface="128.131.167.189" number="7">
+			<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485">
+					<ARTDataTrackerSource number="5"/>
+				</EventVirtualTransform>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>	
+<ConsoleSink comment="station7:nicePenWithTopNr1">
+		<NetworkSink port="12346" name="nicePenWithTopNr1" mode="unicast" interface="128.131.167.189" number="8">
+			<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485">
+			<Merge>
+				<MergeDefault>
+					<ARTDataTrackerSource number="7"/>
+				</MergeDefault>
+				<MergeAttribute attributeName="button">
+					<ButtonHoldFilter offDuration="60">
+					<ButtonFilter 
+					  buttonmask="01000000" 
+				  	   buttonmap="70777777" 
+					  validtrans="1_2__3__" 
+					radiobuttons="_1_22_3_" >
+						<Ref USE="button0"/>
+					</ButtonFilter>
+					</ButtonHoldFilter> 
+				</MergeAttribute>
+			</Merge>
+				</EventVirtualTransform>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+	
+<ConsoleSink comment="station8:nicePenWithTopNr2">
+		<NetworkSink port="12346" name="nicePenWithTopNr2" mode="unicast" interface="128.131.167.189" number="9">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+			<Merge>
+				<MergeDefault>
+					<ARTDataTrackerSource number="13"/>
+				</MergeDefault>
+				<MergeAttribute attributeName="button">
+					<ButtonHoldFilter offDuration="60">
+					<ButtonFilter buttonmask               ="00000010" 
+							  buttonmap            ="77777707" 
+							  validtrans           ="1_2__3__" 
+							  radiobuttons         ="_1_22_3_" 
+							  setbuttononvalidtrans="_1______">
+						<Ref USE="button0"/>
+					</ButtonFilter>
+					</ButtonHoldFilter>
+				</MergeAttribute>
+			</Merge>
+				</EventVirtualTransform>
+			</EventTransform>			
+		</NetworkSink>
+	</ConsoleSink>
+
+<ConsoleSink comment="station9:nicePenWithTopNr3">
+		<NetworkSink port="12346" name="nicePenWithTopNr3" mode="unicast" interface="128.131.167.189" number="10">
+		<EventTransform rotation="-0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+				<EventVirtualTransform rotation="0.70710678118654752440084436210485 0 0 0.70710678118654752440084436210485" >
+			<Merge>
+				<MergeDefault>
+					<ARTDataTrackerSource number="17"/>
+				</MergeDefault>
+				<MergeAttribute attributeName="button">
+					<ButtonHoldFilter offDuration="60">
+					<ButtonFilter 
+					  buttonmask="01000000" 
+				  	   buttonmap="70777777" 
+					  validtrans="1_2__3__" 
+					radiobuttons="_1_22_3_" >
+						<Ref USE="button0"/>
+					</ButtonFilter>
+					</ButtonHoldFilter> 
+				</MergeAttribute>
+			</Merge>
+				</EventVirtualTransform>
+			</EventTransform>			
+		</NetworkSink>
+	</ConsoleSink>
+</OpenTracker>
+

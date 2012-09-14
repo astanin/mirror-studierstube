@@ -1,0 +1,21 @@
+OpenTracker
+
+(C) 2000,2001,2002,2003 Vienna University of Technology
+
+OpenTracker is distributed under the BSD License. See the file LICENSE.TXT
+for details. A short build and installation guide can be found in
+docs/install.html. For detailed information about building, integrating
+and extending OpenTracker, please visit the web site at
+http://www.studierstube.org/opentracker/.
+
+OpenTracker was compiled and tested on Windows2000 and Windows98, 
+SGI Irix (6.5.x only), and Linux (SUSE 7.0). It should work on similar 
+platforms but might require some small porting changes.
+
+Please see the contributing people page in the documentation for a list of
+people we would like to thank for their contributing work.
+
+Contact:           Gerhard Reitmayr
+Email:             reitmayr@ims.tuwien.ac.at
+Web info:          http://www.ims.tuwien.ac.at/links/opentracker/
+Web documentation: http://www.studierstube.org/opentracker/

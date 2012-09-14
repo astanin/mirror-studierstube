@@ -1,0 +1,108 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Sample debian/rules that uses debhelper.
+#
+# This file was originally written by Joey Hess and Craig Small.
+# As a special exception, when this file is copied by dh-make into a
+# dh-make output file, you may use that output file without restriction.
+# This special exception was added by Craig Small in version 0.37 of dh-make.
+#
+# Modified to make a template file for a multi-binary package with separated
+# build-arch and build-indep targets  by Bill Allombert 2001
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+
+
+CFLAGS = -Wall -g
+export CFLAGS
+
+CXXFLAGS = -Wall -g
+export CXXFLAGS
+
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+	CXXFLAGS +0 -O0
+else
+	CFLAGS += -O2 -march=pentium-m -msse -msse2 -mfpmath=sse -finline-functions
+	CXXFLAGS += -O2 -march=pentium-m -msse -msse2 -mfpmath=sse -finline-functions
+endif
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	#scons --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_FFMPEGSRC=1 ENABLE_SWITCH=1
+	scons --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_SWITCH=1
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp
+	rm config.opts
+	#scons -c --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_FFMPEGSRC=1 ENABLE_SWITCH=1
+	scons -c --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_SWITCH=1
+	dh_clean
+
+# didn't see any debhelper script for this one...  larsa 20010829
+source: clean
+	dpkg-buildpackage -S -us
+
+install: DH_OPTIONS=
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	#scons --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_FFMPEGSRC=1 ENABLE_SWITCH=1
+	scons --no-cache PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_SWITCH=1
+	#scons --no-cache install PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_FFMPEGSRC=1 ENABLE_SWITCH=1
+	scons --no-cache install PREFIX=`pwd`/debian/tmp/usr ENABLE_V4L2SRC=1 ENABLE_GLUTSINK=1 ENABLE_SWITCH=1
+	sed s:\/home.*.\/debian\/tmp:: debian/tmp/usr/lib/pkgconfig/openvideo.pc -ibak
+	mkdir -p debian/tmp/usr/share/libopenvideo
+	cp -r data/* debian/tmp/usr/share/libopenvideo/
+	mkdir -p debian/tmp/usr/share/doc/libopenvideo1-dev
+	cp -r doc/* debian/tmp/usr/share/doc/libopenvideo1-dev/
+	dh_install --sourcedir=debian/tmp --exclude=.svn
+
+# This single target is used to build all the packages, all at once, or
+# one at a time. So keep in mind: any options passed to commands here will
+# affect _all_ packages. Anything you want to only affect one package
+# should be put in another target, such as the install target.
+binary-common:
+	dh_testdir
+	dh_testroot
+	dh_installdebconf
+	dh_installdocs
+	dh_installexamples
+	dh_installmenu
+	dh_installman
+	dh_installinfo
+	dh_installchangelogs
+	dh_link
+	dh_compress
+	#dh_strip
+	dh_fixperms
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture dependant packages using the common target.
+binary-arch: build install
+	$(MAKE) -f debian/rules binary-common DH_OPTIONS=-a
+
+# Any other binary targets build just one binary package at a time.
+binary-%: build install
+	$(MAKE) -f debian/rules binary-common DH_OPTIONS=-p$*
+
+binary: binary-arch	
+.PHONY: build clean binary-arch binary install source
+

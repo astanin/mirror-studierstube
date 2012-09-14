@@ -1,0 +1,373 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import icgbuilder
+
+
+# The targets file contains the definitions for all targets that will be built using this scipt
+from targets import targetList
+
+# Following are default flags for creating the supported target types.
+dllflags = None
+libflags = None
+prgflags = None
+
+if sys.platform == 'win32':
+	dllflags = { 'cflags'  : ['/O2','/W3', '/EHsc', '/MD', '/Zi', '/FD', '/TP'],
+		     'defines' : ['"WIN32"', '__WIN32__','NDEBUG', '_WINDOWS', '_USRDLL'
+				  ,'__x86__','_CRT_SECURE_NO_DEPRECATE', "_WINDLL", "_MBCS"],
+		     'ldflags' : ['/INCREMENTAL:NO', '/NOLOGO', '/DEBUG', '/SUBSYSTEM:WINDOWS',
+				  '/OPT:REF', '/OPT:ICF', '/MACHINE:X86',
+				  '/ERRORREPORT:PROMPT'],
+		     'libs'    : ['kernel32', 'user32', 'gdi32', 'winspool', 'comdlg32',
+				  'advapi32', 'shell32', 'ole32', 'oleaut32', 'uuid',
+				  'odbc32', 'odbccp32'] 
+		     }
+
+	libflags = {'cflags'   : ['/O2','/W3', '/EHsc', '/MD', '/Zi'],
+		    'defines'  : ['"WIN32"', '__WIN32__','NDEBUG', '_WINDOWS','_USRDLL',
+				  '__x86__', '_CRT_SECURE_NO_DEPRECATE', "_WINDLL", "_MBCS"]
+		    
+		    }
+
+	prgflags = {'cflags'   : ['/O2','/Ob1', '/GF', '/Gy', '/W3', '/FD', '/EHsc', '/MD'],
+		    'defines'  : ['"WIN32"', '__WIN32__','NDEBUG','"_CONSOLE"',
+				  '"_VC80_UPGRADE=0x0710"', "_MBCS"],
+		    'ldflags'  : ['/INCREMENTAL:NO', '/NOLOGO','/SUBSYSTEM:CONSOLE',
+				  '/MACHINE:X86'],
+		    'libs'     : ['odbc32', 'odbccp32', 'kernel32', 'user32', 'gdi32',
+				  'winspool', 'comdlg32', 'advapi32', 'shell32', 'ole32'
+				  , 'oleaut32', 'uuid','odbc32', 'odbccp32']
+		    }
+
+	# list of libraries that might be used by this project
+	scannerType = 'env'
+	libraryList =['boost', 'ace', 'xercesc', 'omniorb', 'muddleware','ot',
+		      'openvideo', 'tinyxml', 'tinyxmlmod','artoolkitplus']
+
+	# directories needed for the build and install process
+	prefix       = os.getcwd()
+	buildDir     = os.path.join(prefix, 'build', 'win32')
+	installRoot  = prefix
+	installDll   = os.path.join(prefix, 'bin', 'win32')
+	installLib   = os.path.join(prefix, 'lib', 'win32')
+	installExe   = os.path.join(prefix, 'bin', 'win32')
+	srcDir       = os.path.join(prefix, 'src')
+
+elif sys.platform == 'linux' or sys.platform == 'linux2':
+	defaultflags = {'cflags'  : ['-O2', '-pipe','-Wall'],
+			'defines' : ['LINUX']
+			}
+	dllflags = defaultflags
+	libflags = defaultflags
+	prgflags = defaultflags
+	
+	scannerType = 'pkg'
+	libraryList =['boost', 'ACE', 'xerces-c', 'x11', 'omniORB4', 'omniCOS4', 'omniEvents',
+		      'omnithread3','XMLClient']
+
+
+	# directories needed for the build and install process
+	prefix       = '/usr/local'
+	buildDir     = os.path.join(prefix, 'build', 'linux')
+	installRoot  = ''
+	installDll   = ''
+	installLib   = ''
+	installExe   = ''
+	srcDir       = ''
+
+elif sys.platform == 'darwin':
+	defaultflags = {'cflags'  : ['-O2', '-pipe','-Wall', '-W'],
+			'defines' : ['DARWIN']
+			}
+	dllflags = defaultflags
+	libflags = defaultflags
+	prgflags = defaultflags
+	
+	# list of libraries that might be used by this project
+	scannerType = 'pkg'
+	libraryList =['boost', 'ACE', 'xerces-c', 'x11', 'omniORB4', 'omniCOS4', 'omniEvents',
+		      'omnithread3','XMLClient']
+
+	prefix       = '/usr/local'
+	buildDir     = os.path.join(prefix, 'build', 'linux')
+	installRoot  = ''
+	installDll   = ''
+	installLib   = ''
+	installExe   = ''
+	srcDir       = ''
+
+	
+defaultBuildFlags = {'DL' : dllflags,
+		     'LIB': libflags,
+		     'PRG': prgflags}
+
+config_file='config.user'
+	
+print 'CONFIGURE: Searching for installed libraries'
+# to get the include path for all libraries we need to retrieve 
+# the environment vars pointing to the root of each lib
+envvars = os.environ
+
+
+
+targets = []
+# create the builder with an empty target list
+buildConfig = icgbuilder.ConfigBuilder('OpenTracker', scannerType, envvars,
+				       targets, libraryList)
+
+# add extra configuration flags
+buildConfig.version = '2.0'
+buildConfig.prefix = prefix
+buildConfig.buildDir = buildDir
+buildConfig.installRootDir = installRoot
+buildConfig.installDll     = installDll
+buildConfig.installExe     = installExe
+buildConfig.installLib     = installLib
+buildConfig.srcDir         = srcDir
+
+# setup the default build flags in the configurator
+for bfsetup in defaultBuildFlags:
+	bf = buildConfig.getBuildFlags(bfsetup)
+	bf.copyFromDict(defaultBuildFlags[bfsetup])
+
+buildConfig.addIncDir(os.path.join(buildConfig.prefix, 'include'))
+buildConfig.addIncDir(os.path.join(buildConfig.prefix, 'extras', 'intersense'))
+buildConfig.addIncDir(os.path.join(buildConfig.prefix, 'extras'))
+
+#disable things
+buildConfig._enable['muddleware'] = 'false'
+buildConfig._enable['corba']      = 'false'
+buildConfig._enable['pyqt' ]      = 'false'
+
+# create the build targets
+for t in targetList:
+
+	if t.has_key('src_root'):
+		srcRoot = t['src_root']
+	else:
+		srcRoot = None
+	tgt = icgbuilder.Target(t['name'], t['type'], srcRoot)
+	if t.has_key('use'):
+		for u in t['use']:
+			tgt.use(u, t['use'][u])
+	if t.has_key('libs'):
+		for l in t['libs']:
+			tgt.link(l)
+
+	if t.has_key('src_use'):
+		for u in t['src_use']:
+			tgt.useSrc(u)
+
+	if t.has_key('src_ignore'):
+		for i in t['src_ignore']:
+			tgt.ignoreSrc(i)
+	if t.has_key('defines'):
+		for d in t['defines']:
+			tgt.addDefine(d)
+
+	buildConfig.addTarget(tgt)
+
+
+
+# this call makes all the targets try to guess their include and library flags
+# and prepares the configuration for the build
+buildConfig.createBuildEnvironments()
+# write a config file to be read by scons and used to build each target
+buildConfig.writeConfigFile(config_file)
+
+#-----------------------------------------------------------------------------
+# Read the options from the config file and update the various necessary flags
+#-----------------------------------------------------------------------------
+
+env = Environment (ENV = os.environ)
+
+if os.environ.has_key('HOME'):
+	env.CacheDir(os.path.join(os.environ['HOME'], '.scache'))
+
+
+list_opts = []
+user_options = Options (config_file, ARGUMENTS)
+user_options_env = Environment (ENV = os.environ, options = user_options)
+
+#win32 options
+optlist = buildConfig.generateOptionList()
+for opt in optlist:
+	user_options.Add(opt)
+	
+uselist = buildConfig.generateUseList()
+for use in uselist:
+	user_options.Add(BoolOption(use[0], use[1], use[2]))
+
+enablelist = buildConfig.generateEnableList()
+for enable in enablelist:
+	user_options.Add(BoolOption (enable[0], enable[1], enable[2]))
+
+user_options.Add(EnumOption('BUILD_BINARY', buildConfig.buildType,'Select a release or debug binary.', allowed_values = ('release', 'debug', 'custom')))
+	
+
+
+user_options.Update (user_options_env)
+user_options.Save('config.opts', user_options_env)
+user_options_dict = user_options_env.Dictionary()
+Help(user_options.GenerateHelpText(user_options_env))
+
+root_build_dir = user_options_dict['BUILD_DIR']
+
+print "\n"
+print "============================================================"
+print "=      Configuration options for OpenTracker compile       ="
+print "============================================================"
+
+
+# Test to see whether the CORBAModule should be built
+if user_options_dict['ENABLE_CORBA']:
+	idl_path = './idl'
+	if sys.platform == 'win32':
+		_dlLibDir += [corbaLibPath]
+		_dlIncFlags += [corbaIncPath, os.path.join(idl_path, 'skeletons')]
+		_dlLibs += ['omniORB4', 'omnithread', 'omniDynamic4']
+
+	else:
+		defines += ' -DUSE_CORBA '
+		_libs += ['omniORB4', 'omnithread', 'omniDynamic4']
+		# append skeleton directory
+		_cpppath.append(os.path.join(idl_path, 'skeletons'))
+
+	from OTSConsBuilders import omniidl
+
+	omniidl.generate(env)
+
+	idl_files = glob.glob(idl_path + '/*.idl')
+	idl_dict  = {}
+	for idl_file in idl_files:
+		stem = str(idl_file).split('/')[-1][0:-4]
+		idl_dict[stem] = File(idl_file)
+	pydirs = []
+	for _idl in idl_dict.values():
+		# Call the OMNIIDL builder with the idl file
+
+		idl_targets = env.OMNIIDL(_idl)
+
+		stubSK = idl_targets[1]
+		pystubs = idl_targets[3:]
+		for py in pystubs:
+			pydirs.append(os.path.dirname(str(py)))
+		skeletons.append(stubSK)
+
+	# check to see whether there should be a cleanup of these directories
+	if env.GetOption('clean'):
+		print "Cleanup of the python stub directories"
+		for pydir in pydirs:
+			Execute(Delete(pydir))
+
+if user_options_dict['ENABLE_PYQT']:
+	# PyQt: build the .ui files
+	from OTSConsBuilders import pyuic
+	pyuic.generate(env)
+	ui_files = ['src_python/ManualTrackerPython/ManualTrackerGUI.ui']
+	for ui_file in ui_files:
+		env.PYUIC(ui_file)
+
+
+
+
+buildType = user_options_dict['BUILD_BINARY']
+
+
+#list of dynamic libraries to install
+dlls = []
+#list of static libraries to install
+libs = []
+#list of programs to install
+prgs = []
+
+env.BuildDir(buildConfig.buildDir+ os.sep + 'src', 'src', duplicate=0)
+env.BuildDir(buildConfig.buildDir, '.', duplicate=0)
+
+
+# build all dynamic libraries first
+# get the list of dynamic library targets from the user dictionary
+dllist = user_options_dict['DLTARGETS']
+for target in dllist:
+	keyName = 'DL_' + target.upper()
+	longkey = keyName + '_' + buildType.upper()
+	libraryBuilder = env.Copy()
+	libraryBuilder.Append(CCFLAGS = user_options_dict[longkey+'_CCFLAGS'])
+	libraryBuilder.Append(CPPPATH = user_options_dict[longkey+'_INCPATH'])
+	libraryBuilder.Append(CPPDEFINES = user_options_dict[longkey+'_DEFINES'])
+	libraryBuilder.Append(LIBS = user_options_dict[longkey+'_LIBS'])
+	libraryBuilder.Append(LIBPATH = user_options_dict[longkey+'_LIBPATH'])
+	libraryBuilder.Append(LINKFLAGS = user_options_dict[longkey+'_LDFLAGS'])
+	libraryBuilder.SConsignFile (root_build_dir+'scons-signatures')
+
+#	libraryBuilder.BuildDir(os.path.join(user_options_dict['BUILD_DIR'],keyName), 'src', duplicate=0)
+#	libraryBuilder['OBJPREFIX']= keyName
+	libraryBuilder['OBJPREFIX']= os.path.join(user_options_dict['BUILD_DIR'], keyName)
+	
+	# Print welcoming message that makes you feel warm and fuzzy inside;)
+	print "... Building Dynamic Library %s ...\n" %(target.upper())
+	
+	libs = libraryBuilder.SharedLibrary (os.path.join(user_options_dict['BUILD_DIR'],target), user_options_dict[keyName+'_SOURCES'] )
+	for dll in libs:
+		print "DLL SUFFIX %s\n"%(dll.get_suffix())
+		if dll.get_suffix() == '.dll':
+			#install the dlls to the dynamic library directory
+			dlls.append(dll)
+
+	libraryBuilder.Install(user_options_dict['INSTALL_DLL_DIR'], dlls)
+	#install everything under lib
+	libraryBuilder.Install(user_options_dict['INSTALL_LIB_DIR'], libs)
+		
+# build all static libraries
+# get the list of static libraries from the user dictionary
+liblist = user_options_dict['LIBTARGETS']
+for target in liblist:
+	keyName = 'LIB_' + target.upper()
+	longkey = keyName + '_' + buildType.upper()
+	libraryBuilder = env.Copy()
+	libraryBuilder.Append(CCFLAGS = user_options_dict[longkey+'_CCFLAGS'])
+	libraryBuilder.Append(CPPPATH = user_options_dict[longkey+'_INCPATH'])
+	libraryBuilder.Append(CPPDEFINES = user_options_dict[longkey+'_DEFINES'])
+	libraryBuilder.Append(LIBS = user_options_dict[longkey+'_LIBS'])
+	libraryBuilder.Append(LIBPATH = user_options_dict[longkey+'_LIBPATH'])
+	libraryBuilder.Append(LINKFLAGS = user_options_dict[longkey+'_LDFLAGS'])
+	libraryBuilder.SConsignFile (root_build_dir+'scons-signatures')
+
+#	libraryBuilder.BuildDir(os.path.join(user_options_dict['BUILD_DIR'],keyName), 'src', duplicate=0)
+#	libraryBuilder.BuildDir ('build\\win32\\'+keyName, 'src', duplicate=0)
+	libraryBuilder['OBJPREFIX']= os.path.join(user_options_dict['BUILD_DIR'], keyName)
+	
+	# Print welcoming message that makes you feel warm and fuzzy inside;)
+	print "... Building Static Library %s ...\n" %(target.upper())
+
+	libs = libraryBuilder.Library (os.path.join(user_options_dict['BUILD_DIR'],target), user_options_dict[keyName+'_SOURCES'] )
+	#install everything under lib
+	libraryBuilder.Install(user_options_dict['INSTALL_LIB_DIR'], libs)
+
+
+# build all programs
+# get the list of programs from the user dictionary
+prglist = user_options_dict['PRGTARGETS']
+for target in prglist:
+	keyName = 'PRG_' + target.upper()
+	longkey = keyName + '_' + buildType.upper()
+	prgBuilder = env.Copy()
+	prgBuilder.Append(CCFLAGS = user_options_dict[longkey+'_CCFLAGS'])
+	prgBuilder.Append(CPPPATH = user_options_dict[longkey+'_INCPATH'])
+	prgBuilder.Append(CPPDEFINES = user_options_dict[longkey+'_DEFINES'])
+	prgBuilder.Append(LIBS = user_options_dict[longkey+'_LIBS'])
+	prgBuilder.Append(LIBPATH = user_options_dict[longkey+'_LIBPATH'])
+	prgBuilder.Append(LINKFLAGS = user_options_dict[longkey+'_LDFLAGS'])
+	prgBuilder.SConsignFile (root_build_dir+'scons-signatures')
+
+#	libraryBuilder.BuildDir ('build\\win32', 'src', duplicate=0)
+	prgBuilder['OBJPREFIX']= os.path.join(user_options_dict['BUILD_DIR'], keyName)
+	
+	# Print welcoming message that makes you feel warm and fuzzy inside;)
+	print "... Building Static Library %s ...\n" %(target.upper())
+
+	prgs = prgBuilder.Program (os.path.join(user_options_dict['BUILD_DIR'],target), user_options_dict[keyName+'_SOURCES'] )
+
+	prgBuilder.Install(user_options_dict['INSTALL_EXE_DIR'], prgs)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSourceConfig/>
+    <ConsoleConfig headerline="Network Output" interval="1"/>
+    <ARTDataTrackerConfig port="5000"/>
+    <FileConfig /> 
+  </configuration>
+
+  <ConsoleSink comment="Test Source 0">
+    <FileSink file="mobilabtest2.dat" station="0">	
+      <Merge>
+	<MergeDefault>
+	  <ARTDataTrackerSource number="2"/>
+	</MergeDefault>
+	<MergeAttribute attributeName="bcidata">
+	  <NetworkSource  mode="multicast" number="0"
+			  multicast-address="224.0.0.10" port="12345" />
+	</MergeAttribute>
+      </Merge>
+    </FileSink>
+  </ConsoleSink>
+
+  <ConsoleSink comment="Test Source 1">
+    <FileSink file="mobilabtest2.dat" station="1">
+
+      <NetworkSource  mode="multicast" number="1"
+      multicast-address="224.0.0.10" port="12345" />
+    </FileSink>
+  </ConsoleSink>
+</OpenTracker>

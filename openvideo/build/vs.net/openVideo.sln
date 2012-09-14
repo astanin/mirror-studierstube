@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "openVideo", "openVideo.vcproj", "{02FA65DB-E047-4F78-8653-AE8BCAC6F36D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "standalone.vcproj", "{DD73B9D2-11C6-454C-9262-C2A02DC821FD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{02FA65DB-E047-4F78-8653-AE8BCAC6F36D}.Debug.ActiveCfg = Debug|Win32
+		{02FA65DB-E047-4F78-8653-AE8BCAC6F36D}.Debug.Build.0 = Debug|Win32
+		{02FA65DB-E047-4F78-8653-AE8BCAC6F36D}.Release.ActiveCfg = Release|Win32
+		{02FA65DB-E047-4F78-8653-AE8BCAC6F36D}.Release.Build.0 = Release|Win32
+		{DD73B9D2-11C6-454C-9262-C2A02DC821FD}.Debug.ActiveCfg = Debug|Win32
+		{DD73B9D2-11C6-454C-9262-C2A02DC821FD}.Debug.Build.0 = Debug|Win32
+		{DD73B9D2-11C6-454C-9262-C2A02DC821FD}.Release.ActiveCfg = Release|Win32
+		{DD73B9D2-11C6-454C-9262-C2A02DC821FD}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

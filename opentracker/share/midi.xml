@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 2 U (http://www.xmlspy.com) by Ponder (Vienna University of Technology) -->
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by merlin (blue sky) -->
+<!--simple test configuration for the new tracker serve system-->
+<!--DOCTYPE OpenTracker SYSTEM "opentracker.dtd"-->
+<!--?xml-stylesheet type="text/xsl" href="E:\opentracker\data\ot2dot.xsl"?-->
+<OpenTracker>
+  <configuration>
+	<ConsoleConfig headerline="Midi Input" interval="1"/>
+  </configuration>
+
+  <ConsoleSink comment="MidiSrc output" active="on">
+    <FileSink file="midi.out">
+     <MidiSource device="In-B USB MidiSport 2x2"/>
+    </FileSink>
+  </ConsoleSink>
+
+</OpenTracker>

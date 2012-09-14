@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+  <CORBAConfig/>
+  </configuration>
+  <FileSink file="test.out">
+      <CORBASource name="CORBA.Source01"/>
+  </FileSink>
+</OpenTracker>

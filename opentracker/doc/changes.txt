@@ -1,0 +1,33 @@
+/**
+
+@page changes OpenTracker Changes
+
+See also the ChangeLog files in doc for a detailed list of all changes.
+
+@section version11 Changes for Release 1.1
+
+@li interoperability with VRPN
+@li interoperability with DWARF
+@li added variety of trackers such as \n
+  Xsense MT9 orientation tracker \n
+  GPS with support for DGPSIP correction information \n
+  ART Data \n
+  Ascension Flock of Birds \n
+  Ultratrack \n
+  Fasttrack \n
+  Joystick on Windows \n
+  SpaceMouse on Windows \n
+@li a number of transform nodes operating on buttons
+@li some other special operation nodes
+@li compilation with GCC 3.x on Linux
+@li unix buildsystem based on autotools
+
+@section version10 Changes for Release 1.0
+
+@li Linux port
+@li Generic InterSense support, build in per default
+@li new InverTransform, Selection nodes
+@li new TimeModule to control main loop timing
+@li lots of bug fixes and clean ups
+
+*/

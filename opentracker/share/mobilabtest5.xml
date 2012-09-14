@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.145.114" debug="on" />-->
+     <MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.201.211" debug="on" />
+  </configuration>
+  
+      <Merge>
+        <MergeDefault>
+	  <MobilabSource channel="0" datatype="FLOAT" attname="bcidata0" />
+	</MergeDefault>
+	<MergeAttribute attributeName="bcidata1" >
+	  <MobilabSource channel="1" datatype="FLOAT" attname="bcidata1" />
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata2" >
+	  <MobilabSource channel="2" datatype="FLOAT" attname="bcidata2"/>
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata3" >
+	  <MobilabSource channel="3" datatype="FLOAT" attname="bcidata3"/>
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata4" >
+	  <MobilabSource channel="4" datatype="FLOAT" attname="bcidata4"/>
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata5" >
+	  <MobilabSource channel="5" datatype="FLOAT" attname="bcidata5"/>
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata6" >
+	  <MobilabSource channel="6" datatype="FLOAT" attname="bcidata6"/>
+	</MergeAttribute>
+	<MergeAttribute attributeName="bcidata7" >
+	  <MobilabSource channel="7" datatype="FLOAT" attname="bcidata7"/>
+	</MergeAttribute>
+      </Merge>
+  
+</OpenTracker>

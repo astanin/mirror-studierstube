@@ -1,0 +1,12 @@
+INSTALLATION:
+
+Linux:
+Install ACE using ./configure && make && make install process
+Download TinyXml.
+Copy contents of build/tinyxml into TinyXml source directory.
+Change directory to TinyXml source directory
+Run: scons sharedlibrary=1 program=0 install
+Change directory to OpenVideo source directory
+Make sure ACE.pc and tinyxml.pc are in your PKG_CONFIG_PATH
+Run scons
+Run scons install

@@ -1,0 +1,381 @@
+2000-12-13 12:43  viola
+
+	* src/input/: InterTraxModule.h, InterTraxSource.cxx,
+	InterTraxSource.h, isense.cpp, isense.h:
+	
+	implemented intertrax driver
+
+2000-12-13 12:41  viola
+
+	* data/opentracker.dtd:
+	
+	updated for implemented intertrax driver
+
+2000-12-13 11:16  reitmayr
+
+	* data/: debug.xml, maxwell.dtd, maxwell2dot.xsl, opentracker.dtd,
+	ot2dot.xsl, test.xml, workstation.xml:
+	
+	updated and renamed DTD file
+
+2000-12-11 11:46  reitmayr
+
+	* src/: core/CommonNodeFactory.cxx, core/CommonNodeFactory.h,
+	core/ConfigNode.h, core/ConfigurationParser.cxx,
+	core/ConfigurationParser.h, core/Context.cxx, core/Context.h,
+	core/DOMTreeErrorReporter.cxx, core/DOMTreeErrorReporter.h,
+	core/EventGenerator.cxx, core/EventGenerator.h,
+	core/EventObserver.h, core/EventQueue.h,
+	core/EventQueueImplementation.cxx, core/EventQueueImplementation.h,
+	core/EventQueueNode.cxx, core/EventQueueNode.h, core/Makefile,
+	core/MathUtils.cxx, core/MathUtils.h, core/Module.h, core/Node.h,
+	core/NodeFactory.h, core/NodeFactoryContainer.cxx,
+	core/NodeFactoryContainer.h, core/OpenTracker.cxx,
+	core/OpenTracker.h, core/Event.h, core/TestModule.cxx,
+	core/TestModule.h, core/TestSource.h, core/ThreadModule.h,
+	core/TimeDependend.h, core/Transformation.cxx,
+	core/Transformation.h, core/TreeNode.cxx, core/TreeNode.h,
+	core/VirtualTransformation.cxx, core/VirtualTransformation.h,
+	core/WrapperNode.h, core/main.cxx, network/Network.h,
+	network/NetworkSink.h, network/NetworkSinkModule.cxx,
+	network/NetworkSinkModule.h, network/NetworkSource.h,
+	network/NetworkSourceModule.cxx, network/NetworkSourceModule.h:
+	
+	checked in new source code
+
+2000-12-11 11:46  reitmayr
+
+	* doc/opentracker.dxy:
+	
+	added doxygen configuration file
+
+2000-12-11 11:41  reitmayr
+
+	* src/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	ConfigurationParser.cxx, ConfigurationParser.h, Context.cxx,
+	Context.h, CursesModule.cxx, CursesModule.h, CursesOutput.cxx,
+	CursesOutput.h, DOMTreeErrorReporter.cxx, DOMTreeErrorReporter.h,
+	Makefile, Marker.cxx, Marker.h, MathUtils.cxx, MathUtils.h,
+	MaxConfidenceFilter.cxx, MaxConfidenceFilter.h, Module.cxx,
+	Module.h, NetworkModule.cxx, NetworkModule.h, NetworkSource.cxx,
+	NetworkSource.h, NetworkSourceModule.cxx, NetworkSourceModule.h,
+	Node.cxx, Node.h, NodeFactory.cxx, NodeFactory.h,
+	NodeFactoryContainer.cxx, NodeFactoryContainer.h, Event.cxx,
+	Event.h, Station.cxx, Station.h, TestModule.cxx, TestModule.h,
+	TestSource.cxx, TestSource.h, TrackerServer.CBD, TrackerServer.h,
+	Transformation.cxx, Transformation.h, TreeNode.cxx, TreeNode.h,
+	VideoModule.cxx, VideoModule.h, VirtualTransformation.cxx,
+	VirtualTransformation.h, main.cxx, multicast.cxx, multicast.h,
+	zpthread.cxx, zpthread.h:
+	
+	removed old source files
+
+2000-12-11 11:40  reitmayr
+
+	* maxwell.dsp, maxwell.dsw:
+	
+	removed old project files
+
+2000-08-29 15:14  reitmayr
+
+	* src/: Context.cxx, NetworkSourceModule.cxx:
+	
+	fixed bug in NetworkSourceModule.cxx
+
+2000-08-29 15:12  reitmayr
+
+	* data/magnetic.xml:
+	
+	magnetic tracking demonstrated
+
+2000-08-29 10:09  reitmayr
+
+	* data/magnetic.xml:
+	
+	data file for network integration with magnetic tracker
+
+2000-08-25 19:48  reitmayr
+
+	* src/: Context.cxx, Makefile, NetworkSourceModule.cxx:
+	
+	fixed for sgi
+
+2000-08-25 17:03  reitmayr
+
+	* maxwell.dsp, data/maxwell.dtd, data/maxwell2dot.xsl,
+	src/CommonNodeFactory.cxx, src/CommonNodeFactory.h,
+	src/ConfigurationParser.cxx, src/ConfigurationParser.h,
+	src/Context.cxx, src/Context.h, src/CursesModule.cxx,
+	src/CursesModule.h, src/CursesOutput.cxx, src/CursesOutput.h,
+	src/Marker.cxx, src/Marker.h, src/MathUtils.cxx, src/MathUtils.h,
+	src/MaxConfidenceFilter.cxx, src/MaxConfidenceFilter.h,
+	src/Module.cxx, src/Module.h, src/NetworkModule.cxx,
+	src/NetworkModule.h, src/NetworkSource.cxx, src/NetworkSource.h,
+	src/NetworkSourceModule.cxx, src/NetworkSourceModule.h,
+	src/NodeFactory.cxx, src/NodeFactory.h,
+	src/NodeFactoryContainer.cxx, src/NodeFactoryContainer.h,
+	src/Event.cxx, src/Event.h, src/Station.cxx, src/Station.h,
+	src/TestModule.cxx, src/TestModule.h, src/TestSource.cxx,
+	src/TestSource.h, src/TrackerServer.CBD, src/TrackerServer.h,
+	src/Transformation.cxx, src/Transformation.h, src/TreeNode.cxx,
+	src/TreeNode.h, src/VideoModule.cxx, src/VideoModule.h,
+	src/VirtualTransformation.cxx, src/VirtualTransformation.h,
+	src/zpthread.cxx, src/zpthread.h:
+	
+	added NetworkSourceModule with its own thread, this changed a lot
+	of files appearantly
+
+2000-08-24 18:21  reitmayr
+
+	* src/: DOMTreeErrorReporter.cxx, MaxConfidenceFilter.cxx:
+	
+	fixed bug in MaxConfidenceFilter, fixed compile problem in
+	DOMTreeError
+
+2000-08-24 18:12  reitmayr
+
+	* data/: maxwell2dot.xsl, test.xml:
+	
+	updated dot style sheet
+
+2000-08-24 16:54  reitmayr
+
+	* data/workstation.xml:
+	
+	file for test of "par"
+
+2000-08-24 10:45  reitmayr
+
+	* maxwell.dsp, data/debug.xml, src/Context.cxx,
+	src/DOMTreeErrorReporter.cxx, src/DOMTreeErrorReporter.h,
+	src/TestModule.cxx:
+	
+	modified to compile with VC++
+
+2000-08-24 07:39  reitmayr
+
+	* data/maxwell.dtd, data/maxwell2dot.xsl, src/Transformation.cxx,
+	src/VirtualTransformation.cxx:
+	
+	implemented VirtualTransformation, fixed DTD for axisangle
+	specification, wrote style sheet for dot output
+
+2000-08-19 00:53  reitmayr
+
+	* src/: CommonNodeFactory.cxx, Context.cxx, TrackerServer.CBD,
+	TrackerServer.h:
+	
+	fixed Context, added AxisAngle config to Transformation, more
+	documentation in CB
+
+2000-08-19 00:47  reitmayr
+
+	* src/: Context.cxx, Makefile:
+	
+	fixed multible variable decl. in context, updated makefile
+
+2000-08-18 23:16  reitmayr
+
+	* src/: Context.cxx, CursesModule.cxx, CursesModule.h, Module.cxx,
+	Module.h, NetworkDriver.cxx, NetworkDriver.h, NetworkModule.cxx,
+	NetworkModule.h, TestModule.cxx, TestModule.h, TrackerServer.CBD,
+	TrackerServer.h, VideoModule.cxx, VideoModule.h, VideoSource.cxx,
+	VideoSource.h:
+	
+	changed file names, added init flag, better run in Context
+
+2000-08-18 18:26  reitmayr
+
+	* data/maxwell.dtd:
+	
+	fixed default quaternion
+
+2000-08-17 01:01  reitmayr
+
+	* src/TrackerServer.CBD:
+	
+	finished adding curses output
+
+2000-08-17 00:55  reitmayr
+
+	* data/maxwell.dtd, src/ConfigurationParser.cxx, src/Context.cxx,
+	src/CursesModule.cxx, src/CursesModule.h, src/Makefile,
+	src/NetworkDriver.cxx:
+	
+	finished curses based output
+
+2000-08-16 23:55  reitmayr
+
+	* src/: ConfigurationParser.cxx, Context.cxx, CursesModule.cxx,
+	CursesModule.h, CursesOutput.cxx, CursesOutput.h, Marker.cxx,
+	Module.cxx, Module.h, TestSource.cxx, TrackerServer.CBD,
+	TrackerServer.h, TreeNode.cxx:
+	
+	added Curses based output module and stopping of server
+
+2000-08-16 22:49  reitmayr
+
+	* src/: ConfigurationParser.cxx, Makefile, Marker.cxx,
+	TestSource.cxx, TreeNode.cxx:
+	
+	finished removal of Node
+
+2000-08-16 22:41  reitmayr
+
+	* src/: Transformation.cxx, Transformation.h:
+	
+	added localEvent member
+
+2000-08-16 22:10  reitmayr
+
+	* src/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	ConfigurationParser.cxx, ConfigurationParser.h, Context.cxx,
+	Context.h, Marker.cxx, Marker.h, MathUtils.cxx, MathUtils.h,
+	MaxConfidenceFilter.cxx, MaxConfidenceFilter.h, Module.cxx,
+	Module.h, NetworkDriver.cxx, NetworkDriver.h, Node.cxx, Node.h,
+	NodeFactory.cxx, NodeFactory.h, NodeFactoryContainer.cxx,
+	NodeFactoryContainer.h, Event.cxx, Event.h, Station.cxx, Station.h,
+	TestModule.cxx, TestModule.h, TestSource.cxx, TestSource.h,
+	TrackerServer.CBD, TrackerServer.h, Transformation.cxx,
+	Transformation.h, TreeNode.cxx, TreeNode.h, VideoSource.cxx,
+	VideoSource.h, VirtualTransformation.cxx, VirtualTransformation.h:
+	
+	changed everything from Node to TreeNode alone
+
+2000-08-16 18:00  reitmayr
+
+	* src/: MathUtils.cxx, MathUtils.h, Transformation.cxx,
+	VideoSource.cxx:
+	
+	fixed bug in Transform init, added axisangle routines
+
+2000-08-16 18:00  reitmayr
+
+	* data/: debug.xml, maxwell.dtd, test.xml:
+	
+	added axisangle rotation representation, debug test config file
+
+2000-08-16 16:51  reitmayr
+
+	* src/: ConfigurationParser.cxx, DOMTreeErrorReporter.cxx,
+	DOMTreeErrorReporter.h, Makefile:
+	
+	added extended xml error handling, so only real valid configuration
+	files are used.
+
+2000-08-16 13:04  reitmayr
+
+	* src/NetworkDriver.cxx:
+	
+	fixed bug with empty event not being handled
+
+2000-08-13 22:02  reitmayr
+
+	* src/: Transformation.cxx, Transformation.h:
+	
+	made effect of transformation node local, by using a local copy
+
+2000-08-13 20:39  reitmayr
+
+	* src/: ConfigurationParser.cxx, Context.cxx:
+	
+	fixed missing testmodule and warning output in parser if an element
+	couldn't be parsed
+
+2000-08-10 13:16  reitmayr
+
+	* src/Makefile:
+	
+	added TestModule and TestSource
+
+2000-08-10 13:15  reitmayr
+
+	* src/TrackerServer.CBD:
+	
+	last changes
+
+2000-08-10 13:12  reitmayr
+
+	* src/: NetworkDriver.cxx, VideoSource.cxx:
+	
+	fixed modules, if no nodes are present they should do nothing
+
+2000-08-10 12:56  reitmayr
+
+	* maxwell.dsp, data/maxwell.dtd, src/ConfigurationParser.cxx,
+	src/Context.cxx, src/NetworkDriver.cxx, src/TestModule.cxx,
+	src/TrackerServer.CBD, src/VideoSource.cxx:
+	
+	implemented testsource
+
+2000-08-10 12:06  reitmayr
+
+	* maxwell.dsp, src/CommonNodeFactory.cxx, src/CommonNodeFactory.h,
+	src/ConfigurationParser.h, src/Context.cxx, src/Context.h,
+	src/Marker.cxx, src/Marker.h, src/MathUtils.cxx, src/MathUtils.h,
+	src/MaxConfidenceFilter.cxx, src/MaxConfidenceFilter.h,
+	src/Module.cxx, src/Module.h, src/NetworkDriver.h, src/Node.cxx,
+	src/Node.h, src/NodeFactory.cxx, src/NodeFactory.h,
+	src/NodeFactoryContainer.cxx, src/NodeFactoryContainer.h,
+	src/Event.cxx, src/Event.h, src/Station.cxx, src/Station.h,
+	src/TestModule.cxx, src/TestModule.h, src/TestSource.cxx,
+	src/TestSource.h, src/TrackerServer.CBD, src/TrackerServer.h,
+	src/Transformation.cxx, src/Transformation.h, src/TreeNode.cxx,
+	src/TreeNode.h, src/VideoSource.h, src/VirtualTransformation.cxx,
+	src/VirtualTransformation.h:
+	
+	got to compile in VC++, bug in xerces ! put classbuilder in process
+
+2000-08-09 21:51  reitmayr
+
+	* src/: ConfigurationParser.cxx, Makefile, NetworkDriver.cxx,
+	VideoSource.cxx, main.cxx:
+	
+	fixed modifications to compile on IRIX again
+
+2000-08-09 16:57  reitmayr
+
+	* maxwell.dsp, maxwell.dsw, src/ConfigurationParser.cxx,
+	src/MathUtils.cxx, src/NetworkDriver.cxx,
+	src/NodeFactoryContainer.cxx, src/TrackerServer.h,
+	src/TreeNode.cxx, src/VideoSource.cxx, src/main.cxx:
+	
+	porting to VisualC++ some changes in source files added VC project
+	files
+
+2000-08-08 16:28  reitmayr
+
+	* data/: camera_para.dat, pen.tag, pip.tag, pip2.tag, test.xml:
+	
+	some data files
+
+2000-08-08 16:27  reitmayr
+
+	* src/: ConfigurationParser.cxx, MathUtils.cxx, NetworkDriver.cxx,
+	NodeFactoryContainer.cxx, Transformation.cxx, VideoSource.cxx,
+	main.cxx:
+	
+	bug fixes towards finished implementation
+
+2000-08-08 13:06  reitmayr
+
+	* data/maxwell.dtd:
+	
+	basic tracker server dtd
+
+2000-08-08 13:05  reitmayr
+
+	* src/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	ConfigurationParser.cxx, ConfigurationParser.h, Context.cxx,
+	Context.h, Makefile, Marker.cxx, Marker.h, MathUtils.cxx,
+	MathUtils.h, MaxConfidenceFilter.cxx, MaxConfidenceFilter.h,
+	Module.cxx, Module.h, NetworkDriver.cxx, NetworkDriver.h, Node.cxx,
+	Node.h, NodeFactory.cxx, NodeFactory.h, NodeFactoryContainer.cxx,
+	NodeFactoryContainer.h, Event.cxx, Event.h, Station.cxx, Station.h,
+	TrackerServer.h, Transformation.cxx, Transformation.h,
+	TreeNode.cxx, TreeNode.h, VideoSource.cxx, VideoSource.h,
+	VirtualTransformation.cxx, VirtualTransformation.h, main.cxx,
+	multicast.cxx, multicast.h:
+	
+	basic nodes implemented, parsing works
+

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARToolKitPlus", "ARToolKitPlus.vcproj", "{ED6DF778-6E6E-48B9-879A-EDA0900A3F12}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simple", "..\..\sample\simple\build\VC8.XP\simple.vcproj", "{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12} = {ED6DF778-6E6E-48B9-879A-EDA0900A3F12}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multi", "..\..\sample\multi\build\VC8.XP\multi.vcproj", "{3987E6DA-E450-4623-B1D3-E3B0F4F3A847}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12} = {ED6DF778-6E6E-48B9-879A-EDA0900A3F12}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARToolKitPlusDll", "ARToolKitPlusDll.vcproj", "{60388A55-2CF0-421C-917B-E8D99A22B675}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12}.Debug|Win32.Build.0 = Debug|Win32
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12}.Release|Win32.ActiveCfg = Release|Win32
+		{ED6DF778-6E6E-48B9-879A-EDA0900A3F12}.Release|Win32.Build.0 = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug|Win32.Build.0 = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release|Win32.ActiveCfg = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release|Win32.Build.0 = Release|Win32
+		{3987E6DA-E450-4623-B1D3-E3B0F4F3A847}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3987E6DA-E450-4623-B1D3-E3B0F4F3A847}.Debug|Win32.Build.0 = Debug|Win32
+		{3987E6DA-E450-4623-B1D3-E3B0F4F3A847}.Release|Win32.ActiveCfg = Release|Win32
+		{3987E6DA-E450-4623-B1D3-E3B0F4F3A847}.Release|Win32.Build.0 = Release|Win32
+		{60388A55-2CF0-421C-917B-E8D99A22B675}.Debug|Win32.ActiveCfg = Debug|Win32
+		{60388A55-2CF0-421C-917B-E8D99A22B675}.Debug|Win32.Build.0 = Debug|Win32
+		{60388A55-2CF0-421C-917B-E8D99A22B675}.Release|Win32.ActiveCfg = Release|Win32
+		{60388A55-2CF0-421C-917B-E8D99A22B675}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

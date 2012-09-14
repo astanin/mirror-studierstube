@@ -1,0 +1,10 @@
+prefix=@@OPENVIDEO_PREFIX@@
+exec_prefix=${prefix}
+libdir=@@OPENVIDEO_LIBDIR@@
+includedir=${exec_prefix}/include
+
+Name: @@OPENVIDEO_PROJECT_NAME@@
+Description: @@OPENVIDEO_PROJECT_DESCRIPTION@@
+Version: @@OPENVIDEO_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@OPENVIDEO_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@OPENVIDEO_PROJECT_DEFINES@@ 

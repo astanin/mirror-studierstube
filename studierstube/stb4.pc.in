@@ -1,0 +1,10 @@
+prefix=@@STB4_PREFIX@@
+libdir=@@STB4_LIBDIR@@
+exec_prefix=${prefix}
+includedir=${exec_prefix}/include
+
+Name: @@STB4_PROJECT_NAME@@
+Description: @@STB4_PROJECT_DESCRIPTION@@
+Version: @@STB4_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@STB4_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@STB4_PROJECT_DEFINES@@

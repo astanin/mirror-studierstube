@@ -1,0 +1,31 @@
+Source: libopenvideo
+Section: libs
+Priority: optional
+Maintainer: Alexander Bornik <bornik@icg.tu-graza.ac.at>
+Build-Depends: debhelper (>= 5), d-shlibs (>= 0.18), dh-buildinfo, pkg-config,  scons (>= 0.96), sed (>= 4.1)
+Standards-Version: 3.7.2
+
+Package: libopenvideo1
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: OpenVideo video stream transport library (library)
+ OpenVideo
+
+Package: libopenvideo1-dev
+Architecture: any 
+Depends: libopenvideo1 (= ${Source-Version}), pkg-config
+Description: OpenVideo video stream transport library (development)
+ OpenVideo
+
+Package: libopenvideo1-runtime
+Architecture: any
+Depends: libopenvideo1 (= ${Source-Version}), ${shlibs:Depends}
+Description: OpenVideo video stream transport library (runtime)
+ OpenVideo
+
+Package: libopenvideo1-doc
+Architecture: any
+Suggests: libopenvideo1-dev (= ${Source-Version})
+Description: OpenVideo video stream transport library (documentation)
+ OpenVideo
+

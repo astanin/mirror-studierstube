@@ -1,0 +1,105 @@
+Copyright (C) 2000-2003  Vienna University of Technology
+
+Install and Build Instructions
+==============================
+
+This file contains the build instructions for OpenTracker.
+
+OpenTracker uses GNU autoconf, automake and libtool for the configuration and
+compilation under operating systems like Linux and SGI Irix. Visual C++ project
+files are provided for Win32.
+
+Before you can build OpenTracker you will need the following packages set up
+on your system:
+
+Required packages:
+------------------
+o Xerces C++ - http://xml.apache.org/xerces-c/index.html
+  (supported version:  2.3.0)
+
+o ACE (The ADAPTIVE Communication Environment) -
+  http://www.cs.wustl.edu/~schmidt/ACE.html
+  (download the latest beta kit)
+
+Optional packages:
+------------------
+o ARToolkit - http://www.hitl.washington.edu/research/shared_space/download/
+
+To build the OpenTracker library you have to issue a 'configure' provided
+with all options (see below) followed by a 'make' in the OpenTracker build
+directory. To install the OpenTracker headers, library and opentracker-config
+script issue a 'make install' afterwards.
+
+Configuration Options
+=====================
+
+The configure script in the OpenTracker root directory provides the following
+options:
+
+--help
+
+  Specifying this option will cause configure to list all its command
+  line options and exit.
+
+--enable-speech
+
+  Specifying this option will cause configure to enable support for speech
+  recognition software. It's not enabled by default.
+
+--enable-joystick
+
+  Specifying this option will cause configure to enable the use of joysticks.
+  It's not enabled by default.
+
+--with-ace=DIR
+
+  With this option, you can specify where the ACE root directory resides.
+  A typical usage would be: --with-ace=../ACE_wrappers.
+
+--with-xerces=DIR
+
+  With this option, you can specify where the Xerces root directory resides.
+  A typical usage would be: --with-xerces=../xerces
+
+--with-artoolkit=DIR
+
+  With this option, you can specify where the ARToolkit root directory resides.
+  A typical usage would be: --with-artoolkit=../artool
+  The use of the ARToolkit is optional.
+
+CPPFLAGS="<string>"
+CFLAGS="<string>"
+CXXFLAGS="<string>"
+LDFLAGS="<string>"
+LIBS="<string>"
+
+  If you need to add command line flags to respectively the source code
+  preprocessor, the C compiler, the C++ compiler, and the linker, invoke
+  configure with an argument like one of the above.
+
+    ./configure CFLAGS="-ansi -pedantic" CXXFLAGS="-ansi -pedantic" [...]
+
+  This would cause compilation of both C and C++ files to be done with
+  the "-ansi" and "-pedantic" options.
+
+  You can also override other things like which compiler is used by
+  setting $CC, $CXX, $LD, $AR and $RANLIB amongst other variables.
+
+
+Example Usage
+=============
+
+Assuming that OpenTracker resides in /scratch/studierstube/opentracker/ and
+libraries like ACE, ARToolkit and Xerces reside in /scratch/studierstube/
+you would go on and issue the following:
+
+./configure --with-ace=../ACE_wrappers/ --with-xerces=../xerces \
+  --with-artoolkit=../artool
+
+To enable the usage of Joysticks and to build with ARToolkit issue this:
+
+./configure --with-ace=../ACE_wrappers/ --with-xerces=../xerces \
+  --with-artoolkit=../artool --enable-joystick
+
+--
+Tamer Fahmy <tamer@ims.tuwien.ac.at>

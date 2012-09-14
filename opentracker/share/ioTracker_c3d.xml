@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "../data/opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="optTrackerServer" blockMode="none"/>
+    <ConsoleConfig interval="100" display="on"/>
+    <TimeConfig sleep="1"/>
+    <RawInputConfig/>
+  </configuration>
+
+  <NetworkSink port="12347" name="Pen 1" multicast-address="224.100.200.101" number="0" mode="multicast">
+    <Merge DEF="Pen1">
+      <MergeDefault>
+        <EventVirtualPositionTransform translation="0.008136 0.183845 0.004621">
+          <EventVirtualTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+            <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+              <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="2"/>
+            </EventTransform>
+          </EventVirtualTransform>
+        </EventVirtualPositionTransform>
+      </MergeDefault>
+      <MergeAttribute attributeName="button">
+        <ButtonOp op="OR">
+          <Arg1>
+            <ButtonFilter buttonmap="00111111" buttonmask="11000000">
+              <RawInputSource DEF="Pen1_raw" deviceName="\??\HID#{00001124-0000-1000-8000-00805f9b34fb}_VID&amp;00020000_PID&amp;0000#8&amp;759a398&amp;0&amp;0000#{378de44c-56ef-11d1-bc8c-00a0c91405dd}"/>
+            </ButtonFilter>
+          </Arg1>
+          <Arg2>
+            <Merge>
+              <MergeAttribute attributeName="button">
+                <EventUtility create="unsigned_short button 0">
+                  <GroupGate DEF="Pen1_wheel_still" group="Pen1_wheel" neighbors="Pen1_wheel_moving">
+                    <Override>
+                      <RangeFilter max="0.5">
+                        <Difference DEF="Pen1_wheel" attributeName="position" timeframe="250">
+                          <TimestampGenerator timeout="250">
+                            <EventTransform scale="0. 0. 1.">
+                              <Ref USE="Pen1_raw"/>
+                            </EventTransform>
+                          </TimestampGenerator>
+                        </Difference>
+                      </RangeFilter>
+                    </Override>
+                  </GroupGate>
+                </EventUtility>
+                <EventUtility create="unsigned_short button 1">
+                  <GroupGate DEF="Pen1_wheel_moving" group="Pen1_wheel" neighbors="Pen1_wheel_still">
+                    <RangeFilter min="0.5">
+                      <Ref USE="Pen1_wheel"/>
+                    </RangeFilter>
+                  </GroupGate>
+                </EventUtility>
+              </MergeAttribute>
+            </Merge>
+          </Arg2>
+        </ButtonOp>
+      </MergeAttribute>
+    </Merge>
+  </NetworkSink>
+  <NetworkSink port="12347" name="Panel 1" multicast-address="224.100.200.101" number="1" mode="multicast">
+    <EventVirtualTransform DEF="Panel1" translation="-0.005 0.11 -0.045" rotation="0 0 1 0">
+      <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+        <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="5"/>
+      </EventTransform>
+    </EventVirtualTransform>
+  </NetworkSink>
+  <NetworkSink port="12347" name="Pen 2" multicast-address="224.100.200.101" number="2" mode="multicast">
+    <Merge DEF="Pen2">
+      <MergeDefault>
+        <EventVirtualPositionTransform translation="-0.001967 0.187287 -0.000437">
+          <EventVirtualTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+            <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+              <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="6"/>
+            </EventTransform>
+          </EventVirtualTransform>
+        </EventVirtualPositionTransform>
+      </MergeDefault>
+      <MergeAttribute attributeName="button">
+        <ButtonOp op="OR">
+          <Arg1>
+            <ButtonFilter buttonmap="00111111" buttonmask="11000000">
+              <RawInputSource DEF="Pen2_raw" deviceName="\??\HID#{00001124-0000-1000-8000-00805f9b34fb}_VID&amp;00020000_PID&amp;0000#8&amp;2d40f210&amp;0&amp;0000#{378de44c-56ef-11d1-bc8c-00a0c91405dd}"/>
+            </ButtonFilter>
+          </Arg1>
+          <Arg2>
+            <Merge>
+              <MergeAttribute attributeName="button">
+                <EventUtility create="unsigned_short button 0">
+                  <GroupGate DEF="Pen2_wheel_still" group="Pen2_wheel" neighbors="Pen2_wheel_moving">
+                    <Override>
+                      <RangeFilter max="0.5">
+                        <Difference DEF="Pen2_wheel" attributeName="position" timeframe="250">
+                          <TimestampGenerator timeout="250">
+                            <EventTransform scale="0. 0. 1.">
+                              <Ref USE="Pen2_raw"/>
+                            </EventTransform>
+                          </TimestampGenerator>
+                        </Difference>
+                      </RangeFilter>
+                    </Override>
+                  </GroupGate>
+                </EventUtility>
+                <EventUtility create="unsigned_short button 1">
+                  <GroupGate DEF="Pen2_wheel_moving" group="Pen2_wheel" neighbors="Pen2_wheel_still">
+                    <RangeFilter min="0.5">
+                      <Ref USE="Pen2_wheel"/>
+                    </RangeFilter>
+                  </GroupGate>
+                </EventUtility>
+              </MergeAttribute>
+            </Merge>
+          </Arg2>
+        </ButtonOp>
+      </MergeAttribute>
+    </Merge>
+  </NetworkSink>
+  <NetworkSink port="12347" name="Panel 2" multicast-address="224.100.200.101" number="3" mode="multicast">
+    <EventVirtualTransform DEF="Panel2" translation="0. 0.11 -0.045" rotation="0 0 1 0">
+      <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+        <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="7"/>
+      </EventTransform>
+    </EventVirtualTransform>
+  </NetworkSink>
+  <NetworkSink port="12347" name="HMD 1" multicast-address="224.100.200.101" number="4" mode="multicast">
+    <EventTransform DEF="HMD1" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+      <!-- ElasticFilter force="0.08" damp="0.05" -->
+      <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="3"/>
+      <!-- /ElasticFilter-->
+    </EventTransform>
+  </NetworkSink>
+  <NetworkSink port="12347" name="HMD 2" multicast-address="224.100.200.101" number="5" mode="multicast">
+    <EventTransform DEF="HMD2" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+      <!-- ElasticFilter force="0.08" damp="0.05" -->
+      <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="1"/>
+      <!-- /ElasticFilter -->
+    </EventTransform>
+  </NetworkSink>
+  <!-- NetworkSink port="12347" name="K1" multicast-address="224.100.200.101" number="7" mode="multicast">
+    <EventTransform DEF="K1" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+    </EventTransform>
+  </NetworkSink -->
+  <NetworkSink port="12347" name="K2" multicast-address="224.100.200.101" number="7" mode="multicast">
+    <EventTransform DEF="K2" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+      <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="4"/>
+    </EventTransform>
+  </NetworkSink>
+  <NetworkSink port="12347" name="Single" multicast-address="224.100.200.101" number="8" mode="multicast">
+    <EventTransform DEF="Single" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001" translation="0. -0.75 0.">
+      <VRPNSource name="iotracker@mephista.ims.tuwien.ac.at" type="tracker" station="0"/>
+    </EventTransform>
+  </NetworkSink>
+
+  <ConsoleSink comment="Pen 1" active="on">
+    <NetworkSink port="12347" name="Pen 1" number="0" mode="unicast">
+      <Ref USE="Pen1"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Panel 1" active="on">
+    <NetworkSink port="12347" name="Panel 1" number="1" mode="unicast">
+      <Ref USE="Panel1"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Pen 2" active="on">
+    <NetworkSink port="12347" name="Pen 2" number="2" mode="unicast">
+      <Ref USE="Pen2"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Panel 2" active="on">
+    <NetworkSink port="12347" name="Panel 2" number="3" mode="unicast">
+      <Ref USE="Panel2"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="HMD 1" active="on">
+    <NetworkSink port="12347" name="HMD 1" number="4" mode="unicast">
+      <Ref USE="HMD1"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="HMD 2" active="on">
+    <NetworkSink port="12347" name="HMD 2" number="5" mode="unicast">
+      <Ref USE="HMD2"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <!-- ConsoleSink comment="K1" active="on">
+    <NetworkSink port="12347" name="K1" number="7" mode="unicast">
+      <Ref USE="K1"/>
+    </NetworkSink>
+  </ConsoleSink -->
+  <ConsoleSink comment="K2" active="on">
+    <NetworkSink port="12347" name="K2" number="7" mode="unicast">
+      <Ref USE="K2"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Single" active="on">
+    <NetworkSink port="12347" name="Single" number="8" mode="unicast">
+      <Ref USE="Single"/>
+    </NetworkSink>
+  </ConsoleSink>
+</OpenTracker>

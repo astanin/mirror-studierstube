@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="timer" updateRate="30">
+	
+	<OpenCVSrc pixelformat="R8G8B8" width="640" height="480" capturefrom="file" fps="5" filename="test_xvid.avi" loop="true" flipV="true">
+		<GLUTSink pixelformat="B8G8R8"/>
+	</OpenCVSrc>
+	
+</openvideo>

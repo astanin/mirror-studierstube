@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="bla"/>
+    <MobilabConfig dev="/dev/ttyUSB0" />
+  </configuration>
+  
+  <NetworkSink  mode="multicast" name="station name" number="0" multicast-address="224.0.0.10" port="12345" >
+    <MobilabSource channel="0" />
+  </NetworkSink>
+  
+  <NetworkSink  mode="multicast" name="station name" number="1" multicast-address="224.0.0.10" port="12345" >
+    <MobilabSource channel="1" />
+  </NetworkSink>
+</OpenTracker>

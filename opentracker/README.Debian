@@ -1,0 +1,30 @@
+Required packages:
+
+automake1.9
+autoconf
+debhelper 
+d-shlibs
+
+For building a debian package just type
+
+./bootstrap
+
+./debian/rules binary
+
+Note:
+
+The name libOpenTracker.so for the library is against debian naming conventions.
+In order to still be able to build the package change the following in /usr/bin/dpkg_gencontrol.
+
+
+  } elsif (m/^-p(.*)/) {
+    $oppackage= $1;
+    #&error("Illegal package name \`$1'");
+  } elsif (m/^-c/) {
+		       
+
+Be sure to insert the following lines to /usr/bin/d-devlibdeps:
+
+-e 's/libACE5.4.7-dev/libace-dev/' \
+-e 's/libxerces-c26-dev/libxerces26-dev/' \
+	

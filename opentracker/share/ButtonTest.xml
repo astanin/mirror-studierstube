@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 U (http://www.xmlspy.com) by IB (Vienna University of Technology) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig interval="100"/>
+    <TimeConfig sleep="400"/>
+  </configuration>
+  <ConsoleSink comment="station0:pen0">
+        <ButtonHoldFilter offDuration="3" >
+          <ButtonFilter buttonmask="11111110" buttonmap="70717777" validtrans="1_2_____" radiobuttons="_1_22___" setbuttononvalidtrans="_1______">
+            <ParButtonSource dev="0x378" DEF="button0"/>
+          </ButtonFilter>
+        </ButtonHoldFilter>
+  </ConsoleSink>
+</OpenTracker>

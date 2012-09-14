@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--!DOCTYPE OpenTracker SYSTEM "opentracker.dtd"-->
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="DPong Client" interval="1"/>
+    <CallforwardConfig/>
+    <CallbackConfig/>
+    <CORBAConfig/>
+  </configuration>  
+
+
+  <!-- Output ports -->
+  <PushSupp name="PaddleB">
+     <Callforward name="PaddleB" DEF="PADDLEB"/>
+  </PushSupp>
+
+  <PushSupp name="PlayerB">
+     <Callforward name="PlayerB" DEF="PLAYERB"/>
+  </PushSupp>
+
+
+  <!-- Input ports -->
+  <Callback name="PaddleA">
+    <PushCons name="PaddleA" DEF="PADDLEA"/>
+  </Callback>
+
+  <EventTransform translation="0 1.2 -1" DEF="PLAYERA">
+     <Ref USE="PADDLEA"/>
+  </EventTransform>
+  
+
+  <Callback name="PlayerA">
+    <Ref USE="PLAYERA"/>
+  </Callback>
+
+  <Callback name="Puck">
+    <PushCons name="Puck" DEF="PUCK"/>
+  </Callback>
+
+
+
+
+  <ConsoleSink comment="Puck " active="off">
+      <Ref USE="PUCK"/>
+  </ConsoleSink>
+
+  <ConsoleSink comment="Player A" active="off">
+      <Ref USE="PLAYERA"/>
+  </ConsoleSink>
+
+  <ConsoleSink comment="Paddle B" active="off">
+      <Ref USE="PADDLEB"/>
+  </ConsoleSink>
+
+
+
+
+</OpenTracker>

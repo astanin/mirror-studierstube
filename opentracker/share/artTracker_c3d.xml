@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "../data/opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="artTrackerServer" blockMode="none"/>
+    <ConsoleConfig interval="100" display="on"/>
+    <TimeConfig sleep="1"/>
+    <ARTDataTrackerConfig port="5000"/>
+  </configuration>
+
+  <NetworkSink port="12346" name="Pen 3" multicast-address="224.100.200.101" interface="128.131.167.189" number="0" mode="multicast">
+    <Merge DEF="Pen3">
+      <MergeDefault>
+        <EventVirtualTransform rotation="0. 1. 0. 0.">
+          <EventVirtualPositionTransform translation="0.063296 0.157857 0.001286">
+            <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+              <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+                <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+                  <ARTDataTrackerSource number="13"/> <!-- Pen with top 2 -->
+                </EventVirtualTransform>
+              </EventTransform>
+            </EventVirtualTransform>
+          </EventVirtualPositionTransform>
+        </EventVirtualTransform>
+      </MergeDefault>
+      <MergeAttribute attributeName="button">
+        <ButtonHoldFilter offDuration="60"> <!-- Pen with body 2: 433 -->
+          <ButtonFilter buttonmask="00000010" buttonmap="77777707" validtrans="1_2__3__" radiobuttons="_1_22_3_" setbuttononvalidtrans="_1______">
+            <ParButtonSource dev="0x378" DEF="ParButtons"/>
+          </ButtonFilter>
+        </ButtonHoldFilter>
+      </MergeAttribute>
+    </Merge>
+  </NetworkSink>
+  <NetworkSink port="12346" name="Panel 3" multicast-address="224.100.200.101" interface="128.131.167.189" number="1" mode="multicast">
+    <EventVirtualTransform DEF="Panel3" translation="0.160601 -0.018010 0.076995" rotation="0.70710678118654752440084436210485 0. 0. -0.70710678118654752440084436210485">
+      <EventVirtualTransform rotation="0. 0.70710678118654752440084436210485 0. 0.70710678118654752440084436210485">
+        <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+          <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+            <!-- ElasticFilter force="0.08" damp="0.05" -->
+            <ARTDataTrackerSource number="1"/>
+            <!-- /ElasticFilter -->
+          </EventVirtualTransform>
+        </EventTransform>
+      </EventVirtualTransform>
+    </EventVirtualTransform>
+  </NetworkSink>
+  <NetworkSink port="12346" name="Pen 4" multicast-address="224.100.200.101" interface="128.131.167.189" number="2" mode="multicast">
+    <Merge DEF="Pen4">
+      <MergeDefault>
+        <EventVirtualTransform rotation="0. 1. 0. 0.">
+          <EventVirtualPositionTransform translation="0.015450 0.224102 0.011757">
+            <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+              <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+                <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+                  <ARTDataTrackerSource number="7"/> <!-- Pen with top 1 -->
+                </EventVirtualTransform>
+              </EventTransform>
+            </EventVirtualTransform>
+          </EventVirtualPositionTransform>
+        </EventVirtualTransform>
+      </MergeDefault>
+      <MergeAttribute attributeName="button">
+        <ButtonHoldFilter offDuration="60"> <!-- Pen with body 3: 418 -->
+          <ButtonFilter buttonmask="00010000" buttonmap="77707777" validtrans="1_2__3__" radiobuttons="_1_22_3_" setbuttononvalidtrans="_1______">
+            <Ref USE="ParButtons"/>
+          </ButtonFilter>
+        </ButtonHoldFilter>
+      </MergeAttribute>
+    </Merge>
+  </NetworkSink>
+  <NetworkSink port="12346" name="Panel 4" multicast-address="224.100.200.101" interface="128.131.167.189" number="3" mode="multicast">
+    <EventVirtualTransform DEF="Panel4" translation="0.12788 -0.048718 0.117731" rotation="0.70710678118654752440084436210485 0. 0. -0.70710678118654752440084436210485">
+      <EventVirtualTransform rotation="0. 1. 0. 0.">
+        <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+          <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" >
+            <!-- ElasticFilter force="0.08" damp="0.05" -->
+            <ARTDataTrackerSource number="4"/>
+            <!-- /ElasticFilter -->
+          </EventVirtualTransform>
+        </EventTransform>
+      </EventVirtualTransform>
+    </EventVirtualTransform>
+  </NetworkSink>
+  <NetworkSink port="12346" name="HMD 3" multicast-address="224.100.200.101" interface="128.131.167.189" number="4" mode="multicast">
+    <EventTransform DEF="HMD3" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+      <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+        <ElasticFilter force="0.08" damp="0.05">
+          <ARTDataTrackerSource number="15"/>
+        </ElasticFilter>
+      </EventVirtualTransform>
+    </EventTransform>
+  </NetworkSink>
+  <NetworkSink port="12346" name="HMD 4" multicast-address="224.100.200.101" interface="128.131.167.189" number="5" mode="multicast">
+    <EventTransform DEF="HMD4" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+      <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+        <ElasticFilter force="0.08" damp="0.05">
+          <ARTDataTrackerSource number="19"/>
+        </ElasticFilter>
+      </EventVirtualTransform>
+    </EventTransform>
+  </NetworkSink>
+  <!-- NetworkSink port="12346" name="K1" multicast-address="224.100.200.101" interface="128.131.167.189" number="6" mode="multicast">
+    <EventTransform DEF="K1" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+      <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+      </EventVirtualTransform>
+    </EventTransform>
+  </NetworkSink -->
+  <NetworkSink port="12346" name="K2" multicast-address="224.100.200.101" interface="128.131.167.189" number="7" mode="multicast">
+    <EventTransform DEF="K2" rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+      <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+        <ARTDataTrackerSource number="5"/>
+      </EventVirtualTransform>
+    </EventTransform>
+  </NetworkSink>
+  <NetworkSink port="12346" name="Pen X" multicast-address="224.100.200.101" interface="128.131.167.189" number="8" mode="multicast">
+    <Merge DEF="PenX">
+      <MergeDefault>
+        <EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+          <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+            <ARTDataTrackerSource number="17"/> <!-- Pen with top 3 -->
+          </EventVirtualTransform>
+        </EventTransform>
+      </MergeDefault>
+      <MergeAttribute attributeName="button">
+        <ButtonHoldFilter offDuration="60"> <!-- Pen with body 1: 315 -->
+          <ButtonFilter buttonmask="01000000" buttonmap="70777777" validtrans="1_2__3__" radiobuttons="_1_22_3_">
+            <Ref USE="ParButtons"/>
+          </ButtonFilter>
+        </ButtonHoldFilter>
+      </MergeAttribute>
+    </Merge>
+  </NetworkSink>
+
+  <ConsoleSink comment="Pen 3" active="on">
+    <NetworkSink port="12346" name="Pen 3" interface="128.131.167.189" number="0" mode="unicast">
+      <Ref USE="Pen3"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Panel 3" active="on">
+    <NetworkSink port="12346" name="Panel 3" interface="128.131.167.189" number="1" mode="unicast">
+      <Ref USE="Panel3"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Pen 4" active="on">
+    <NetworkSink port="12346" name="Pen 4" interface="128.131.167.189" number="2" mode="unicast">
+      <Ref USE="Pen4"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Panel 4" active="on">
+    <NetworkSink port="12346" name="Panel 4" interface="128.131.167.189" number="3" mode="unicast">
+      <Ref USE="Panel4"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="HMD 3" active="on">
+    <NetworkSink port="12346" name="HMD 3" interface="128.131.167.189" number="4" mode="unicast">
+      <Ref USE="HMD3"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="HMD 4" active="on">
+    <NetworkSink port="12346" name="HMD 4" interface="128.131.167.189" number="5" mode="unicast">
+      <Ref USE="HMD4"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <!-- ConsoleSink comment="K1" active="on">
+    <NetworkSink port="12346" name="K1" interface="128.131.167.189" number="6" mode="unicast">
+      <Ref USE="K1"/>
+    </NetworkSink>
+  </ConsoleSink -->
+  <ConsoleSink comment="K2" active="on">
+    <NetworkSink port="12346" name="K2" interface="128.131.167.189" number="7" mode="unicast">
+      <Ref USE="K2"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Pen X" active="on">
+    <NetworkSink port="12346" name="Pen X" interface="128.131.167.189" number="8" mode="unicast">
+      <Ref USE="PenX"/>
+    </NetworkSink>
+  </ConsoleSink>
+
+  <!-- old prototype pen -->
+  <!-- EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+    <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" >
+      <Merge>
+        <MergeDefault>
+          <ARTDataTrackerSource number="0"/>
+        </MergeDefault>
+        <MergeAttribute attributeName="button">
+          <ButtonHoldFilter offDuration="60">
+            <ButtonFilter buttonmask="01000000" buttonmap="70777777" validtrans="1_2__3__" radiobuttons="_1_22_3_">
+              <Ref USE="ParButtons"/>
+            </ButtonFilter>
+          </ButtonHoldFilter>
+        </MergeAttribute>
+      </Merge>
+    </EventVirtualTransform>
+  </EventTransform -->
+  <!-- current prototype pen -->
+  <!-- EventTransform rotation="-0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485" scale="0.001 0.001 0.001">
+    <EventVirtualTransform rotation="0.70710678118654752440084436210485 0. 0. 0.70710678118654752440084436210485">
+      <Merge>
+        <MergeDefault>
+          <ARTDataTrackerSource number="3"/>
+        </MergeDefault>
+        <MergeAttribute attributeName="button">
+          <ButtonHoldFilter offDuration="60">
+            <ButtonFilter buttonmask="00010000" buttonmap="77707777" validtrans="1_2__3__" radiobuttons="_1_22_3_" setbuttononvalidtrans="_1______">
+              <Ref USE="ParButtons"/>
+            </ButtonFilter>
+          </ButtonHoldFilter>
+        </MergeAttribute>
+      </Merge>
+    </EventVirtualTransform>
+  </EventTransform -->
+</OpenTracker>

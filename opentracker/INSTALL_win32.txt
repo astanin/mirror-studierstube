@@ -1,0 +1,112 @@
+============================================================================
+==                  BUILDING OPENTRACKER ON WINDOWS                       ==
+============================================================================
+
+
+authors: Michael Kalkusch
+created: 13-04-2006
+
+
+  Required packages:
+  ------------------
+  
+    - ACE 5.4.7
+        http://deuce.doc.wustl.edu/Download.html
+        
+    - TinyXML 2.4.2 mod 
+        modified version of TinyXML 2.4.2
+        http://www.grinninglizard.com/tinyxml/
+               
+    
+    Optional packages:
+    ==================
+      - XERCES 
+          optional instead of TinyXML as XML parser
+          http://xml.apache.org/xerces-c/          
+        
+      - ARToolkitPlus
+        http://studierstube.icg.tu-graz.ac.at/handheld_ar/artoolkitplus.php
+
+      - OpenVideo
+        http://www.studierstube.org/openvideo
+        
+		    - VidCapture
+		        modified version based on VidCapture 0.30
+		        required for OpenVideo
+		          https://svn.icg.tu-graz.ac.at/svn/OpenVideoMod/trunk/        
+		        non patched version:
+		          http://sourceforge.net/projects/vidcapture/
+		      
+		    - VideoWrapper 0.1
+		        modified version based on VideoWrapper 0.1
+		        required for OpenVideo
+		          https://svn.icg.tu-graz.ac.at/svn/OpenVideoMod/trunk/      
+		        non patched version:                
+		          http://sourceforge.net/projects/videowrapper/	          	          
+		            
+		    - GLUT 3.7.6
+		        required for OpenVideo
+		        http://www.xmission.com/~nate/glut.html
+
+
+
+   List of dependencies:
+  ----------------------
+    
+                        | STB4 | OpenVideo | OpenTracker |
+    --------------------+------+-----------+-------------+
+     ACEROOT            |  x   |     x     |      x      |
+     ARTOOLKITROOT      |      |           |     (x)     |
+     ARTOOLKITPLUSROOT  |  x   |           |     (x) 1)  |
+     BOOSTROOT          |  x   |           |             |
+     COINROOT           |  x   |           |             |
+     GLUT (dll&header)  |      |     x     |             |
+     OPENVIDEOROOT      |  x   |     x     |     (x) 1)  |
+     OTROOT             |  x   |           |      x      |
+     STB4ROOT           |  x   |           |             |
+     TINYXMLROOT        |      |     x  2) |      x  2)  |
+     TINYXMLMODROOT     |  x   |    (x) 2) |     (x) 2)  |
+     VIDCAPTUREROOT     |  x   |     x     |             |
+     VIDEOWRAPPERROOT   |  x   |     x     |             |
+     XERCESCROOT        |      |           |     (x) 2)  |    
+    --------------------+------+-----------+-------------+
+
+     x  ........... required
+    (x) ........... optional
+     1) ........... if OpenTracker is compiled with ARTOOLKITPLUS support OpenVideo is required
+     2) ........... parsing of XML files is either is done either using TinyXML or Xerxes
+         
+    STB4 .......... Studierstube 4.0   http://www.studierstube.org
+    OpenTracker ... OpenTracker 1.1.1  http://www.studierstube.org/opentracker 
+    OpenVideo ..... OpenVideo 0.1      http://www.studierstube.org/openvideo 
+
+
+
+  Required environment variables:
+  -------------------------------
+         
+     Set environment variables via "Start"-->"Settings"-->"ControlPanel"
+       -->"System"-->"Advanced"-->"Environment Variables"
+       
+     Note: After setting environment variables "Visual Studio" has to be restarted and
+       each shell must also be restarted to apply the changed environment variables!
+   
+     
+    
+    Environment variables for OpenTracker 1.1.1:
+    ============================================
+    
+      ACEROOT           
+        ARTOOLKITPLUSROOT   (optional)
+      OTROOT  
+      PATH=%PATH%;%ACEROOT%\bin\win32;%OTROOT%\bin\win32  
+        TINYXMLMODROOT
+          or  
+        XERCESCROOT
+      
+    Note: Either TINYXMLMODROOT or XERCESCROOT are required for parsing XML files with TinyXML or Xerces
+
+
+
+If you have any questions concerning Windows MS VC 8.0 for
+Studierstube 4.0, write to <kalkusch@icg.tu-graz.ac.at>.

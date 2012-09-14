@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--simple test configuration for ART source module-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="ARTVISCENTER_piponly" />
+    <ConsoleConfig headerline="ART Trackerserver" interval="1"/>
+    <ARTDataTrackerConfig port="5000"/>
+  </configuration>
+ 
+  <!-- Pip -->
+  <ConsoleSink comment="2">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform2">
+		<ARTDataTrackerSource number="2"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <NetworkSink name="ART" number="2" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform2"/>
+  </NetworkSink>
+</OpenTracker>

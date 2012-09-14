@@ -1,0 +1,1687 @@
+2001-12-11 14:41  splechtna
+
+	* data/opentracker.dtd:
+	
+	[rcs] added elements for FastTrak and Joystick
+
+2001-12-11 14:40  splechtna
+
+	* src/misc/OpenTracker.cxx:
+	
+	[rcs] added FastTrakModule and JoystickModule
+
+2001-12-11 14:34  splechtna
+
+	* opentracker.dsp:
+	
+	[rcs] added FastTrakModule.cxx, FastTrakModule.h, FastTrakSource.h,
+	JoystickModule.cxx, JoystickModule.h and JoystickSource.h to
+	project file
+
+2001-12-11 14:32  splechtna
+
+	* config.h:
+	
+	[rcs] added define USE_JOYSTICK
+
+2001-12-11 14:30  splechtna
+
+	* src/input/: JoystickModule.cxx, JoystickModule.h,
+	JoystickSource.h:
+	
+	[rcs] new module/source providing joystick support (only for win32)
+
+2001-12-11 14:28  splechtna
+
+	* src/input/: FastTrakModule.cxx, FastTrakModule.h,
+	FastTrakSource.h:
+	
+	[rcs] new module/source supporting Polhemus Fasttrak and IsoTrak II
+	(so far only IsoTrak II was tested)
+
+2001-12-06 12:53  reitmayr
+
+	* data/opentracker.dtd, src/common/ConsoleModule.cxx,
+	src/common/ConsoleModule.h, src/common/ConsoleSink.h:
+	
+	added flags to ConsoleSink and ConsoleConfig to control which sinks
+	are printed out.
+
+2001-11-29 18:28  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	added accessor methods for image format.  fixed closing hang up. 
+	added docu
+
+2001-11-29 13:48  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	added accessor methods for frame size
+
+2001-11-23 11:04  reitmayr
+
+	* opentracker.dsp:
+	
+	added FOBModule.cxx to the Project file
+
+2001-11-23 11:03  reitmayr
+
+	* src/: input/FOBModule.cxx, misc/serialcomm.h,
+	misc/xml/XMLWriter.h:
+	
+	fixed some minor issues for IRIX compilation
+
+2001-11-22 17:52  reitmayr
+
+	* src/common/CommonNodeFactory.cxx, src/common/Makefile,
+	src/common/ThresholdFilterNode.cxx,
+	src/common/ThresholdFilterNode.h, opentracker.dsp,
+	data/opentracker.dtd, data/test.xml:
+	
+	added a new Threshold node
+
+2001-11-22 17:52  reitmayr
+
+	* src/network/Makefile:
+	
+	updated makefile with tcpmodule files
+
+2001-11-22 17:51  reitmayr
+
+	* src/misc/Makefile:
+	
+	updated makefile with serialcomm files
+
+2001-11-22 13:37  reitmayr
+
+	* src/input/FOBModule.cxx, src/misc/serial.h,
+	src/misc/serialcomm.cxx, src/misc/serialcomm.h, opentracker.dsp:
+	
+	serial communication code and FOBModule extended
+
+2001-11-22 13:36  reitmayr
+
+	* src/network/TCPModule.cxx:
+	
+	removed unused size variable
+
+2001-11-22 13:35  reitmayr
+
+	* src/input/ParButtonModule.cxx:
+	
+	moved port access to extra source file
+
+2001-11-22 13:34  reitmayr
+
+	* src/tool/tool.dsp:
+	
+	fixed custom builds to use QTDIR variable
+
+2001-11-22 13:33  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added event switch to StbSink to set whether station should send
+	events
+
+2001-11-21 12:46  reitmayr
+
+	* src/tool/ToolAppWin.cxx, src/tool/ToolAppWin.h,
+	src/tool/ToolForm.ui, src/tool/ToolIOModule.cxx,
+	src/tool/ToolIOModule.h, src/tool/ToolSink.h,
+	src/tool/ToolSource.h, src/tool/fileopen.xpm, src/tool/tool.cxx,
+	src/tool/tool.dsp, opentracker.dsw:
+	
+	added GUI tool for OpenTracker based on QT.  Currently in very
+	alpha event but working.
+
+2001-11-21 12:43  reitmayr
+
+	* src/: core/Context.cxx, input/CyberMouseModule.cxx:
+	
+	some bug fixes
+
+2001-11-10 01:20  reitmayr
+
+	* src/network/TCPModule.cxx:
+	
+	fixed a bug in the TCPModule
+
+2001-11-09 23:07  reitmayr
+
+	* opentracker.dsp, data/opentracker.dtd, src/misc/OpenTracker.cxx,
+	src/network/TCPModule.cxx, src/network/TCPModule.h,
+	src/network/TCPSink.h:
+	
+	added TCPModule for Oliver Bimbers virtual show case viewer. It
+	implements a TCP/IP server that streams tracking data to severall
+	clients in parallel.
+
+2001-10-23 14:39  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added ConfidenceSelect and Filter elements modified FOBModule
+	elements
+
+2001-10-22 00:30  reitmayr
+
+	* src/core/: TestModule.cxx, TestSource.h:
+	
+	test nodes can generate customized test events now.
+
+2001-10-22 00:30  reitmayr
+
+	* src/common/EventQueueNode.cxx:
+	
+	fixed bug : the newest instead of the oldest event was removed :(
+
+2001-10-22 00:14  reitmayr
+
+	* src/misc/serial.h:
+	
+	serial communciations interface
+
+2001-10-22 00:13  reitmayr
+
+	* src/misc/test.cxx:
+	
+	changed to new callback format
+
+2001-10-22 00:12  reitmayr
+
+	* src/input/FOBModule.cxx:
+	
+	finished a first implementation for group mode tracking to test
+
+2001-10-22 00:12  reitmayr
+
+	* src/core/Node.h:
+	
+	fixed a documentation marker
+
+2001-10-22 00:12  reitmayr
+
+	* src/core/: EventQueueImplementation.cxx,
+	EventQueueImplementation.h:
+	
+	fixed EventQueueImplementation in the course of debugging
+	EventQueue, basically had to switch to storing events instead of
+	pointers to avoid the usuall implicit change problem.
+
+2001-10-22 00:10  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, ConfidenceSelectNode.h,
+	EventQueueNode.h, FilterNode.cxx, FilterNode.h:
+	
+	finally debugged and fixed the following nodes : EventQueueNode,
+	FilterNode.  added documentation for FilterNode,
+	ConfidenceSelectNode
+
+2001-10-20 19:24  reitmayr
+
+	* src/input/: FOBModule.cxx, FOBModule.h:
+	
+	a start at the implementation of FOBModule.  ATTENTION : until
+	finished it will break the compilation of OpenTracker !!!
+
+2001-10-20 19:23  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	added a method to access the frame buffer. useful for videooverlays
+	in studierstube
+
+2001-10-20 19:20  reitmayr
+
+	* src/common/: ConfidenceSelectNode.cxx, ConfidenceSelectNode.h,
+	FilterNode.cxx, FilterNode.h, MergeNode.cxx:
+	
+	added a FilterNode that computes an averaged value over last
+	events.  added a ConfidenceSelect node that filters out less
+	confident events compared to others. It is not a hard filter as the
+	ConfidenceFilter.
+
+2001-10-20 19:18  reitmayr
+
+	* src/common/: CallbackModule.cxx, CallbackModule.h,
+	CallbackNode.h, CommonNodeFactory.cxx:
+	
+	added a void data pointer to the callback function type and support
+	for this in the implementation.
+
+2001-10-04 13:22  reitmayr
+
+	* opentracker.dsp, src/misc/standalone.dsp, src/misc/test.dsp:
+	
+	changed build to use MFC because of firewire drivers
+
+2001-10-04 12:13  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ParButtonModule.cxx,
+	WacomGraphireModule.cxx:
+	
+	fixed ParButtonModule and other stuff
+
+2001-10-04 12:13  reitmayr
+
+	* src/misc/: portio.c, portio.cxx, portio.h:
+	
+	moved portio code to cxx
+
+2001-09-26 15:33  reitmayr
+
+	* src/common/: SelectionNode.cxx, SelectionNode.h:
+	
+	updated documentation
+
+2001-09-26 15:32  reitmayr
+
+	* opentracker.dsp, data/opentracker.dtd, data/test.xml,
+	src/common/CommonNodeFactory.cxx,
+	src/common/ConfidenceFilterNode.cxx,
+	src/common/ConfidenceFilterNode.h, src/common/Makefile:
+	
+	added ConfidenceFilter node
+
+2001-09-24 14:33  reitmayr
+
+	* README.TXT:
+	
+	updated links in the documentation
+
+2001-09-20 12:55  reitmayr
+
+	* src/misc/: portio.c, portio.h:
+	
+	win32 port access routines
+
+2001-09-19 18:25  reitmayr
+
+	* data/opentracker.dtd, src/input/ARToolKitModule.cxx,
+	src/input/ARToolKitModule.h, src/input/ARToolKitSource.h:
+	
+	changed ARToolKit elements to reflect latest API and to set
+	videomode
+
+2001-08-23 17:44  reitmayr
+
+	* src/common/: FileModule.cxx, FileModule.h:
+	
+	implemented constraint to have only one source per (file,station)
+	pair
+
+2001-08-20 11:54  reitmayr
+
+	* src/misc/xml/: XMLWriter.cxx, XMLWriter.h:
+	
+	added indentation of the output. because we are removing any
+	whitespaces on parsing, we loose any identation by the author and
+	have to add it again.
+
+2001-08-20 11:53  reitmayr
+
+	* opentracker.dsp:
+	
+	added XMLWriter to project file
+
+2001-08-19 22:04  reitmayr
+
+	* src/misc/: Makefile, xml/XMLWriter.cxx, xml/XMLWriter.h:
+	
+	a fixed version of XMLWriter, still problems with formatting the
+	output.
+
+2001-08-18 23:51  reitmayr
+
+	* src/: core/Node.cxx, core/Node.h, misc/Makefile, misc/test.cxx,
+	misc/xml/Makefile, misc/xml/XMLWriter.cxx, misc/xml/XMLWriter.h:
+	
+	a first, still buggy, version of the XMLWriter class. This class
+	writes out the current configuration to an XML file.
+
+2001-08-18 22:12  reitmayr
+
+	* src/common/StaticTransformation.h:
+	
+	added update to XML element in the setter methods of
+	StaticTransformation
+
+2001-08-18 22:01  reitmayr
+
+	* src/core/: Node.cxx, Node.h, StringTable.h:
+	
+	added an interface to Node to access attribute information in the
+	XML element.  This is usefull to keep the XML element up to date,
+	if some attributes of a Node are changed at runtime.
+
+2001-08-14 12:27  reitmayr
+
+	* opentracker.dsp, data/opentracker.dtd, data/test.xml,
+	src/common/File.h, src/core/Context.cxx, src/core/StringTable.cxx,
+	src/core/StringTable.h, src/input/ParButtonModule.cxx:
+	
+	added ParButtonModule for input via parallel interface, added
+	KeyIterator to get all keys in a StringTable, some other changes
+
+2001-08-07 15:28  reitmayr
+
+	* src/: common/FileModule.cxx, core/Node.cxx, core/StringTable.cxx,
+	input/ParButtonModule.cxx:
+	
+	small changes to compile under Linux
+
+2001-08-07 11:21  reitmayr
+
+	* src/input/: ParButtonModule.cxx, ParButtonSource.h:
+	
+	test version for parallel port button
+
+2001-08-07 11:21  reitmayr
+
+	* src/common/: File.h, FileModule.h:
+	
+	fixed some compile problems under windows
+
+2001-08-07 11:20  reitmayr
+
+	* data/debug.xml:
+	
+	parallel port test
+
+2001-08-05 01:33  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	added framerate constraint to ARToolKit Module
+
+2001-08-05 01:32  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added framerate constraint to ARToolKit module
+
+2001-08-04 20:14  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	added support for ParButtonSource
+
+2001-08-04 20:07  reitmayr
+
+	* src/: input/FOBModule.h, input/Makefile,
+	input/ParButtonModule.cxx, input/ParButtonModule.h,
+	input/ParButtonSource.h, misc/OpenTracker.cxx:
+	
+	added ParButtonModule for parallel port buttons, untested SGI
+	version only, sofar.
+
+2001-08-04 15:27  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	finished FileModule with FileSource and FileSink, updated dtd and
+	test file
+
+2001-08-04 15:26  reitmayr
+
+	* src/common/: File.h, FileModule.cxx, FileModule.h, FileSink.h,
+	FileSource.h, Makefile:
+	
+	finished FileModule with FileSource and FileSink
+
+2001-07-31 23:54  reitmayr
+
+	* src/: OpenTracker.h, common/CommonNodeFactory.cxx,
+	common/CommonNodeFactory.h, common/DynamicTransformation.cxx,
+	common/File.h, common/Makefile, common/MergeNode.cxx,
+	common/SelectionNode.cxx, core/ConfigurationParser.h,
+	core/Context.cxx, core/Makefile, core/Node.cxx, core/Node.h,
+	core/NodePort.h, core/WrapperNode.h, input/InterSenseModule.cxx:
+	
+	finalized graph API renamed wrapper node to NodePort and explicitly
+	expose it to give control over it in the API
+
+2001-07-23 17:41  reitmayr
+
+	* src/: common/CommonNodeFactory.cxx, core/Node.cxx,
+	common/MatrixTransformation.cxx, common/MatrixTransformation.h:
+	
+	added MatrixTransformation files to the project, changed some
+	parsing in CommonNodeFactory, fixed removal of references, when a
+	node is deleted
+
+2001-07-23 17:40  reitmayr
+
+	* opentracker.dsp:
+	
+	added MatrixTransformation files to the project
+
+2001-07-23 17:39  reitmayr
+
+	* data/: opentracker.dtd, opentracker.spp:
+	
+	added *MatrixTransform elements
+
+2001-07-23 16:08  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h,
+	ARToolKitSource.h, CyberMouseModule.cxx, CyberMouseModule.h,
+	WacomGraphireModule.cxx, WacomGraphireModule.h:
+	
+	fixed missing namespace qualifiers
+
+2001-07-17 22:41  reitmayr
+
+	* doc/opentracker.dxy:
+	
+	added stylesheet
+
+2001-07-17 20:00  reitmayr
+
+	* src/common/File.h:
+	
+	improved output formatting
+
+2001-07-16 23:43  reitmayr
+
+	* src/: OpenTracker.h, common/CallbackModule.cxx,
+	common/CallbackModule.h, common/CallbackNode.h,
+	common/CommonNodeFactory.cxx, common/CommonNodeFactory.h,
+	common/ConsoleModule.cxx, common/ConsoleModule.h,
+	common/ConsoleSink.h, common/ConsoleSource.h,
+	common/DynamicTransformation.h, common/EventQueueNode.h,
+	common/File.h, common/FileModule.cxx, common/FileModule.h,
+	common/FileSink.h, common/InvertTransformation.h,
+	common/MergeNode.cxx, common/MergeNode.h, common/SelectionNode.h,
+	common/StaticTransformation.h, common/TimeModule.cxx,
+	common/Transformation.h, common/VirtualTransformation.h,
+	core/ConfigNode.h, core/ConfigurationParser.cxx,
+	core/ConfigurationParser.h, core/Context.cxx, core/Context.h,
+	core/EventQueueImplementation.h, core/Node.cxx, core/Node.h,
+	core/NodeFactory.h, core/NodeFactoryContainer.cxx,
+	core/NodeFactoryContainer.h, core/RefNode.h, core/Event.h,
+	core/StringTable.cxx, core/StringTable.h, core/TestModule.cxx,
+	core/TestModule.h, core/TestSource.h, core/WrapperNode.cxx,
+	core/WrapperNode.h, input/ARToolKitModule.cxx,
+	input/ARToolKitModule.h, input/ARToolKitSource.h,
+	input/CyberMouseModule.cxx, input/CyberMouseModule.h,
+	input/CyberMouseSource.h, input/FOBModule.h, input/FOBSource.h,
+	input/InterSenseModule.cxx, input/InterSenseModule.h,
+	input/InterSenseSource.h, input/InterTraxModule.cxx,
+	input/InterTraxModule.h, input/WacomGraphireModule.cxx,
+	input/WacomGraphireModule.h, misc/main.cxx, misc/test.cxx,
+	network/NetworkSink.h, network/NetworkSinkModule.cxx,
+	network/NetworkSinkModule.h, network/NetworkSource.h,
+	network/NetworkSourceModule.cxx, network/NetworkSourceModule.h:
+	
+	added runtime manipulation interface to the graph.  The biggest
+	changes are in Node, Context and Configuration parser, which sport
+	new, additional APIs. Other changes concern improvement of
+	encapsulation and optimizations to namespace use. Finally templates
+	for the Flock of Birds module were added.  Some additional
+	documentation.
+
+2001-07-16 23:40  reitmayr
+
+	* opentracker.dsp:
+	
+	removed WrapperNode source and added FOB source
+
+2001-07-16 23:35  reitmayr
+
+	* doc/: header.html, ot.css:
+	
+	added style sheet to doxygen format
+
+2001-07-14 01:26  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added FOB elements
+
+2001-07-14 01:06  reitmayr
+
+	* src/input/: FOBModule.cxx, FOBModule.h, FOBSource.h, Makefile:
+	
+	added Flock of Birds device driver template files
+
+2001-07-12 18:56  reitmayr
+
+	* src/common/FileModule.cxx:
+	
+	added iostream header for cout under Windows32
+
+2001-07-12 00:34  reitmayr
+
+	* src/: common/File.h, common/FileModule.cxx, common/FileModule.h,
+	common/Makefile, misc/OpenTracker.cxx:
+	
+	finished FileModule for a working version. Need to clean up design
+	somewhat and document it better.
+
+2001-07-09 18:00  reitmayr
+
+	* src/common/ConsoleModule.h:
+	
+	made ConsoleModule class OPENTRACKER_API
+
+2001-07-09 17:59  reitmayr
+
+	* data/opentracker.dtd, data/test.xml, src/common/File.h,
+	src/common/FileModule.cxx, src/common/FileModule.h,
+	src/common/FileSink.h:
+	
+	added simple version of FileModule
+
+2001-07-09 17:59  reitmayr
+
+	* opentracker.dsp:
+	
+	added FileModule files to project
+
+2001-06-27 22:06  reitmayr
+
+	* src/common/CallbackModule.cxx, src/misc/test.cxx,
+	src/misc/test.dsp, opentracker.dsp, opentracker.dsw:
+	
+	added forgotten CallbackModule to VC project, added test project
+	for test program.
+
+2001-06-15 23:32  reitmayr
+
+	* README.TXT, VERSION.TXT:
+	
+	last documentation changes for 1.0
+
+2001-06-15 23:18  reitmayr
+
+	* Config.Linux:
+	
+	added Linux specific makefile definitions
+
+2001-06-15 23:11  reitmayr
+
+	* config.h, src/input/InterTraxModule.h,
+	src/input/InterTraxSource.h:
+	
+	removing InterTrax define, because it is deprecated
+
+2001-06-13 23:11  reitmayr
+
+	* Config.Irix:
+	
+	fixed some wrong chars in the **** make file
+
+2001-06-13 22:19  reitmayr
+
+	* CHANGES.TXT:
+	
+	changes file to document any changes
+
+2001-06-13 22:14  reitmayr
+
+	* doc/install.html:
+	
+	updated install documentation
+
+2001-06-13 21:58  reitmayr
+
+	* src/: common/ConsoleModule.cxx, common/TimeModule.h,
+	core/ConfigurationParser.cxx:
+	
+	small code changes to make it compiler independend
+
+2001-06-13 21:48  reitmayr
+
+	* extras/intersense/unix/Makefile, src/input/InterSenseModule.cxx:
+	
+	fixed problems with C names in intersense library, it is also
+	compiled using C++ now
+
+2001-06-13 19:09  reitmayr
+
+	* Config.Irix, Config.global, Makefile:
+	
+	updated Make system to work under Linux
+
+2001-06-13 19:09  reitmayr
+
+	* src/: common/ConsoleModule.cxx, core/ConfigurationParser.cxx,
+	core/Node.cxx, input/InterSenseModule.cxx,
+	network/NetworkSinkModule.cxx:
+	
+	updated code to compile properly under Linux
+
+2001-06-13 19:08  reitmayr
+
+	* extras/intersense/unix/: Makefile, isense.h:
+	
+	added common Makefile for Linux and Irix, added defines to avoid
+	extern "C" in C compilation
+
+2001-06-13 18:43  reitmayr
+
+	* src/common/: TimeModule.cxx, TimeModule.h:
+	
+	added display option to enable display of framerate at exit
+
+2001-06-13 18:42  reitmayr
+
+	* src/core/OSUtils.cxx:
+	
+	added Linux specific implementations
+
+2001-06-13 18:35  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	added display option to TimeModule
+
+2001-06-12 14:35  reitmayr
+
+	* src/common/Makefile:
+	
+	added SelectionNode files to Makefile
+
+2001-06-12 00:14  reitmayr
+
+	* data/ot2dot.xsl:
+	
+	updated StbSink node to be an oval
+
+2001-06-12 00:10  reitmayr
+
+	* opentracker.dsp:
+	
+	added Source files for SelectionNode, TimeModule and OSUtils
+
+2001-06-12 00:09  reitmayr
+
+	* data/: opentracker.dtd, ot2dot.xsl, test.xml:
+	
+	added Selection element and wrapper elements, updated test.xml
+
+2001-06-12 00:01  reitmayr
+
+	* src/core/: OSUtils.h, Event.h:
+	
+	updated Event to also use OSUtils, added documentation
+
+2001-06-12 00:01  reitmayr
+
+	* src/: common/TimeModule.h, input/CyberMouseSource.h:
+	
+	added documentation
+
+2001-06-12 00:00  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	SelectionNode.cxx, SelectionNode.h:
+	
+	added Selection node from Ivan and Matej
+
+2001-06-12 00:00  reitmayr
+
+	* src/common/ConsoleModule.cxx:
+	
+	fixed missing timestamp for keyboard events
+
+2001-06-11 05:27  reitmayr
+
+	* README.TXT:
+	
+	updated documentation
+
+2001-06-11 05:23  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	updated dtd for TimeModule
+
+2001-06-11 05:22  reitmayr
+
+	* src/: OpenTracker.h, common/Makefile, common/TimeModule.cxx,
+	common/TimeModule.h, core/Context.cxx, core/Context.h,
+	core/Makefile, core/MathUtils.h, core/OSUtils.cxx, core/OSUtils.h,
+	misc/OpenTracker.cxx, misc/main.cxx,
+	network/NetworkSourceModule.cxx:
+	
+	added OS wrapper for time related methods, implemented a TimeModule
+	that controls framerate of the mainloop
+
+2001-06-11 05:19  reitmayr
+
+	* config.h:
+	
+	fixed address in documentation
+
+2001-06-08 18:57  reitmayr
+
+	* src/core/: Context.cxx, Context.h:
+	
+	experiements with tread control, further development needed
+
+2001-06-08 18:56  reitmayr
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h:
+	
+	changed button interface : a keystroke now toggles the button event
+	between pressed and released
+
+2001-05-28 17:24  reitmayr
+
+	* src/common/CommonNodeFactory.cxx,
+	src/common/DynamicTransformation.cxx,
+	src/common/DynamicTransformation.h, data/opentracker.dtd:
+	
+	added switch to DynamicTransform to enable or disable generation of
+	events when the base changes
+
+2001-05-28 17:23  reitmayr
+
+	* src/core/: Node.cxx, RefNode.h:
+	
+	fixed a bug in accessing children
+
+2001-05-28 17:23  reitmayr
+
+	* src/core/ConfigurationParser.cxx:
+	
+	added some documentation
+
+2001-05-28 14:54  reitmayr
+
+	* config.h:
+	
+	added newline to avoid warning bz sgi compiler
+
+2001-05-28 14:53  reitmayr
+
+	* src/: common/Makefile, core/Context.cxx:
+	
+	fixed some small mistakes in makefile and source
+
+2001-05-22 10:36  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, InvertTransformation.cxx,
+	InvertTransformation.h, Makefile:
+	
+	added InvertTransform source files, added parsing of InverTransform
+	elements to CommonNodeFactory
+
+2001-05-22 10:34  reitmayr
+
+	* opentracker.dsp:
+	
+	added InvertTransform source files
+
+2001-05-22 10:34  reitmayr
+
+	* data/test.xml:
+	
+	added test for InvertTransform elements
+
+2001-05-22 10:32  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added InverTransform elements
+
+2001-05-02 17:15  reitmayr
+
+	* src/input/: InterSenseModule.cxx, InterSenseModule.h:
+	
+	fixed bugs in InterSenseModule,
+
+2001-05-02 15:31  reitmayr
+
+	* README.TXT:
+	
+	added thanks
+
+2001-05-02 15:18  reitmayr
+
+	* lib/lib.txt:
+	
+	empty file to make sure directory is created
+
+2001-05-02 15:07  reitmayr
+
+	* data/opentracker.dtd:
+	
+	fixed missing REF attribute in StbSink
+
+2001-05-02 15:04  reitmayr
+
+	* VERSION.TXT:
+	
+	version information
+
+2001-05-02 15:00  reitmayr
+
+	* doc/install.html:
+	
+	added simple install documentation
+
+2001-05-02 14:59  reitmayr
+
+	* README.TXT:
+	
+	added general readme for releases
+
+2001-05-02 14:59  reitmayr
+
+	* src/: core/Context.cxx, core/Context.h, misc/main.cxx:
+	
+	added module initialization to context constructor
+
+2001-04-30 12:10  reitmayr
+
+	* src/: OpenTracker.h, common/DynamicTransformation.h,
+	common/StaticTransformation.h, common/Transformation.h,
+	common/VirtualTransformation.h:
+	
+	updated documentation for transformation nodes
+
+2001-04-30 12:09  reitmayr
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h:
+	
+	added function keys and so on for windows, updated documentation
+
+2001-04-30 12:09  reitmayr
+
+	* doc/: header.html, opentracker.dxy:
+	
+	fixed link in header part
+
+2001-04-29 21:50  reitmayr
+
+	* src/network/NetworkSourceModule.cxx:
+	
+	implemented receiving euler angles and rotation matrices
+
+2001-04-29 18:45  reitmayr
+
+	* Config.Irix, Config.global, Makefile:
+	
+	updated configuration and makefile system
+
+2001-04-29 18:34  reitmayr
+
+	* src/: core/ConfigurationParser.cxx, core/ConfigurationParser.h,
+	core/Context.cxx, core/Context.h, core/Node.h,
+	misc/OpenTracker.cxx, misc/main.cxx:
+	
+	cleaned up some clas interfaces, made string ref. const whereever
+	useful to avoid ugly casts from char arrays to strings
+
+2001-04-29 18:33  reitmayr
+
+	* src/misc/: Makefile, test.cxx:
+	
+	added a test program
+
+2001-04-29 18:32  reitmayr
+
+	* src/common/: CallbackModule.cxx, CallbackModule.h,
+	CallbackNode.h, Makefile:
+	
+	added a callback node that can be used to trigger callback
+	functions upon receiving events.
+
+2001-04-29 18:31  reitmayr
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h, ConsoleSink.h:
+	
+	added better key configuration by using key codes, this gives
+	support for cursor keys etc, even on unix !
+
+2001-04-29 18:27  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	added Callback node and test case for that
+
+2001-04-24 21:58  reitmayr
+
+	* src/common/ConsoleModule.cxx:
+	
+	fixed output with curses
+
+2001-04-24 21:49  reitmayr
+
+	* src/input/: InterSenseModule.cxx, InterSenseModule.h, Makefile:
+	
+	added unix version of InterSense driver
+
+2001-04-24 21:46  reitmayr
+
+	* extras/: Makefile, intersense/unix/Makefile,
+	intersense/unix/README, intersense/unix/isdriver.c,
+	intersense/unix/isdriver.h, intersense/unix/isense.c,
+	intersense/unix/isense.h, intersense/unix/itcom.c,
+	intersense/unix/itcom.h, intersense/unix/main.c,
+	intersense/unix/serial.c, intersense/unix/serial.h,
+	intersense/unix/timer.c, intersense/unix/timer.h:
+	
+	added intersense code for unix and Makefiles
+
+2001-04-23 16:32  reitmayr
+
+	* opentracker.dsp, data/debug.xml, data/magnetic.xml,
+	src/common/ConsoleModule.cxx, src/common/ConsoleModule.h,
+	src/core/Module.h, src/core/Node.h, src/input/ARToolKitModule.cxx,
+	src/input/ARToolKitModule.h, src/input/InterSenseModule.cxx,
+	src/input/InterSenseModule.h, src/input/InterSenseSource.h,
+	src/misc/OpenTracker.cxx, src/network/NetworkSinkModule.cxx,
+	src/network/NetworkSinkModule.h:
+	
+	added InterSense drivers, currently only a windows version
+
+2001-04-23 16:30  reitmayr
+
+	* data/: opentracker.dtd, ot2dot.xsl:
+	
+	added InterSense support
+
+2001-04-23 16:15  reitmayr
+
+	* bin/: isense.dll, itrax2.dll:
+	
+	added intersense dlls for windows support of InterSense trackers
+
+2001-04-23 15:51  reitmayr
+
+	* extras/README.TXT:
+	
+	created extras directory with disclaimer etc.
+
+2001-04-23 15:48  reitmayr
+
+	* src/input/isense.cpp, src/input/isense.h,
+	extras/intersense/win/isense.cpp, extras/intersense/win/isense.h:
+	
+	moved intersense files to extras directory
+
+2001-04-18 18:45  reitmayr
+
+	* data/: opentracker.dtd, ot2dot.xsl, test.xml, workstation.xml:
+	
+	updated licensing information, stylesheet extended to include Ref
+	nodes, updated some old files
+
+2001-04-18 18:38  reitmayr
+
+	* src/: OpenTracker.h, common/CommonNodeFactory.h,
+	common/ConsoleModule.cxx, common/ConsoleModule.h,
+	common/ConsoleSink.h, common/ConsoleSource.h,
+	common/DynamicTransformation.cxx, common/DynamicTransformation.h,
+	common/EventQueueNode.h, common/MergeNode.h,
+	common/StaticTransformation.h, common/Transformation.h,
+	common/VirtualTransformation.h, core/DOMTreeErrorReporter.h,
+	core/Module.h, core/Node.cxx, core/Node.h, core/NodeFactory.h,
+	core/NodeFactoryContainer.h, core/RefNode.h, core/Event.h,
+	core/StringTable.cxx, core/StringTable.h, core/TestModule.h,
+	core/TestSource.h, core/ThreadModule.h, core/WrapperNode.h,
+	input/ARToolKitModule.h, input/ARToolKitSource.h,
+	input/CyberMouseModule.h, input/CyberMouseSource.h,
+	input/InterTraxModule.h, input/InterTraxSource.h,
+	input/WacomGraphireModule.h, input/WacomGraphireSource.h,
+	network/Network.h, network/NetworkSink.h,
+	network/NetworkSinkModule.h, network/NetworkSource.h,
+	network/NetworkSourceModule.h:
+	
+	added lots of documentation, interlinked the module and node
+	reference pages.  This needs the latest doxygen version (1.2.6) to
+	work.
+
+2001-04-18 18:37  reitmayr
+
+	* doc/opentracker.dxy:
+	
+	removed tree menu, because its so slow
+
+2001-04-17 12:40  reitmayr
+
+	* src/misc/main.cxx:
+	
+	fixed address error
+
+2001-04-16 17:43  reitmayr
+
+	* src/: common/DynamicTransformation.cxx, common/MergeNode.cxx,
+	common/StaticTransformation.cxx, common/Transformation.cxx,
+	core/Context.h, core/EventQueueImplementation.cxx, core/Makefile,
+	core/Node.cxx, core/Node.h, core/Event.cxx, core/ThreadModule.cxx,
+	core/ThreadModule.h, input/CyberMouseModule.cxx,
+	input/CyberMouseModule.h, input/CyberMouseSource.h,
+	input/InterTraxModule.cxx, input/InterTraxSource.h,
+	misc/OpenTracker.cxx, network/NetworkSinkModule.cxx,
+	network/NetworkSourceModule.cxx:
+	
+	updated source for cleaner compilation on Irix, fixed some
+	addresses in the license header
+
+2001-04-12 08:42  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h,
+	ARToolKitSource.h:
+	
+	nicer cleanup and address update
+
+2001-04-12 08:41  reitmayr
+
+	* src/common/: DynamicTransformation.cxx, DynamicTransformation.h:
+	
+	fixed problem with updates
+
+2001-04-12 08:41  reitmayr
+
+	* src/core/Node.h:
+	
+	made some methods virtual
+
+2001-04-09 17:28  reitmayr
+
+	* src/core/: Module.h, Node.cxx:
+	
+	updates and bugfixes
+
+2001-04-09 17:28  reitmayr
+
+	* data/mobile.xml:
+	
+	config file for mobile fusion setup
+
+2001-04-09 17:27  reitmayr
+
+	* data/: ot2dot.xsl, test.xml, opentracker.dtd, opentracker.spp:
+	
+	updated DTD and dot stylesheet
+
+2001-04-09 09:44  downtown
+
+	* src/input/ARToolKitModule.cxx:
+	
+	fixed some bugs
+
+2001-04-09 09:15  reitmayr
+
+	* src/: OpenTracker.h, core/Module.h:
+	
+	clean up in some files
+
+2001-04-09 09:12  reitmayr
+
+	* src/core/: StringTable.cxx, StringTable.h:
+	
+	added new class StingTable to work around problems with passing STL
+	maps
+
+2001-04-08 21:31  reitmayr
+
+	* src/OpenTracker.h, src/common/CommonNodeFactory.cxx,
+	src/common/CommonNodeFactory.h, src/common/ConsoleModule.cxx,
+	src/common/ConsoleModule.h, src/common/ConsoleSink.h,
+	src/common/MergeNode.cxx, src/core/ConfigNode.h,
+	src/core/ConfigurationParser.cxx, src/core/ConfigurationParser.h,
+	src/core/Context.cxx, src/core/Context.h,
+	src/core/EventQueueImplementation.h, src/core/Module.h,
+	src/core/Node.cxx, src/core/Node.h, src/core/NodeFactory.h,
+	src/core/NodeFactoryContainer.cxx, src/core/NodeFactoryContainer.h,
+	src/core/TestModule.cxx, src/core/TestModule.h,
+	src/core/TestSource.h, src/core/ThreadModule.cxx,
+	src/core/ThreadModule.h, src/core/WrapperNode.h,
+	src/input/ARToolKitModule.cxx, src/input/ARToolKitModule.h,
+	src/input/ARToolKitSource.h, src/input/CyberMouseModule.h,
+	src/input/InterTraxModule.cxx, src/input/InterTraxModule.h,
+	src/input/WacomGraphireModule.cxx, src/input/WacomGraphireModule.h,
+	src/misc/OpenTracker.cxx, src/network/NetworkSinkModule.cxx,
+	src/network/NetworkSinkModule.h,
+	src/network/NetworkSourceModule.cxx,
+	src/network/NetworkSourceModule.h, opentracker.dsp:
+	
+	finally a version working stable with Studierstube, lots of other
+	small updates
+
+2001-04-08 21:29  reitmayr
+
+	* doc/opentracker.dxy:
+	
+	added config header file
+
+2001-04-08 21:28  reitmayr
+
+	* data/test.xml:
+	
+	updated to new transform tags
+
+2001-04-08 21:28  reitmayr
+
+	* data/stb.xml:
+	
+	added default studierstube tracker config which does nothing
+
+2001-04-04 11:19  reitmayr
+
+	* config.h, opentracker.dsp:
+	
+	added config.h for global configuration of additional code
+
+2001-04-04 10:30  reitmayr
+
+	* src/: OpenTracker.h, common/CommonNodeFactory.cxx,
+	common/CommonNodeFactory.h, core/Context.cxx, core/Node.cxx,
+	input/ARToolKitModule.cxx, input/ARToolKitModule.h,
+	network/NetworkSourceModule.cxx, network/NetworkSourceModule.h:
+	
+	fixed some memory leaks
+
+2001-04-03 23:44  reitmayr
+
+	* src/: dllinclude.h, common/CommonNodeFactory.cxx,
+	core/Context.cxx, core/ThreadModule.cxx, core/ThreadModule.h,
+	misc/OpenTracker.cxx, network/NetworkSinkModule.cxx,
+	network/NetworkSourceModule.cxx:
+	
+	changed some includes and switched off some warnings, so that it
+	compiles real clean.
+
+2001-04-03 23:44  reitmayr
+
+	* data/opentracker.dtd:
+	
+	fixed name of dynamic transform, added simple intersense elements
+
+2001-04-03 23:43  reitmayr
+
+	* opentracker.dsp:
+	
+	fixed use of environemnt variables
+
+2001-04-03 22:29  reitmayr
+
+	* src/misc/OpenTracker.cxx:
+	
+	moved a define a little bit
+
+2001-04-02 00:18  reitmayr
+
+	* opentracker.dsp, data/opentracker.dtd, src/core/Node.h,
+	src/misc/main.cxx, src/misc/standalone.dsp:
+	
+	project files updated for simple compilation. To compile do the
+	following :
+	
+	set ACEROOT to install dir of ACE_wrappers set XERCESCROOT to
+	install dir of Xerces library
+
+2001-04-01 15:24  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added new transform elements
+
+2001-04-01 15:24  reitmayr
+
+	* src/: misc/OpenTracker.cxx, misc/main.cxx, misc/standalone.dsp,
+	OpenTracker.h:
+	
+	made client programs of the dll independend of ACE, the ace
+	initializing is done in opentracker now
+
+2001-04-01 15:23  reitmayr
+
+	* src/network/: NetworkSinkModule.cxx, NetworkSourceModule.cxx:
+	
+	some small changes to source code
+
+2001-04-01 15:22  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	DynamicTransformation.cxx, DynamicTransformation.h,
+	StaticTransformation.cxx, StaticTransformation.h, Transformation.h,
+	VirtualTransformation.cxx, VirtualTransformation.h:
+	
+	updated transformation to be more specific, also have a clear
+	concept of what is happening now
+
+2001-03-27 08:08  reitmayr
+
+	* src/: OpenTracker.h, dllinclude.h, common/CommonNodeFactory.cxx,
+	common/CommonNodeFactory.h, common/ConsoleModule.cxx,
+	common/ConsoleModule.h, common/ConsoleSink.h,
+	common/ConsoleSource.h, common/DynamicTransformation.cxx,
+	common/DynamicTransformation.h, common/EventQueueNode.cxx,
+	common/EventQueueNode.h, common/MergeNode.cxx, common/MergeNode.h,
+	common/StaticTransformation.cxx, common/StaticTransformation.h,
+	common/Transformation.cxx, common/Transformation.h,
+	common/VirtualTransformation.cxx, common/VirtualTransformation.h,
+	core/ConfigNode.h, core/ConfigurationParser.cxx,
+	core/ConfigurationParser.h, core/Context.cxx, core/Context.h,
+	core/EventQueueImplementation.cxx, core/EventQueueImplementation.h,
+	core/MathUtils.cxx, core/MathUtils.h, core/Module.h, core/Node.cxx,
+	core/Node.h, core/NodeFactory.h, core/NodeFactoryContainer.cxx,
+	core/NodeFactoryContainer.h, core/RefNode.h, core/Event.cxx,
+	core/Event.h, core/TestModule.cxx, core/TestModule.h,
+	core/TestSource.h, core/ThreadModule.cxx, core/ThreadModule.h,
+	core/WrapperNode.cxx, core/WrapperNode.h,
+	input/ARToolKitModule.cxx, input/ARToolKitModule.h,
+	input/ARToolKitSource.h, input/CyberMouseModule.cxx,
+	input/CyberMouseModule.h, input/CyberMouseSource.h,
+	input/InterTraxModule.cxx, input/InterTraxModule.h,
+	input/InterTraxSource.h, input/WacomGraphireModule.cxx,
+	input/WacomGraphireModule.h, input/WacomGraphireSource.h,
+	misc/OpenTracker.cxx, misc/main.cxx, network/Network.h,
+	network/NetworkSink.h, network/NetworkSinkModule.cxx,
+	network/NetworkSinkModule.h, network/NetworkSource.h,
+	network/NetworkSourceModule.cxx, network/NetworkSourceModule.h:
+	
+	added licensing information to source files
+
+2001-03-27 08:06  reitmayr
+
+	* LICENSE.txt, src/core/Makefile:
+	
+	added license file
+
+2001-03-27 07:36  reitmayr
+
+	* opentracker.dsp, src/OpenTracker.h, src/core/ThreadModule.cxx,
+	src/core/ThreadModule.h, src/misc/main.cxx,
+	src/misc/standalone.dsp, src/network/NetworkSink.h,
+	src/network/NetworkSinkModule.cxx, src/network/NetworkSinkModule.h,
+	src/network/NetworkSourceModule.cxx,
+	src/network/NetworkSourceModule.h:
+	
+	removed dependencies on ACE in the header files
+
+2001-03-27 07:35  reitmayr
+
+	* src/input/: ARToolKitModule.h, ARToolKitSource.h,
+	CyberMouseModule.cxx, CyberMouseModule.h, CyberMouseSource.h,
+	InterTraxModule.cxx, InterTraxModule.h, InterTraxSource.h,
+	WacomGraphireModule.cxx, WacomGraphireModule.h,
+	WacomGraphireSource.h:
+	
+	moved to new tree structure
+
+2001-03-27 00:45  reitmayr
+
+	* src/: dllinclude.h, core/Makefile, core/RefNode.h,
+	input/ARToolKitModule.cxx, input/ARToolKitModule.h,
+	input/ARToolKitSource.h, misc/OpenTracker.cxx:
+	
+	some changes to clean compilation on IRIX
+
+2001-03-27 00:11  reitmayr
+
+	* opentracker.dsp, opentracker.dsw, data/test.xml,
+	src/OpenTracker.h, src/dllinclude.h,
+	src/common/CommonNodeFactory.cxx, src/common/ConsoleModule.cxx,
+	src/common/ConsoleSink.h, src/common/ConsoleSource.h,
+	src/common/DynamicTransformation.cxx,
+	src/common/DynamicTransformation.h, src/common/EventQueueNode.cxx,
+	src/common/EventQueueNode.h, src/common/MergeNode.cxx,
+	src/common/MergeNode.h, src/common/StaticTransformation.h,
+	src/common/Transformation.cxx, src/common/Transformation.h,
+	src/common/VirtualTransformation.cxx,
+	src/common/VirtualTransformation.h, src/core/ConfigNode.h,
+	src/core/ConfigurationParser.cxx, src/core/ConfigurationParser.h,
+	src/core/Context.h, src/core/EventGenerator.cxx,
+	src/core/EventGenerator.h, src/core/EventObserver.h,
+	src/core/EventQueue.h, src/core/EventQueueImplementation.cxx,
+	src/core/EventQueueImplementation.h, src/core/MathUtils.cxx,
+	src/core/MathUtils.h, src/core/Module.h, src/core/Node.cxx,
+	src/core/Node.h, src/core/NodeFactory.h,
+	src/core/NodeFactoryContainer.h, src/core/RefNode.h,
+	src/core/Event.cxx, src/core/Event.h, src/core/TestModule.h,
+	src/core/TestSource.h, src/core/ThreadModule.h,
+	src/core/TimeDependend.h, src/core/TreeNode.cxx,
+	src/core/TreeNode.h, src/core/WrapperNode.cxx,
+	src/core/WrapperNode.h, src/misc/OpenTracker.cxx,
+	src/misc/standalone.dsp, src/network/NetworkSink.h,
+	src/network/NetworkSinkModule.h, src/network/NetworkSource.h,
+	src/network/NetworkSourceModule.cxx,
+	src/network/NetworkSourceModule.h:
+	
+	implemented new tree structure using DOM tree, new MSVC++ project
+	files for dll and standalone program
+
+2001-03-25 13:14  reitmayr
+
+	* doc/footer.html:
+	
+	updated email address to ims
+
+2001-03-25 12:47  reitmayr
+
+	* src/: OpenTracker.h, config.h, common/ConsoleModule.cxx:
+	
+	removed obsolete config.h, this is dealt with in the build system
+
+2001-03-25 00:50  reitmayr
+
+	* Config.Irix, Config.global, Makefile, src/Makefile,
+	src/OpenTracker.cxx, src/main.cxx, src/common/ConsoleModule.cxx,
+	src/common/ConsoleModule.h, src/common/Makefile,
+	src/core/Context.cxx, src/core/Makefile,
+	src/input/ARToolKitModule.cxx, src/input/ARToolKitSource.h,
+	src/input/Makefile, src/misc/Makefile, src/misc/OpenTracker.cxx,
+	src/misc/main.cxx, src/network/Makefile:
+	
+	added Makefile system from studierstube, some changes to compile
+	under IRIX
+
+2001-03-20 23:47  reitmayr
+
+	* data/debug.xml, doc/opentracker.dxy:
+	
+	and another test
+
+2001-03-20 23:43  reitmayr
+
+	* data/debug.xml, doc/opentracker.dxy:
+	
+	and another test
+
+2001-03-20 23:32  reitmayr
+
+	* data/debug.xml, doc/opentracker.dxy:
+	
+	another test for the new log script
+
+2001-03-20 23:27  reitmayr
+
+	* data/opentracker.spp, doc/opentracker.dxy:
+	
+	test commit for new log file
+
+2001-03-08 12:11  reitmayr
+
+	* opentracker.dsp:
+	
+	new project file
+
+2001-03-08 01:00  reitmayr
+
+	* data/workstation.xml:
+	
+	removed commend line
+
+2001-03-08 00:31  reitmayr
+
+	* data/workstation.xml:
+	
+	and another test
+
+2001-03-08 00:29  reitmayr
+
+	* data/workstation.xml:
+	
+	test again
+
+2001-03-08 00:26  reitmayr
+
+	* data/: debug.xml, workstation.xml:
+	
+	test again
+
+2001-03-08 00:23  reitmayr
+
+	* data/workstation.xml:
+	
+	updated to new DTD
+
+2001-03-06 19:09  reitmayr
+
+	* src/OpenTracker.cxx:
+	
+	added new drivers to Context initialization, to make them visible
+	to the parser.
+
+2001-03-06 19:08  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, CyberMouseModule.cxx,
+	CyberMouseModule.h, InterTraxModule.cxx, InterTraxModule.h,
+	WacomGraphireModule.cxx, WacomGraphireModule.h:
+	
+	fixed several bugs to make device drivers work correctly
+
+2001-03-06 19:08  reitmayr
+
+	* src/core/: Context.cxx, Context.h:
+	
+	added timed main loop
+
+2001-03-06 19:08  reitmayr
+
+	* src/core/ConfigurationParser.cxx:
+	
+	fixed parsing of REF element
+
+2001-03-06 19:07  reitmayr
+
+	* src/network/: NetworkSinkModule.cxx, NetworkSourceModule.cxx:
+	
+	fixed some issues with opening sockets
+
+2001-03-06 19:06  reitmayr
+
+	* src/common/: DynamicTransformation.cxx, DynamicTransformation.h,
+	StaticTransformation.cxx:
+	
+	now dynamic transformation generates an event, when base changes
+
+2001-03-05 19:24  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added new input device elements by Ivan & Matej
+
+2001-03-05 19:23  reitmayr
+
+	* doc/opentracker.dxy:
+	
+	updated to doxygen 1.2.5
+
+2001-03-05 18:53  reitmayr
+
+	* src/: config.h, input/CyberMouseModule.cxx,
+	input/CyberMouseModule.h, input/CyberMouseSource.h,
+	input/InterTraxModule.cxx, input/InterTraxModule.h,
+	input/InterTraxSource.cxx, input/InterTraxSource.h,
+	input/WacomGraphireModule.cxx, input/WacomGraphireModule.h,
+	input/WacomGraphireSource.h:
+	
+	added modules by ivan & matej
+
+2001-03-05 18:21  reitmayr
+
+	* src/: common/ConsoleModule.cxx, common/ConsoleModule.h,
+	common/ConsoleSink.h, common/ConsoleSource.h,
+	core/ConfigurationParser.cxx, network/NetworkSinkModule.cxx:
+	
+	fixed flexible network protocol bugs
+
+2001-02-20 23:50  reitmayr
+
+	* src/common/ConsoleModule.cxx:
+	
+	some small code additions
+
+2001-02-20 23:50  reitmayr
+
+	* data/: ot2dot.xsl, test.xml:
+	
+	added dynamictransformation node translation
+
+2001-02-20 19:02  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	ConsoleModule.cxx, ConsoleModule.h, DynamicTransformation.cxx,
+	DynamicTransformation.h, StaticTransformation.cxx,
+	StaticTransformation.h, Transformation.cxx, Transformation.h,
+	VirtualTransformation.cxx, VirtualTransformation.h:
+	
+	implemented DynamicTransformation, more code re keyboard tracking
+
+2001-02-20 19:02  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	added updated keyboard config elements and DynamicTransformation
+	elements.
+
+2001-02-20 09:48  reitmayr
+
+	* opentracker.dsp, opentracker.dsw:
+	
+	added Visual C++ Project files
+
+2001-02-19 08:31  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, CommonNodeFactory.h,
+	StaticTransformation.cxx, StaticTransformation.h,
+	Transformation.cxx, Transformation.h, VirtualTransformation.h:
+	
+	refactored transformations to include dynamic ones
+
+2001-02-14 00:55  reitmayr
+
+	* data/ot2dot.xsl:
+	
+	added ports for Merge node children
+
+2001-02-13 17:41  reitmayr
+
+	* data/opentracker.dtd:
+	
+	put console input and output in one config element
+
+2001-02-13 17:41  reitmayr
+
+	* src/: common/ConsoleModule.cxx, common/ConsoleModule.h,
+	network/NetworkSourceModule.cxx:
+	
+	started implementation of console keyboard tracker
+
+2001-02-13 16:58  reitmayr
+
+	* data/: opentracker.dtd, ot2dot.xsl:
+	
+	added keyboard source element definition, updated dot stylesheet
+
+2001-02-13 16:44  reitmayr
+
+	* src/: OpenTracker.cxx, common/ConsoleModule.cxx,
+	common/ConsoleModule.h, common/ConsoleSink.h,
+	common/ConsoleSource.h, input/ARToolKitModule.cxx,
+	input/ARToolKitModule.h, input/ARToolKitSource.h,
+	input/InterTraxModule.h, input/InterTraxSource.cxx,
+	input/InterTraxSource.h:
+	
+	moved console to write keyboard tracker, updated conditional
+	compiles
+
+2001-02-13 16:11  reitmayr
+
+	* src/: OpenTracker.cxx, OpenTracker.h, config.h:
+	
+	added config.h for a central place for any defines
+
+2001-01-31 15:49  reitmayr
+
+	* src/: OpenTracker.cxx, common/CommonNodeFactory.cxx,
+	common/CommonNodeFactory.h, common/MergeNode.h,
+	core/ConfigurationParser.cxx, core/Node.h, core/TestModule.h:
+	
+	updated CommonNodeFactory to reflect new nodes and locations of
+	source files
+
+2001-01-29 18:16  reitmayr
+
+	* doc/footer.html, doc/header.html, doc/opentracker.dxy,
+	src/OpenTracker.cxx, src/OpenTracker.h,
+	src/common/CommonNodeFactory.cxx, src/common/CommonNodeFactory.h,
+	src/common/EventQueueNode.cxx, src/common/EventQueueNode.h,
+	src/common/MergeNode.cxx, src/common/MergeNode.h,
+	src/common/Transformation.cxx, src/common/Transformation.h,
+	src/common/VirtualTransformation.cxx,
+	src/common/VirtualTransformation.h, src/core/CommonNodeFactory.cxx,
+	src/core/CommonNodeFactory.h, src/core/ConfigNode.h,
+	src/core/ConfigurationParser.cxx, src/core/ConfigurationParser.h,
+	src/core/Context.h, src/core/EventGenerator.h,
+	src/core/EventObserver.h, src/core/EventQueue.h,
+	src/core/EventQueueImplementation.h, src/core/EventQueueNode.cxx,
+	src/core/EventQueueNode.h, src/core/MathUtils.h, src/core/Module.h,
+	src/core/Node.h, src/core/NodeFactory.h,
+	src/core/NodeFactoryContainer.h, src/core/Event.h,
+	src/core/TestModule.h, src/core/ThreadModule.h,
+	src/core/TimeDependend.h, src/core/Transformation.cxx,
+	src/core/Transformation.h, src/core/TreeNode.h,
+	src/core/VirtualTransformation.cxx,
+	src/core/VirtualTransformation.h, src/core/WrapperNode.h,
+	src/input/ARToolKitModule.h, src/input/InterTraxModule.h,
+	src/network/NetworkSinkModule.h, src/network/NetworkSourceModule.h:
+	
+	added documentation, new MergeNode moved some  files from core to
+	common
+
+2001-01-28 17:49  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added Merge and wrapper node elements
+
+2001-01-28 17:49  reitmayr
+
+	* src/: OpenTracker.cxx, input/ARToolKitModule.cxx,
+	input/ARToolKitModule.h, input/ARToolKitSource.h,
+	input/InterTraxModule.h, input/InterTraxSource.cxx,
+	input/InterTraxSource.h:
+	
+	added compile conditionals to exclude certain input modules, if
+	necessary
+
+2001-01-28 17:48  reitmayr
+
+	* src/common/: MergeNode.cxx, MergeNode.h:
+	
+	implemented generic merge node
+
+2001-01-03 15:47  reitmayr
+
+	* data/: opentracker.dtd, test.xml:
+	
+	updated DTD for ARToolKit
+
+2001-01-03 15:46  reitmayr
+
+	* src/: OpenTracker.cxx, OpenTracker.h, main.cxx,
+	core/ConfigNode.h, core/ConfigurationParser.cxx,
+	core/ConfigurationParser.h, core/Context.cxx,
+	core/EventQueueNode.h, core/Module.h, core/OpenTracker.cxx,
+	core/OpenTracker.h, core/Event.h, core/main.cxx:
+	
+	some restructuring of headers, fixes etc.
+
+2001-01-03 15:45  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h,
+	ARToolKitSource.h, InterTraxModule.h, InterTraxSource.h:
+	
+	added ARToolKit interface, some fixes to intersense lib
+
+2001-01-03 15:45  reitmayr
+
+	* src/network/: NetworkSink.h, NetworkSinkModule.cxx,
+	NetworkSinkModule.h, NetworkSource.h, NetworkSourceModule.cxx,
+	NetworkSourceModule.h:
+	
+	fixed multithreaded networksource
+

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+
+    <!-- ///// Mouse Event (Calibration) Module configuration ///// -->
+
+    <QtMouseEventCalibConfig 
+        TrackingSystemScaleOneMeter="1.0"
+    />
+
+  </configuration>
+
+
+  <!-- ///// Tracking Device Source Section ///// -->
+
+  <!-- Examples of sources applicable below -->
+  <NetworkSource number="0" multicast-address="224.0.0.10" port="1234" DEF="AppScreenPositionDevice" />
+  <FileSource station="1" file="mouse_position.dat" DEF="MousePositionDevice" />
+
+  <!-- Application Screen Position Device (ASPD): enter OpenTracker source -->
+  <!-- IMPORTANT: the parent XML-tag must include the attribute DEF="AppScreenPositionDevice" -->
+  <TODOUnknownSource DEF="AppScreenPositionDevice" />
+
+  <!-- Mouse Position Device (MPD): enter OpenTracker source -->
+  <!-- IMPORTANT: parent XML-tag must include the attribute DEF="MousePositionDevice" -->
+  <TODOUnknownSource DEF="MousePositionDevice" />
+
+  <!-- Mouse Button Device (MPD): enter OpenTracker source -->
+  <!-- IMPORTANT: parent XML-tag must include the attribute DEF="MouseButtonDevice" -->
+  <TODOUnknownSource DEF="MouseButtonDevice" />
+
+ 
+
+
+  <!-- ///// Sink Section ///// -->
+
+  <!-- NOTE 1: ASPS, MPS, MBS is mandatory. MWS optional. -->
+  <!-- NOTE 2: Single References can be used multiple times in the sinks section.
+       eg: using MPD for both, MousePositionSink + MouseButtonSink -->
+
+  <QtAppScreenPosSink>
+    <Ref USE="AppScreenPositionDevice" />
+  </QtAppScreenPosSink>
+
+  <QtMousePosSink>
+    <Ref USE="MousePositionDevice" />
+  </QtMousePosSink>
+
+  <QtMouseButtonSink>
+    <Ref USE="MouseButtonDevice" />
+  </QtMouseButtonSink>
+
+
+</OpenTracker>

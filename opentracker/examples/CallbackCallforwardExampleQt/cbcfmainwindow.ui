@@ -1,0 +1,170 @@
+<ui version="4.0" >
+ <class>CbCfMainWindow</class>
+ <widget class="QMainWindow" name="CbCfMainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>OpenTracker Callback/Callforward Example</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" >
+   <layout class="QVBoxLayout" >
+    <property name="margin" >
+     <number>9</number>
+    </property>
+    <property name="spacing" >
+     <number>6</number>
+    </property>
+    <item>
+     <widget class="QWidget" native="1" name="widget" >
+      <layout class="QHBoxLayout" >
+       <property name="margin" >
+        <number>9</number>
+       </property>
+       <property name="spacing" >
+        <number>6</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QTextEdit" name="eventsEdit" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>590</height>
+            </size>
+           </property>
+           <property name="lineWrapMode" >
+            <enum>QTextEdit::NoWrap</enum>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="outEventsEdit" >
+           <property name="lineWrapMode" >
+            <enum>QTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QTextEdit" name="configEdit" >
+           <property name="minimumSize" >
+            <size>
+             <width>0</width>
+             <height>430</height>
+            </size>
+           </property>
+           <property name="lineWrapMode" >
+            <enum>QTextEdit::NoWrap</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="configPushButton" >
+           <property name="text" >
+            <string>Update OT Configuration</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QTextEdit" name="textEdit" />
+         </item>
+         <item>
+          <widget class="QPushButton" name="eventPushButton" >
+           <property name="text" >
+            <string>Push Event</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="defaultUp" >
+    <bool>false</bool>
+   </property>
+   <widget class="QMenu" name="menuClient_Mode" >
+    <property name="title" >
+     <string>Client Mode</string>
+    </property>
+    <addaction name="separator" />
+    <addaction name="actionClient_A" />
+    <addaction name="actionClient_B" />
+    <addaction name="actionLocal_TestSource" />
+   </widget>
+   <addaction name="menuClient_Mode" />
+  </widget>
+  <widget class="QStatusBar" name="statusbar" />
+  <action name="actionClient_A" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
+   <property name="checked" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Client A</string>
+   </property>
+   <property name="iconText" >
+    <string>Client A</string>
+   </property>
+   <property name="toolTip" >
+    <string>Client A</string>
+   </property>
+  </action>
+  <action name="actionClient_B" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Client B</string>
+   </property>
+  </action>
+  <action name="actionLocal_TestSource" >
+   <property name="checkable" >
+    <bool>false</bool>
+   </property>
+   <property name="text" >
+    <string>Local TestSource</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

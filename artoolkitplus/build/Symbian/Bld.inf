@@ -1,0 +1,7 @@
+// BLD.INF
+// Component description file
+//
+
+PRJ_MMPFILES
+
+ARToolKitPlus.mmp

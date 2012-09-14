@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 2 U (http://www.xmlspy.com) by Ponder (Vienna University of Technology) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<?xml-stylesheet type="text/xsl" href="P:\cg\dev\opentracker\data\test.xsl"?>
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig display="on" headerline="VRPN Test file"/>
+    <VRPNConfig port="3883"/>
+  </configuration>
+  <ConsoleSink comment="Button Server">
+    <VRPNSink name="buttontest" type="button">
+      <ConsoleSource number="0"/>
+    </VRPNSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Tracker Server">
+    <VRPNSink name="trackertest" type="tracker">
+      <TestSource position="1 0 0"/>
+    </VRPNSink>
+  </ConsoleSink>
+  <ConsoleSink comment="Tracker Client">
+    <VRPNSource name="trackertest@localhost:3883" type="tracker"/>
+  </ConsoleSink>
+  <ConsoleSink comment="Button Client">
+    <VRPNSource name="buttontest@localhost:3883" type="button"/>
+  </ConsoleSink>
+</OpenTracker>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="timer" updateRate="30">
+	<V4L2Src name="V4L2Src" pixelformat="R8G8B8" videomode="MJPEG" width=640 height=480 device="/dev/video2"> 
+		<GLUTSink name="glsink1" pixelformat="R8G8B8"/> 
+	</V4L2Src>
+</openvideo>
+
+
+
+
+
+

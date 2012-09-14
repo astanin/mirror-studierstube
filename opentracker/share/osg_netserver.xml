@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--!DOCTYPE OpenTracker SYSTEM "opentracker.dtd"-->
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="DPong Client" interval="1"/>
+    <CallforwardConfig/>
+    <CallbackConfig/>
+    <NetworkSinkConfig/>
+    <NetworkSourceConfig/>
+  </configuration>  
+
+
+  <!-- Output ports -->
+  <NetworkSink  mode="unicast" name="Paddlea" number="0" port="12003"> 
+     <Callforward name="Puck" DEF="PUCK"/>
+  </NetworkSink>
+
+
+  <!-- Input ports -->
+  <Callback name="PaddleA">
+      <NetworkSource  mode="unicast" address="localhost" number="0" port="12001" DEF="PADDLEA"/>
+  </Callback>  
+
+  <Callback name="PlayerA">
+      <NetworkSource  mode="unicast" address="localhost" number="1" port="12001" DEF="PLAYERA"/>
+  </Callback>
+
+  <Callback name="PaddleB">
+      <NetworkSource  mode="unicast" address="localhost" number="0" port="12002" DEF="PADDLEB"/>
+  </Callback>  
+
+  <Callback name="PlayerB">
+      <NetworkSource  mode="unicast" address="localhost" number="1" port="12002" DEF="PLAYERB"/>
+  </Callback>
+
+
+
+  <ConsoleSink comment="Puck " active="on">
+      <Ref USE="PUCK"/>
+  </ConsoleSink>
+
+  <ConsoleSink comment="Player A" active="on">
+      <Ref USE="PLAYERA"/>
+  </ConsoleSink>
+
+  <ConsoleSink comment="Paddle B" active="on">
+      <Ref USE="PADDLEB"/>
+  </ConsoleSink>
+
+
+</OpenTracker>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0 (http://www.xmlspy.com) by gr (gr) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration/>
+  <StbSink station="0">
+    <NetworkSource  mode="multicast" number="1"
+     multicast-address="224.0.0.10" port="12345" />
+  </StbSink>
+  
+  <StbSink station="1">
+    <NetworkSource  mode="multicast" number="2"
+     multicast-address="224.0.0.10" port="12345" />
+  </StbSink>
+  
+  <StbSink station="2">
+    <NetworkSource  mode="multicast" number="3"
+     multicast-address="224.0.0.10" port="12345" />
+  </StbSink>
+</OpenTracker>

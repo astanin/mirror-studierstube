@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Firefly (YRG) -->
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by merlin (blue sky) -->
+<!--simple test configuration for the new tracker serve system-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<?xml-stylesheet type="text/xsl" href="P:\cg\dev\opentracker\data\test.xsl"?>
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Receiver Test" interval="1"/>
+    <TimeConfig sleep="50"/>
+    <DwarfConfig name="OpenTrackerTest">
+      <ability name="out1" type="PoseData" thingid="whatever" thingtype="whatever">
+        <attribute name="test" value="more"/>
+        <connector protocol="PushSupplier"/>
+      </ability>
+    </DwarfConfig>
+  </configuration>
+  <ConsoleSink comment="DwarfSink">
+    <DwarfSink name="out1">
+      <ConsoleSource number=""/>
+    </DwarfSink>
+  </ConsoleSink>
+</OpenTracker>

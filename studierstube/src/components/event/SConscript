@@ -1,0 +1,45 @@
+#!/usr/bin/python
+import sys
+import os
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+
+event_env = library_env.Copy ()
+
+# Get all files from directory while applying ignore filter
+source_dir   = Dir('#').abspath + os.sep + '/src/components/event'
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+# ACE
+event_env.Append (CPPPATH = user_options_dict['ACE_INCLUDE'])
+event_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+event_env.Append (LIBS    = user_options_dict['ACE_LIBRARY'])
+# Coin
+event_env.Append (CPPPATH = user_options_dict['COIN_INCLUDE'])
+event_env.Append (LIBPATH = user_options_dict['COIN_LIBPATH'])
+event_env.Append (LIBS    = user_options_dict['COIN_LIBRARY'])
+if sys.platform == 'darwin':
+	lfs = user_options_dict['COIN_LDFLAGS'] + ['-Wl,-undefined,dynamic_lookup']
+	event_env.Append (LINKFLAGS = lfs)
+else:
+	event_env.Append (LINKFLAGS = user_options_dict['COIN_LDFLAGS'])
+
+# OPENTRACKER
+event_env.Append (CPPPATH = user_options_dict['OPENTRACKER_INCLUDE'])
+event_env.Append (LIBPATH = user_options_dict['OPENTRACKER_LIBPATH'])
+event_env.Append (LIBS    = user_options_dict['OPENTRACKER_LIBRARY'])
+# BOOST
+event_env.Append (CPPPATH = user_options_dict['BOOST_INCLUDE'])
+event_env.Append (LIBPATH = user_options_dict['BOOST_LIBPATH'])
+event_env.Append (LIBS    = user_options_dict['BOOST_LIBRARY'])
+
+# Starlight
+event_env.Append (LIBS    = 'stbstarlight')
+
+event = event_env.SharedLibrary (target='#'+user_options_dict['BUILD_DIR']+'/lib/stbevent', source=source_files)
+env.Alias(target = ['install'], source = event_env.Install(user_options_dict['INSTALL_ROOT_DIR'] + os.sep + user_options_dict['LIBDIR'], event))

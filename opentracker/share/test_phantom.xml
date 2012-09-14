@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration/>
+  <PhantomLocationSink group="225.0.0.12" eid="6" pid="94" frequency="1">
+    <EventTransform translation="0.5 0.6 0.7">
+      <PhantomLocationSource group="225.0.0.12" eid="6" pid="100"/>
+    </EventTransform>
+  </PhantomLocationSink>
+</OpenTracker>

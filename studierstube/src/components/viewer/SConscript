@@ -1,0 +1,43 @@
+#!/usr/bin/python
+import sys
+import os
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+
+viewer_env = library_env.Copy ()
+
+# Get all files from directory while applying ignore filter
+source_dir   = Dir('#').abspath + os.sep + '/src/components/viewer'
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+# ACE
+viewer_env.Append (CPPPATH = user_options_dict['ACE_INCLUDE'])
+viewer_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+viewer_env.Append (LIBS    = user_options_dict['ACE_LIBRARY'])
+# Coin
+viewer_env.Append (CPPPATH = user_options_dict['COIN_INCLUDE'])
+viewer_env.Append (LIBPATH = user_options_dict['COIN_LIBPATH'])
+viewer_env.Append (LIBS    = user_options_dict['COIN_LIBRARY'])
+# SoQt
+viewer_env.Append (CPPPATH   = user_options_dict['SOQT_INCLUDE'])
+viewer_env.Append (LIBPATH   = user_options_dict['SOQT_LIBPATH'])
+viewer_env.Append (LIBS      = user_options_dict['SOQT_LIBRARY'])
+viewer_env.Append (LINKFLAGS = user_options_dict['SOQT_LDFLAGS'])
+# OpenVideo
+if user_options_dict['ENABLE_OPENVIDEO'] == 1:
+    viewer_env.Append (CPPPATH = user_options_dict['OPENVIDEO_INCLUDE'])
+    viewer_env.Append (LIBPATH = user_options_dict['OPENVIDEO_LIBPATH'])
+    viewer_env.Append (LIBS    = user_options_dict['OPENVIDEO_LIBRARY'])
+# Qt
+viewer_env.Append (CPPPATH = user_options_dict['QT_INCLUDE'])
+#print  user_options_dict['QT_INCLUDE']
+viewer_env.Append (LIBPATH = user_options_dict['QT_LIBPATH'])
+viewer_env.Append (LIBS    = user_options_dict['QT_LIBRARY'])
+
+viewer = viewer_env.SharedLibrary (target='#'+user_options_dict['BUILD_DIR']+'/lib/stbviewer_qt', source=source_files)
+env.Alias(target = ['install'], source = viewer_env.Install(user_options_dict['INSTALL_ROOT_DIR'] + os.sep + user_options_dict['LIBDIR'], viewer))

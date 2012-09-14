@@ -1,0 +1,10 @@
+prefix=@@ARTOOLKITPLUS_PREFIX@@
+exec_prefix=${prefix}
+libdir=@@ARTOOLKITPLUS_LIBDIR@@
+includedir=${exec_prefix}/include
+
+Name: @@ARTOOLKITPLUS_PROJECT_NAME@@
+Description: @@ARTOOLKITPLUS_PROJECT_DESCRIPTION@@
+Version: @@ARTOOLKITPLUS_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@ARTOOLKITPLUS_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@ARTOOLKITPLUS_PROJECT_DEFINES@@

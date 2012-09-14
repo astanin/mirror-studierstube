@@ -1,0 +1,17 @@
+// OT_EventChannel.idl
+#ifndef _OT_EVENTCHANNEL_IDL
+#define _OT_EVENTCHANNEL_IDL
+
+// OpenTracker specific pragma to insert extra includes into the stub header.
+#pragma hh #include <OpenTracker/skeletons/OT_sysdep.h>
+
+#include <COS/CosEventComm.idl>
+#include "OTGraph.idl"
+
+module OT_EventChannel {
+
+  interface PushConsNode : CosEventComm::PushConsumer, OTGraph::Node {};
+
+};
+
+#endif //_OT_EVENTCHANNEL_IDL

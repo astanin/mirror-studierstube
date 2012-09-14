@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+  <CORBAConfig persistent="true" endPoint="giop:tcp::9999"/>
+  </configuration>
+  <CORBASink name="CORBA.Sink01" DEF="foo" nameBinding="Node.foo">
+    <EventTransform scale="2 15 5" nameBinding="Node.transform" DEF="transform">
+      <CORBASource nameBinding="Node.bar" DEF="bar"/>
+    </EventTransform>
+  </CORBASink>
+</OpenTracker>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSourceConfig />
+    <ConsoleConfig headerline="Network Output" interval="1"/>
+  </configuration>
+
+  <ConsoleSink comment="Mobilab heart rate">
+      <NetworkSource  mode="unicast" number="0"
+      address="127.0.0.1" port="12002" />
+  </ConsoleSink>
+
+  <ConsoleSink comment="Mobilab EEG">
+      <NetworkSource  mode="unicast" number="1"
+      address="127.0.0.1" port="12002" />
+  </ConsoleSink>
+
+</OpenTracker>

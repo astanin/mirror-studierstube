@@ -1,0 +1,10 @@
+prefix=@@TINYXMLMOD_PREFIX@@
+exec_prefix=${prefix}
+libdir=@@TINYXMLMOD_LIBDIR@@
+includedir=${exec_prefix}/include
+
+Name: @@TINYXMLMOD_PROJECT_NAME@@
+Description: @@TINYXMLMOD_PROJECT_DESCRIPTION@@
+Version: @@TINYXMLMOD_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@TINYXMLMOD_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@TINYXMLMOD_PROJECT_DEFINES@@

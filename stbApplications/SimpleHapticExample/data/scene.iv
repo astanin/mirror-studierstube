@@ -1,0 +1,45 @@
+#Inventor V2.1 ascii
+
+
+DEF HDTrack SoTrakEngine {
+	key "tracking"
+	value "HDTrack"
+}
+
+DEF frame SoHLFrameSeparator {
+	position = USE HDTrack.translation
+  
+  SoCube {}
+}
+
+SoSeparator {
+  SoTransform {
+    translation = USE HDTrack.translation
+    rotation = USE HDTrack.rotation
+  }
+  BaseColor { rgb 1 1 1 }
+  SoSphere { radius 0.002 }
+}
+
+SoSeparator {
+	SoTransform {
+		translation = USE frame.proxy
+  }
+	BaseColor { rgb 1 0 0 }
+	SoSphere { radius 0.002 }
+}
+
+
+SoSeparator {
+	SoTransform {
+		translation 0 0.1 0
+	}
+	BaseColor { rgb 1 1 1 }
+	SoFont { size 20 }
+	SoText2 {
+		string = USE frame.forceOut
+		spacing 1
+		justification LEFT
+	}
+}
+

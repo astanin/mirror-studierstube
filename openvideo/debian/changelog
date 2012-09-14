@@ -1,0 +1,38 @@
+libopenvideo (1.0-6) unstable; urgency=low
+
+  * new version
+  * pi
+  * i
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Wed, 20 Jun 2007 12:08:21 +0200
+
+libopenvideo (1.0-5) unstable; urgency=low
+
+  * new version
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Fri, 04 May 2007 11:21:19 +0200
+
+libopenvideo (1.0-4) unstable; urgency=low
+
+  * new version - V4L2Src working! 
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Fri, 04 May 2007 10:00:48 +0200
+
+libopenvideo (1.0-3) unstable; urgency=low
+
+  * new version
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Wed, 02 May 2007 10:18:28 +0200
+
+libopenvideo (1.0-2) unstable; urgency=low
+
+  * new version 
+
+ -- Alexander Bornik <bornik@zarathustra.icg.tu-graz.ac.at>  Thu, 22 Mar 2007 15:13:34 +0100
+
+libopenvideo (1.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Alexander Bornik <bornik@icg.tu-graza.ac.at>  Tue, 13 Mar 2007 12:26:45 +0100
+

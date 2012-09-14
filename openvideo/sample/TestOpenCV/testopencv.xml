@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo>
+
+  <!-- <TestSrc name="TestSource" pixelformat="R8G8B8">  -->
+  <OpenCVSrc pixelformat="B8G8R8" capturefrom="camera" width="640" height="480" fps="15" cameraId="0">
+
+    <GLUTSink name="glsink1" pixelformat="B8G8R8"/> 
+
+    <GL_TEXTURE_2D_Sink name="stbSink" pixelformat="B8G8R8"/>
+ 
+  </OpenCVSrc>
+
+  <!-- </TestSrc> -->
+
+</openvideo>

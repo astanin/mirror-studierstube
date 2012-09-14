@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--simple test configuration for th Flock of Birds source module-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Second Server"/>
+    <FOBConfig mode="single" master="1" transmitter="7">
+      <Bird device="COM1" number="1"/>
+      <Bird number="2"/>
+      <Bird number="3"/>
+      <Bird number="4"/>
+      <Bird number="5"/>
+      <Bird number="6"/>
+    </FOBConfig>
+  </configuration>
+  <ConsoleSink comment="1">
+    <FOBSource number="1"/>
+  </ConsoleSink>
+  <ConsoleSink comment="2">
+    <FOBSource number="2"/>
+  </ConsoleSink>
+  <ConsoleSink comment="3">
+    <FOBSource number="3"/>
+  </ConsoleSink>
+  <ConsoleSink comment="4">
+    <FOBSource number="4"/>
+  </ConsoleSink>
+  <ConsoleSink comment="5">
+    <FOBSource number="5"/>
+  </ConsoleSink>
+  <ConsoleSink comment="6">
+    <FOBSource number="6"/>
+  </ConsoleSink>
+</OpenTracker>

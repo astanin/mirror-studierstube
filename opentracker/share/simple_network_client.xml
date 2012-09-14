@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Network Output" interval="1"/>
+  </configuration>
+  <ConsoleSink comment="Test Source 1">
+    <EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0" DEF="trdata1">
+      <NetworkSource  mode="multicast" number="1"
+      multicast-address="224.0.0.10" port="12345" />
+
+    </EventTransform>
+  </ConsoleSink>
+</OpenTracker>

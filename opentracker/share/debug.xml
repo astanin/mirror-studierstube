@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<?xml-stylesheet type="text/xsl" href="P:\cg\dev\opentracker\data\test.xsl"?>
+<OpenTracker>
+  <configuration/>
+    <NetworkSink name="Test Sink" number="1" multicast-address="224.100.200.101" port="12346">
+        <TestSource frequency="10" offset="2"/>
+    </NetworkSink>
+    <NetworkSource number="1" multicast-address="224.100.200.101" port="12346"/>
+</OpenTracker>

@@ -1,0 +1,10 @@
+prefix=@@SIMPLEAPP_PREFIX@@
+libdir=@@SIMPLEAPP_LIBDIR@@
+exec_prefix=${prefix}
+includedir=${exec_prefix}/include
+
+Name: @@SIMPLEAPP_PROJECT_NAME@@
+Description: @@SIMPLEAPP_PROJECT_DESCRIPTION@@
+Version: @@SIMPLEAPP_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@SIMPLEAPP_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@SIMPLEAPP_PROJECT_DEFINES@@

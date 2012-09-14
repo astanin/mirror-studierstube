@@ -1,0 +1,19 @@
+This script calculates the parameters required
+to setup an SoOffAxisCamera node in Studierstube.
+
+To run this MATLab script, the camera's resolution
+and intrinsic matrix has to be known.
+
+Data for intrinsic matrix can be measured using
+the MATLab camera calibration toolbox.
+
+The matrix is built like this:
+
+[ fcx 0.0 ccx ; 0.0 fcy ccy ; 0.0 0.0 1.0 ]
+
+where fcx and fcy are the focal length and
+ccx and ccy are the coordinates of the principal point.
+
+If an ARToolKit camera file (both old binary or new ASCII
+style) already exists one can use the artoolkitmatrix tool
+to output this matrix.

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+	<configuration>
+		<StbTrackerConfig camera-parameter="..\..\..\Data\Calibration\fujinon6mm.dat" pose-estimator="rpp" border-width="0.125" marker-mode="idbased" threshold="non-uniform"/>
+		<ConsoleConfig headerline="Sample Tracking Input" interval="1" display="off"/>
+	</configuration>
+	
+	<ConsoleSink comment="Model" active="on">
+		<StbTrackerMarkerSource center="0 0" size="1 1" tag-id="17"/>
+	</ConsoleSink>
+	
+</OpenTracker>

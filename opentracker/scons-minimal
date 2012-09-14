@@ -1,0 +1,54 @@
+import sys, os
+from glob import glob
+from os.path import join
+from os import walk
+
+_libs = ['xerces-c', 'ACE']
+_defines = ['OT_NO_FOB_SUPPORT', 'OT_NO_GPS_SUPPORT', 'OT_NO_NETWORK_SUPPORT', 'OT_NO_FILEMODULE_SUPPORT', 'OT_NO_TIMEMODULE_SUPPORT', 'OT_NO_XSENS_SUPPORT','OT_NO_MAGICY_SUPPORT', 'OT_NO_SPEECH_SUPPORT', 'OT_NO_CONSOLE_SUPPORT', 'OT_NO_CALLBACKMODULE_SUPPORT', 'OT_NO_FASTTRACK_SUPPORT', 'OT_NO_DYNASIGHT_SUPPORT', 'OT_NO_GROUPGATE_SUPPORT', 'OT_NO_ULTRATRACK_SUPPORT', 'OT_NO_INTERSENSE_SUPPORT', 'OT_NO_ORIENTATION_SUPPORT', 'OT_NO_INTERPORLATORMODULE_SUPPORT', 'OT_NO_ARTDATATRACKER_SUPPORT', 'OT_NO_BUTTON_SUPPORT', 'OT_NO_CONFIDENCE_SUPPORT', 'OT_NO_TIMEGATE_SUPPORT', 'OT_NO_TIMESTAMPGENERATOR_SUPPORT', 'OT_NO_CALLFORWARDMODULE_SUPPORT']
+
+essential_core_files = glob(join('src', 'core', '*.cxx')) + \
+    [join('src', 'misc', 'OpenTracker.cxx')] + \
+    [join('src', 'tool', 'OT_ACE_Log.cxx')]
+
+common = ['ButtonOpNode.cxx', 'CommonNodeFactory.cxx', 'LogModule.cxx', 'FilterNode.cxx', 'SelectionNode.cxx', 'DESPFilterNode.cxx', 'Transformation.cxx', 'RangeFilterNode.cxx', 'EventUtilityNode.cxx', 'PositionFilterNode.cxx', 'ThresholdFilterNode.cxx', 'MatrixTransformation.cxx', 'VirtualTransformation.cxx', 'StaticTransformation.cxx', 'DynamicTransformation.cxx', 'EllipsoidTransformNode.cxx', 'TriangulateOrientationNode.cxx', 'DifferenceNode.cxx', 'EventQueueNode.cxx', 'InvertTransformation.cxx', 'MergeNode.cxx', 'DESP.cxx']
+common_files = [join('src', 'common', file) for file in common]
+input_files  = []
+
+opts = Options('custom.py')
+opts.Add(BoolOption('DEBUG', 'Set to build for debug', 0))
+
+env = Environment (ENV = os.environ, options=opts)
+env.Append(CPPPATH=['include'])
+env.Append(LIBS=_libs)
+env.Append(CPPDEFINES=_defines)
+env.Append(LIBPATH='lib')
+if env['DEBUG']:
+    env.Append(CXXFLAGS='-g')
+else:
+    env.Append(CXXFLAGS='-O2')
+
+if sys.platform == 'darwin':
+    # Add default directories used by Darwin Ports
+    env.Append(CPPPATH=['/opt/local/include']) 
+    env.Append(LIBPATH=['/opt/local/lib'])
+elif sys.platform.startswith('linux'):
+    input_files += [join('src', 'input', 'ParButtonModule.cxx'),
+		    join('src', 'input', 'LinmouseModule.cxx')]
+elif sys.platform == 'win32':
+    pass
+
+otlib = env.SharedLibrary(join('lib', 'opentracker'), essential_core_files + common_files + input_files)
+ot    = env.Program(join('bin','opentracker'), join('src','standalones','main.cxx'), LIBS='opentracker')
+
+# install everything into prefix, if there is such a thing
+prefix = ARGUMENTS.get('PREFIX')
+if prefix:
+    bin_inst = env.Install(join(prefix, 'bin'), [ot])
+    lib_inst = env.Install(join(prefix, 'lib'), [otlib])
+    inc_inst = []
+    # obtain list of all header files to be installed
+    for dirpath, dirnames, filenames in walk('include'):
+	inc_inst += [env.Install( join(prefix, dirpath), join(dirpath, header) ) for header in filenames if header.endswith('.h') or header.endswith('.hh')]
+    # all files to be installed
+    install_files = [bin_inst, inc_inst, lib_inst]
+    env.Alias('install', install_files )

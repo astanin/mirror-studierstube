@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Stb4 test tracker" interval="1" display="off"/>
+    <EventConfig keyevents="on" mouseevents="on"/>
+  </configuration>
+
+  <ConsoleSink comment="keyboard" active="on">
+    <EventSink bla="hello">
+      <EventKeyboardSource number="0"/>
+    </EventSink>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="mouse" active="on">
+    <EventSink blabla="hi">
+      <EventMouseSource mode="relative"/>
+    </EventSink>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="test" active="on">
+    <TestSource position="1 0 -2" frequency="1"/>
+  </ConsoleSink>
+
+</OpenTracker>

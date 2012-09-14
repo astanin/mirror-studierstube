@@ -1,0 +1,16 @@
+/**
+
+@page changes OpenVideo Changes
+
+See also the ChangeLog files in doc for a detailed list of all changes.
+
+
+@section version10 Changes for Release 1.0
+
+@li Linux port
+@li xxx source node (thanks to petter risholm)
+@li support for  vs 2005
+@li support for tinyxml_mod
+@li build to lib/win32 and  bin/win32
+@li changed configOV.h to configOV.template.h
+*/

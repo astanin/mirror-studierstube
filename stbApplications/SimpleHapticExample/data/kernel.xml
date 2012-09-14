@@ -1,0 +1,26 @@
+<studierstube>
+
+  <kernel updateMode="timer" logMode="console" updateRate="0.03333"/>
+  
+  <Component name="Haptic" availability="onload" lib="stbhaptics" />
+  
+  <Component name="Event" availability="ondemand" lib="stbevent">
+    <Param key="configFile" value="opentracker.xml" />	
+  </Component>
+  
+  <Component name="Starlight" availability="ondemand" lib="stbstarlight" />
+	
+  
+  <Component name="Viewer" availability="onload" lib="stbviewer_qt">
+    <Param key="configFile" value="viewer.iv" />
+  </Component>
+
+  <Application name="PhantomApp" availability="onload" lib="stbsimplehapticexample">
+    <Param key="sceneFile"  value="scene.iv" />	
+    <Param key="needViewer" value="true" />	
+    <Param key="needEvent"  value="true" />
+    <Param key="needHaptic" value="true" />
+  </Application>
+  
+</studierstube>
+	

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.145.114" debug="on" />-->
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.201.211" debug="on" />-->
+     <MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="192.168.123.101" debug="on" />
+    <FileConfig />
+  </configuration>
+  
+  <FileSink file="bcidata.dat" station="0" >
+     <HeartrateFilter attrname="bcidata4" threshold="0.018" toomuch="0.2" onDuration ="4" offDuration="100" samplefactor="4" consume="true">
+	  <MobilabSource channel="4" datatype="FLOAT" attname="bcidata4"/>
+    </HeartrateFilter>
+  </FileSink>
+  
+</OpenTracker>

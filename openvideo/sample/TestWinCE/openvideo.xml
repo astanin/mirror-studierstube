@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo>
+
+	<TestSrc name="TestSource" pixelformat="R8G8B8">
+
+		<VideoSink name="Simple video out" pixelformat="R8G8B8" />
+
+	</TestSrc>
+
+</openvideo>

@@ -1,0 +1,111 @@
+=========================================================================
+==                  BUILDING OPENVIDEO ON WINDOWS                      ==
+=========================================================================
+
+
+authors: Michael Kalkusch
+updated: 11-04-2006
+
+
+  Required packages:
+  ------------------
+        
+    - ACE 5.4.7
+        http://deuce.doc.wustl.edu/Download.html
+        
+    - TinyXML 2.4.2         
+        http://www.grinninglizard.com/tinyxml/
+
+    - VidCapture 0.30 mod
+        modified version based on VidCapture 0.30
+        required for OpenVideo
+        https://svn.icg.tu-graz.ac.at/svn/OpenVideoMod/trunk/
+        
+        VidCapture:
+        http://sourceforge.net/projects/vidcapture/
+    
+    - VideoWrapper 0.1.1 mod
+        modified version based on VideoWrapper 0.1.1
+        required for OpenVideo
+        https://svn.icg.tu-graz.ac.at/svn/OpenVideoMod/trunk/
+        
+        VideoWrapper:
+        http://sourceforge.net/projects/videowrapper/
+        
+    - GLUT 3.7.6
+        required for OpenVideo
+        http://www.xmission.com/~nate/glut.html
+
+
+
+  Required environment variables:
+  -------------------------------
+ 
+     Set environment variables via "Start"-->"Settings"-->"ControlPanel"
+       -->"System"-->"Advanced"-->"Environment Variables"
+       
+     Note: After setting environment variables "Visual Studio" has to be restarted and
+       each shell must also be restarted to apply the changed environment variables!
+     
+    Environment variables for OpenVideo:
+    ====================================
+    
+      OpenVideo dll
+      -------------
+      
+        ACEROOT
+        OPENVIDEOROOT
+        TINYXMLROOT
+          or
+        TINYXMLMODROOT
+        VIDCAPTUREROOT
+        VIDEOWRAPPERROOT
+    
+      OpenVideo "standalone"
+      ----------------------
+    
+        ACEROOT
+        OPENVIDEOROOT
+        
+        
+      Hints for compiling
+      -------------------
+      
+       (1) copy  include\openvideo\configOV.template.h   include\openvideo\configOV.h 
+             
+    
+    
+   List of dependencies:
+  -----------------------    
+    
+                        | STB4 | OpenVideo | OpenTracker |
+    --------------------+------+-----------+-------------+
+     ACEROOT            |  x   |     x     |      x      |
+     ARTOOLKITROOT      |      |           |     (x)     |
+     ARTOOLKITPLUSROOT  |  x   |           |     (x) 1)  |
+     BOOSTROOT          |  x   |           |             |
+     COINROOT           |  x   |           |             |
+     GLUT (dll&header)  |      |     x     |             |
+     OPENVIDEOROOT      |  x   |     x     |     (x) 1)  |
+     OTROOT             |  x   |           |      x      |
+     STB4ROOT           |  x   |           |             |
+     TINYXMLROOT        |      |     x  2) |      x  2)  |
+     TINYXMLMODROOT     |  x   |    (x) 2) |     (x) 2)  |
+     VIDCAPTUREROOT     |  x   |     x     |             |
+     VIDEOWRAPPERROOT   |  x   |     x     |             |
+     XERCESCROOT        |      |           |     (x) 2)  |    
+    --------------------+------+-----------+-------------+
+
+     x  ........... required
+    (x) ........... optional
+     1) ........... if OpenTracker is compiled with ARTOOLKITPLUS support OpenVideo is required
+     2) ........... parsing of XML files is either is done either using TinyXML or Xerxes
+         
+    STB4 .......... Studierstube 4.0   http://www.studierstube.org
+    OpenTracker ... OpenTracker 1.1.1  http://www.studierstube.org/opentracker 
+    OpenVideo ..... OpenVideo 0.1      http://www.studierstube.org/openvideo 
+    
+    
+     
+If you have any questions concerning Windows MS VC 8.0 for
+OpenVideo, write to <kalkusch@icg.tu-graz.ac.at>.    

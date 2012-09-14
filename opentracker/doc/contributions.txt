@@ -1,0 +1,30 @@
+/**
+
+@page contributions Contributing People
+
+We would like to thank the following people for contributing to OpenTracker :
+
+Dieter Schmalstieg \n
+Toni Fuhrmann \n
+Gerd Hesina \n
+Jan Prikryl \n
+Hannes Kaufmann \n
+Rainer Splechtna \n
+Ivan Viola \n
+Matej Mlejnek \n
+Christopher Schmidt \n
+Florian Ledermann \n
+Thomas Peterseil \n
+Berk Oezer \n
+Michael Woegerbauer \n
+Reinhard Steiner \n
+Christopher Schmidt \n
+Alexander Bornik \n
+Michael Knapp \n
+Tamer Fahmy \n
+Alexander Schaelss \n
+Christoph Traxler \n
+Christian Sandor \n
+Martin Bauer \n
+Thomas Psik \n
+*/

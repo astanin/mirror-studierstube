@@ -1,0 +1,9 @@
+## Makefile.common -- Makefile definitions that are common for all Makefiles
+
+INCLUDES = -I$(top_srcdir)/src @CURSES_INCLUDEDIR@ \
+           @stb_ac_ace_cppflags@ @stb_ac_xerces_cppflags@ @stb_ac_artoolkit_cppflags@ \
+           -I$(top_srcdir)/extras/intersense/ \
+           @QT_CXXFLAGS@
+
+otincdir = $(includedir)/OpenTracker
+otextrasincdir = $(otincdir)/extras

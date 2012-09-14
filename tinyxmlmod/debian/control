@@ -1,0 +1,24 @@
+Source: tinyxmlmod
+Priority: optional
+Maintainer: Alexander Bornik <bornik@icg.tu-graz.ac.at>
+Build-Depends:  d-shlibs (>= 0.18), debhelper (>= 5), dh-buildinfo, pkg-config
+Standards-Version: 3.7.2
+Section: libs
+
+Package: libtinyxmlmod1-dev
+Section: libdevel
+Architecture: any
+Depends: libtinyxmlmod1 (= ${Source-Version}), ${devlibs:Depends}, scons
+Provides: libtinyxmlmod
+Conflicts: libtinyxml-dev, libtinyxml
+Description: Modified version of the TinyXML library
+ TinyXMLMod
+
+Package: libtinyxmlmod1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, scons
+Conflicts: libtinyxml1
+Provides: libtinyxmlmod
+Description: Modified version of the TinyXML library
+ TinyXMLMod

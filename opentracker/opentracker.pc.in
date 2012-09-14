@@ -1,0 +1,10 @@
+prefix=@@OPENTRACKER_PREFIX@@
+libdir=@@OPENTRACKER_LIBDIR@@
+exec_prefix=${prefix}
+includedir=${exec_prefix}/include
+
+Name: @@OPENTRACKER_PROJECT_NAME@@
+Description: @@OPENTRACKER_PROJECT_DESCRIPTION@@
+Version: @@OPENTRACKER_PROJECT_VERSION@@
+Libs: -L${libdir} -l@@OPENTRACKER_PROJECT_LIBNAME@@
+Cflags: -I${includedir} @@OPENTRACKER_PROJECT_DEFINES@@

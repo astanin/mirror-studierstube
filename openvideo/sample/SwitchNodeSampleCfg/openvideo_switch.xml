@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="idle" updateRate="30">
+
+ <Switch DEF="Switch" name="Stb4VideoSink" pixelformat="B8G8R8"/> 
+
+ <DSVLSrc config-file="dsvl.xml" pixelformat="B8G8R8" num-buffers="4" flip-v="true">
+ 	<Switch USE="Switch" name="Stb4VideoSink"   pixelformat="B8G8R8"/> 
+ </DSVLSrc>
+
+ <ImageSrc name="ImagSrc" pixelformat="R8G8B8" width="640" height="480" image0="testbild.jpg">
+	<Switch USE="Switch" name="Stb4VideoSink"  pixelformat="B8G8R8"/> 
+ </ImageSrc> 
+
+</openvideo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  
+  <configuration>
+    <NetworkSinkConfig name="NWS"/>
+    <!--<ConsoleConfig headerline="ClientA configuration" interval="1"/>-->
+  </configuration>
+  
+  <NetworkSink  mode="unicast" name="ClientLocal" number="0" port="12101"> 
+    <Callforward name="clientLocalInput" DEF="cf1"/>
+  </NetworkSink>
+  
+  <Callback name="clientTestInput">
+    <TestSource frequency="1000000" noise="0.1" />
+  </Callback>
+
+  <Callback name="clientAInput">
+    <Ref USE="cf1" />
+  </Callback>
+
+</OpenTracker>

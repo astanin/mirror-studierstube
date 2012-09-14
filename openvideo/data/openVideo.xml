@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="idle" updateRate="10">
+
+	<VideoWrapperSrc 
+		name="TSrc_1"
+		libId="vc"
+		formatId="RGB24"
+		cameraNum="0"
+		width="320"
+		height="240"
+		frameRate="30"
+		scale="1"
+		pixelformat="R8G8B8"> 
+  
+		<GLUTSink name="glsink1" pixelformat="R8G8B8"/> 
+		<GL_TEXTURE_2D_Sink name="stbSink" pixelformat="R8G8B8"/>
+	</VideoWrapperSrc>
+
+</openvideo>
+
+

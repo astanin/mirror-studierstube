@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenTracker>
+	<configuration>
+		<ConsoleConfig headerline="Sample Tracking Input" interval="1" display="on"/>
+		<EventConfig keyevents="on" mouseevents="on"/>
+		<PhantomConfig devicename="Default PHANToM" id="2" />
+		<PhantomSourceConfig />
+		<PhantomSinkConfig />
+	</configuration>
+
+	<ConsoleSink comment="Shutterglasses relativ to Workstation" active="on">
+		<EventSink tracking="SGTrack">
+			<EventDynamicTransform>
+				<ConsoleSink comment="Shutterglasses" active="on">
+					<EventVirtualTransform translation="-0.106 -0.04 0.014">
+						<EventVirtualTransform rotationtype="quaternion" rotation="0.739101 -0.019434 -0.026220 0.672804">
+							<NetworkSource
+								number="1" 
+		     				mode="multicast"
+              	multicast-address="224.100.200.101" 
+                port="12346" 
+                interface="129.27.201.31"/>
+						</EventVirtualTransform>
+					</EventVirtualTransform>
+				</ConsoleSink>
+				<TransformBase>
+					<EventInvertTransform>
+						<ConsoleSink comment="Haptic Workstation" active="on">
+							<EventVirtualTransform translation="-0.181 -0.857 0.259"> 
+								<EventVirtualTransform rotationtype="quaternion" rotation="-0.081434 -0.703649 -0.699301 -0.096047">
+									<NetworkSource 
+										number="8" 
+										mode="multicast"
+										multicast-address="224.100.200.101" 
+										port="12346" 
+										interface="129.27.201.31"/>
+		  						</EventVirtualTransform>
+	  						</EventVirtualTransform>
+	  					</ConsoleSink>
+					</EventInvertTransform>
+				</TransformBase>
+			</EventDynamicTransform>
+		</EventSink>
+	</ConsoleSink>
+
+	<ConsoleSink comment="Haptic Device Source" active="on">
+		<EventSink tracking="HDTrack">
+			<EventTransform translation="0 -0.08 0.077">
+				<EventTransform scale="0.001 0.001 0.001">
+					<PhantomSource id="2"/> 
+				</EventTransform>
+			</EventTransform>
+		</EventSink>
+  </ConsoleSink>
+
+	<PhantomSink id="2" feedback="1" ramprate="0.01">
+		<ConsoleSink comment="Haptic Device Sink" active="on">
+			<EventSource node="frame" position="forceOut" />
+		</ConsoleSink>
+	</PhantomSink> 
+	
+  <PhantomModule schedule="true" />
+	
+</OpenTracker>

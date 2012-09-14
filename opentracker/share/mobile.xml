@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by merlin (blue sky) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+	<configuration>
+		<ARToolKitConfig camera-parameter="camera.data" />
+		<ConsoleConfig headerline="Mobile Fusion Setup" interval="20"/>
+	</configuration>
+	<ConsoleSink comment="Head">
+		<InterTraxSource DEF="head"/>		
+	</ConsoleSink>
+	<ConsoleSink comment="Tablet">
+		<EventDynamicTransform DEF="tablet">
+			<TransformBase>
+				<Ref USE="head"/>
+			</TransformBase>
+			<EventVirtualTransform >
+				<ARToolKitSource tag-file="tablet.tag" vertex=""/>
+			</EventVirtualTransform>
+		</EventDynamicTransform>
+	</ConsoleSink>
+	<ConsoleSink comment="Pen">
+		<Merge>
+			<MergeDefault>
+				<EventDynamicTransform >
+					<TransformBase>
+						<Ref USE="head"/>
+					</TransformBase>
+					<EventVirtualTransform >
+						<ARToolKitSource tag-file="pen.tag" vertex=""/>
+					</EventVirtualTransform>
+				</EventDynamicTransform>
+				<EventDynamicTransform>
+					<TransformBase>
+						<Ref USE="tablet"/>
+					</TransformBase>
+					<EventTransform>
+						<WacomGraphireSource device="0"/>
+					</EventTransform>
+				</EventDynamicTransform>
+			</MergeDefault>
+		</Merge>
+	</ConsoleSink>
+</OpenTracker>

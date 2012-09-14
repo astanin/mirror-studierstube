@@ -1,0 +1,154 @@
+#!/usr/bin/python
+import glob
+import sys
+import os
+import re
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+Import ('defines')
+
+source_dir   = Dir('#src').abspath
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+if sys.platform == 'darwin':
+	# Remove the following files from the darwin build
+	source_files.remove(os.path.join('input','InterSenseModule.cxx'))
+	source_files.remove(os.path.join('input','ParButtonModule.cxx'))
+	source_files.remove(os.path.join('input','LinmouseModule.cxx'))
+
+if sys.platform.startswith('linux') or sys.platform == 'win32':
+	source_files.append('../extras/intersense/isense.c')
+
+if sys.platform != 'win32':
+    source_files.remove(os.path.join('tool','ToolAppWin.cxx'))
+    source_files.remove(os.path.join('tool','ToolIOModule.cxx'))
+    source_files.remove('tool/tool.cxx')
+    source_files.remove('misc/portio.cxx')
+
+    reobj = re.compile('^misc.*.wince.*')
+    for sf in source_files:
+	if reobj.search(sf):
+	    source_files.remove(sf)
+    source_files.remove('misc/wince/StdAfx.cpp')
+
+if user_options_dict['USE_OTQT']:
+	library_env.Append(QT_MOCFROMHFLAGS = '-p OpenTracker' + os.sep + 'otqt')
+	mocs = library_env.Moc('../../../include/OpenTracker/otqt/OTQt.h')
+	env.Alias('mocs', mocs)
+	moc_file = mocs
+	source_files.append(moc_file)
+
+if user_options_dict['ENABLE_CORBA']:
+	#idl_directory = os.path.join(Dir('#').abspath,'src','idl','skeletons')
+	#idl_directory = os.path.join('src','idl','skeletons')
+	#idl_directory = os.path.join('idl','skeletons')
+	idl_directory = 'skeletons'
+	necessary_files = ['OT_CORBASK.cc', 'OT_CORBADynSK.cc', 'utsSK.cc', 'utsDynSK.cc']
+	if user_options_dict['ENABLE_OMNIEVENTS']:
+		necessary_files += ['OT_EventChannelSK.cc', 'OT_EventChannelDynSK.cc']
+	for f in necessary_files:
+		ff = os.path.join(idl_directory, f)		
+		if ff in source_files:
+			print ff, " is already in source_files"
+		else:
+			print "should I add ", ff, "?"
+			abs_src_skeleton_path = os.path.join(Dir('#src').abspath, 'skeletons') 
+			source_files.append(os.path.join(abs_src_skeleton_path, f))
+else:
+        #FIXXXXME: only remove files, if corba is not needed
+	corba_files = glob.glob(Dir('#').abspath + os.sep + 'src' + os.sep +'network' + os.sep +"CORBA*.cxx")
+	for corba_file in corba_files:
+		source_files.remove(os.path.join('network', os.path.basename(corba_file)))
+	for skeleton in glob.glob(os.path.join(Dir('#src').abspath, 'skeletons',  "*")):
+		try:
+			source_files.remove(os.path.join('skeletons', os.path.basename(skeleton)))
+		except ValueError:
+			print os.path.join('skeletons', os.path.basename(skeleton)), "not in source files list"
+
+if user_options_dict['ENABLE_PHANTOM_MIDDLEWARE']:
+	pass
+else:
+	source_files.remove(os.path.join('network','PhantomMiddlewareModule.cxx'))
+
+source_files.remove(os.path.join('misc','test.cxx'))
+
+if not user_options_dict['USE_OTQT']:
+    # remove files in otqt subdirectory
+    reobj = re.compile('^otqt.*')
+    for sf in source_files:
+	if reobj.match(sf):	
+	    source_files.remove(sf)
+else:
+    # add the newmat library
+    newmat_files = glob.glob(Dir('#').abspath + os.sep + 'extras' + os.sep +'newmat10' + os.sep +"*.c*")
+    for nmfile in newmat_files:
+	    source_files.append('..' + os.sep + 'extras' + os.sep + 'newmat10' + os.sep + os.path.basename(nmfile))
+    
+
+# Remove standalone files from library sources
+
+standalone_files = glob.glob(Dir('#').abspath + os.sep + 'src' + os.sep +'standalones' + os.sep +"*.c*")
+for standalone_file in standalone_files:
+	try:
+		source_files.remove(os.path.join('standalones', os.path.basename(standalone_file)))
+		print "Removed ", standalone_file, "from list of library sources"
+	except ValueError:
+		print "Failed to remove", standalone_file, "from list of library sources"
+
+all_source_files = source_files
+
+otlib_env = library_env.Copy ()
+otlib_env.Append(CPPPATH = ['.',os.path.join('..','extras','intersense')])
+otlib_env.Append(CPPPATH = ['..' + os.sep])
+otlib_env.Append(CPPPATH = ['..' + os.sep + 'include'])
+otlib_env.Append (CPPPATH = user_options_dict['ACE_INCLUDE'])
+otlib_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+otlib_env.Append (LIBS    = user_options_dict['ACE_LIBRARY'])
+otlib_env.Append (CPPDEFINES = defines)
+if user_options_dict['ENABLE_CORBA']:
+	otlib_env.Append (CPPPATH = user_options_dict['OMNIORB_INCLUDE'])
+	otlib_env.Append (LIBPATH = user_options_dict['OMNIORB_LIBPATH'])
+	otlib_env.Append (LIBS    = user_options_dict['OMNIORB_LIBRARY'])
+if user_options_dict['BUILD_BINARY'] == 'debug' and sys.platform == 'darwin':
+	#otlib_env.Append (LIBS = 'MallocDebug')
+	#otlib_env.Append(CFLAGS = '-fno-common')
+	#otlib_env.Append(CCFLAGS = '-fshort-double')
+	#otlib_env.Append(CCFLAGS = '-fno-common')
+	#otlib_env.Append(LDFLAGS = '-single_module')
+	pass
+
+# Enable X11 on Linux (needed for keyboard input)
+if sys.platform.startswith('linux'):
+	try:
+		otlib_env.Append (CPPPATH = user_options_dict['X11_INCLUDE'])
+	except KeyError:
+		print 'X11_INCLUDE missing from user_options_dict for some reason'
+		print 'using default value'		
+		otlib_env.Append (CPPPATH = '/usr/include/X11')
+	try:
+		otlib_env.Append (LIBPATH = user_options_dict['X11_LIBPATH'])
+	except KeyError:
+		print  'X11_LIBPATH missing from user_options_dict for some reason'
+		print 'using default value'				
+		otlib_env.Append (LIBPATH = '/usr/lib')
+	try:
+		otlib_env.Append (LIBS    = user_options_dict['X11_LIBRARY'])
+	except KeyError:
+		print 'X11_LIBRARY missing from user_options_dict for some reason'
+		print 'using default value'		
+		otlib_env.Append (LIBS    = 'X11')
+	
+
+# Enable ncurses
+if sys.platform != 'win32':
+    otlib_env.Append (LIBS    = 'ncurses')
+
+otlib = otlib_env.SharedLibrary (target=os.path.join('#lib','opentracker'),  source = all_source_files)
+
+# return otlib library back to main SConstruct file
+Return('otlib')

@@ -1,0 +1,46 @@
+#!/usr/bin/python
+import os
+import buildutils
+
+# Import environment from SConstruct file
+Import('env')
+
+# Set up filters for source and include files
+sourcefilter  = '\.cxx$|\.cpp$|\.moc$|\.cc$|\.c$'
+includefilter = '\.h$'
+ignorefilter  = '/ignore/|/ignore$|\.scon|\.svn|\.#'
+
+# Search for source files
+sourcedir   = Dir('#').abspath + os.sep + 'src'
+sourcefiles = buildutils.listtrav(sourcedir , sourcedir)
+sourcefiles = buildutils.regexpfilter(sourcefiles, sourcefilter, True)
+sourcefiles = buildutils.regexpfilter(sourcefiles, ignorefilter, False)
+
+# Search for include files
+includedir   = Dir('#').abspath + os.sep + 'include'
+includefiles = buildutils.listtrav(includedir, includedir)
+includefiles = buildutils.regexpfilter(includefiles, includefilter, True)
+includefiles = buildutils.regexpfilter(includefiles, ignorefilter, False)
+
+# Set the library install location
+libsubprefix = env['SUBPREFIX'] + os.sep + 'lib'
+if env['LIBDIR'] != '':
+    libsubprefix = env['LIBDIR']
+if not libsubprefix.startswith(os.sep):
+    libsubprefix = os.sep + libsubprefix
+
+# Set the include install location
+incsubprefix = env['SUBPREFIX'] + os.sep + 'include'
+if env['INCLUDEDIR'] != '':
+    incsubprefix = env['INCLUDEDIR']
+if not incsubprefix.startswith(os.sep):
+    incsubprefix = os.sep + incsubprefix
+
+# Bulid shared library 
+openvideolib = env.SharedLibrary(env['OPENVIDEO_PROJECT_LIBNAME'], sourcefiles)
+env.Alias(target = ['install'], source = env.Install(dir = '${PREFIX}' + libsubprefix, source = openvideolib))
+
+# Install header files
+for include in includefiles:
+    dirname = include[0:include.rindex(os.sep)]
+    env.Alias(target = ['install'], source = env.Install(dir = '${PREFIX}' + incsubprefix + os.sep + dirname, source = includedir + os.sep + include))

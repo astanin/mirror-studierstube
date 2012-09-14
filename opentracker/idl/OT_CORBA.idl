@@ -1,0 +1,39 @@
+// OT_CORBA.idl
+#ifndef _OT_CORBA_IDL
+#define _OT_CORBA_IDL
+
+// OpenTracker specific pragma to insert extra includes into the stub header.
+#pragma hh #include <OpenTracker/skeletons/OT_sysdep.h>
+
+#include "OTGraph.idl"
+
+module OT_CORBA {
+  struct EventAttribute {
+    string name;
+    any value;
+  };
+
+  typedef sequence<EventAttribute> Event;
+  typedef sequence<float> FloatVector;
+
+  interface OTNode: OTGraph::Node {
+  };
+
+  interface TransformNode : OTNode {
+    Event transformEvent(in Event ev);
+  };
+
+  interface OTEntity {
+    oneway void setEvent(in Event ev);    
+  };
+
+  interface OTSink : OTNode {
+    void setEntity(in OTEntity entity);
+    OTEntity getEntity();
+  };
+
+  interface OTSource : OTEntity, OTNode { };
+
+};
+
+#endif //_OT_CORBA_IDL

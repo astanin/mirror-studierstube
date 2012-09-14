@@ -1,0 +1,124 @@
+import os
+import sys
+import buildutils
+
+#****************************************************************************
+# The options are saved to a file and reapplied automatically
+#****************************************************************************
+opts = Options(['build.opts'], ARGUMENTS)
+opts.Add('prefix'                    , 'Sets the project installation directory', '/usr/local')
+opts.Add(BoolOption('debug'          , 'Can be set to True to include debugging info, or False otherwise', 1))
+opts.Add(BoolOption('profile'        , 'Can be set to True to include profiling info, or False otherwise', 1))
+opts.Add(BoolOption('useSTL'         , 'Can be used to turn on STL support. False, then STL will not be used. True will include the STL files.', 1))
+opts.Add(BoolOption('sharedlibrary'  , 'A shared library will be built if this is set to True', 0))
+opts.Add(BoolOption('staticlibrary'  , 'A static library will be built if this is set to True', 0))
+opts.Add(BoolOption('program'        , 'The xmltest program will be built if this is set to True', 1))
+
+#****************************************************************************
+# Set tinyxml library files
+#****************************************************************************
+libfiles = ['tinyxml.cpp', 'tinyxmlparser.cpp', 'tinyxmlerror.cpp', 'tinystr.cpp']
+libname  = 'tinyxml'
+
+#****************************************************************************
+# Set xmltest program files
+#****************************************************************************
+binfiles = ['xmltest.cpp', 'tinyxml.cpp', 'tinyxmlparser.cpp', 'tinyxmlerror.cpp', 'tinystr.cpp']
+progname = 'xmltest'
+
+#****************************************************************************
+# Set tinyxml installable header files
+#****************************************************************************
+incfiles = ['tinystr.h', 'tinyxml.h']
+
+#****************************************************************************
+# Set up environment and save options to disk
+#****************************************************************************
+env = Environment(options = opts, ENV = os.environ)
+opts.Save('build.opts', env)
+
+#****************************************************************************
+# Set project details used in the package-config (.pc) file
+# See tinyxml.pc.in
+#****************************************************************************
+env['TIXML_PROJECT_NAME']        = "TinyXML"
+env['TIXML_PROJECT_DESCRIPTION'] = "TinyXml is a simple, small, C++ XML parser that can be easily integrating into other programs."
+env['TIXML_PROJECT_VERSION']     = "2.4.3"
+env['TIXML_PROJECT_DEFINES']     = ""
+env['TIXML_PROJECT_LIBNAME']     = libname
+
+#****************************************************************************
+# Set debug flags
+#****************************************************************************
+if env['debug'] == True:
+    env.AppendUnique(CPPDEFINES = ['DEBUG'])
+    # CXXFLAGS includes the value of CCFLAGS
+    env.AppendUnique(CCFLAGS    = ['-Wall', '-Wno-format', '-g'])
+    env.AppendUnique(LDFLAGS    = ['-g'])
+else:
+    # CXXFLAGS includes the value of CCFLAGS
+    env.AppendUnique(CCFLAGS    = ['-Wall', '-Wno-unknown-pragmas', '-Wno-format', '-O3'])
+
+#****************************************************************************
+# Set profile flags
+#****************************************************************************
+if env['profile'] == True:
+    # CXXFLAGS includes the value of CCFLAGS
+    env.AppendUnique(CCFLAGS   = ['-pg', '-O3'])
+    env.AppendUnique(LDFLAGS  = ['-pg'])
+
+#****************************************************************************
+# Set STL define
+#****************************************************************************
+if env['useSTL'] == True:
+    env.AppendUnique(CPPDEFINES = ['TIXML_USE_STL'])
+
+#****************************************************************************
+# Build and install for shared library
+#****************************************************************************
+if env['sharedlibrary'] ==  True:
+    outname = env.SharedLibrary(libname, libfiles)
+    env.Alias(target = ["install"], source = env.Install(dir = '${prefix}/lib', source = outname))
+    
+if env['staticlibrary'] == True:
+    outname = env.StaticLibrary(libname, libfiles)
+    env.Alias(target = ["install"], source = env.Install(dir = '${prefix}/lib', source = outname))
+    
+if env['program'] == True:
+    outname = env.Program(progname, binfiles)
+    env.Alias(target = ["install"], source = env.Install(dir = '${prefix}/bin', source = outname))
+
+
+#****************************************************************************
+# Generate string of defines
+#****************************************************************************
+if env.has_key('CPPDEFINES'):
+    defines = ''
+    for define in env['CPPDEFINES']:
+        defines += '-D' + define + " "
+        
+    env['TIXML_PROJECT_DEFINES'] = defines
+
+#****************************************************************************
+# Installs the package-config and header files
+#****************************************************************************
+if env['sharedlibrary'] or env['staticlibrary']:
+    #****************************************************************************
+    # Substitutes variables from the environment within @@ and @@, and writes
+    # the substituted file to disk.
+    #****************************************************************************
+    buildutils.appendbuilders(env)
+    outname = env.Substitute('tinyxml.pc', 'tinyxml.pc.in')
+    env.AlwaysBuild(outname)
+
+    env.Alias(target = ["install"], source = env.AlwaysBuild(env.Install(dir = '${prefix}/lib/pkgconfig', source = outname)))
+    env.Alias(target = ["install"], source = env.Install(dir = '${prefix}/include/tinyxml', source = incfiles))
+
+#****************************************************************************
+# Generate help message
+#****************************************************************************
+Help(opts.GenerateHelpText(env))
+
+###########################################################################
+# Done:)
+###########################################################################

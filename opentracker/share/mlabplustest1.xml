@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="bla"/>
+    <ConsoleConfig headerline="Sample Output" interval="1" display="on"/>
+    <MobilabConfig dev="/dev/rfcomm0" />
+  </configuration>
+  
+  <ConsoleSink comment="Mobilab channel 0" active="on">
+    <NetworkSink  mode="multicast" name="station name" number="0" multicast-address="224.0.0.10" port="12345" >
+      <MobilabSource channel="0" />
+    </NetworkSink>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Mobilab channel 1" active="on">
+    <NetworkSink  mode="multicast" name="station name" number="1" multicast-address="224.0.0.10" port="12345" >
+      <MobilabSource channel="1" />
+    </NetworkSink>
+  </ConsoleSink>
+</OpenTracker>

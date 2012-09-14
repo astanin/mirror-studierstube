@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+  <CORBAConfig/>
+  </configuration>
+  <CORBASink name="CORBA.Sink01" frequency="50">
+      <TestSource frequency="1000"/>
+  </CORBASink>
+</OpenTracker>

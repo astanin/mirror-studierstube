@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenTracker>
+	<configuration>
+		<!-- Here we place all the necessary configurations -->
+	    <ConsoleConfig headerline="Vespr OT" interval="1" display="on"/>
+	    <ICubeXConfig>
+	       <Preset filename="ICubeXPresets.ini"/>
+	       <ICubeXSocket socket_id="blueMidi" indevice="BlueMIDI NT : 1" outdevice="BlueMidi NT : 2"/>
+	       <!--ICubeXSocket socket_id="blueMidi" indevice="In-B USB MidiSport 2x2" outdevice="Out-B USB MidiSport 2x2"/-->
+	    </ICubeXConfig>
+
+	</configuration>
+
+	<!-- Define all vespr sensors -->	
+	<!-- Left hand joydevice  -->
+	<JoystickSource id="1" DEF="LeftWing"/>
+	<!-- Right hand joydevice -->
+
+
+     	<ICubeXSource socket_id="blueMidi" DEF="RightWing"/>
+
+
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="0" preset="BendShort" midi_type="control-change" midi_channel="0" midi_controller="1" DEF="Bendo" />
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="1" preset="TouchMicro" midi_type="control-change" midi_channel="0" midi_controller="2" DEF="Preso"/>
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="2" preset="TouchMiniOn" midi_type="control-change" midi_channel="0" midi_controller="3" DEF="Button0"/>
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="3" preset="TouchMiniOn" midi_type="control-change" midi_channel="1" midi_controller="1" DEF="MicroJoy1"/>
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="4" preset="TouchMiniOn" midi_type="control-change" midi_channel="1" midi_controller="2" DEF="MicroJoy2"/>
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="5" preset="TouchMiniOn" midi_type="control-change" midi_channel="1" midi_controller="3" DEF="MicroJoy3"/>
+	<ICubeXSensor socket_id="blueMidi" dev_id="0" port="6" preset="TouchMiniOn" midi_type="control-change" midi_channel="1" midi_controller="4" DEF="MicroJoy4"/>
+
+	<!-- Batpack sensors      -->
+
+	<!-- Visualization, just for debugging and for use with the standalone -->	
+
+	<ConsoleSink comment="LeftWing BlueMidi" active="on">
+	   <Ref USE="LeftWing"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="RightWing BlueMidi" active="on">
+	   <Ref USE="RightWing"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="BendO" active="on">
+	   <Ref USE="Bendo"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="PresO" active="on">
+	   <Ref USE="Preso"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="Button" active="on">
+	   <Ref USE="Button0"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="MicroJoy1" active="on">
+	   <Ref USE="MicroJoy1"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="MicroJoy2" active="on">
+	   <Ref USE="MicroJoy2"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="MicroJoy3" active="on">
+	   <Ref USE="MicroJoy3"/>
+  	</ConsoleSink>
+
+	<ConsoleSink comment="MicroJoy4" active="on">
+	   <Ref USE="MicroJoy4"/>
+  	</ConsoleSink>
+</OpenTracker>

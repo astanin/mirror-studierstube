@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--simple test configuration for ART source module-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="ART Trackerserver" interval="1"/>
+    <ARTDataTrackerConfig port="5000"/>
+  </configuration>
+ 
+  <ConsoleSink comment="0">
+	<ARTDataTrackerSource number="40" DEF="src0" />    
+  </ConsoleSink>
+	
+</OpenTracker>

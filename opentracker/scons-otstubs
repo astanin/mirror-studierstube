@@ -1,0 +1,218 @@
+# This build script is targeted specifically towards Windows XP, 
+# using Microsoft Visual Studio 2005
+# Dependencies are copied from their source directories to
+# the project directory
+
+import sys, os
+from glob import glob
+from os.path import join, basename, dirname
+#########################################
+# extend path to include SCons builders #
+#########################################
+sys.path.append('builders')
+
+################################
+#       Helper Functions       #
+################################
+def filterFiles(files, suffixes):
+    for file in files:
+        for suffix in suffixes:
+            if str(file).endswith(suffix):
+                yield file
+
+def filterStaticLibraries(files):
+    for file in files:
+        if str(file).endswith('.lib'):
+            yield file
+
+def filterDynamicLibraries(files):
+    for file in files:
+        if str(file).endswith('.dll'):
+            yield file
+
+def findRelativePath(root, target):
+    # replace root with blank empty string
+    relative_path = target.replace(root, "", 1) 
+    if relative_path.startswith(os.sep):
+        return relative_path[1:] # omit first separator
+    return relative_path
+
+def installRelativeToDirectory(env, root_dir, include_dir, _prefix, _alias, _suffixes):
+    _headers = []
+    for dirpath, dirnames, filenames in os.walk(join(root_dir, include_dir)):
+        relative_path = findRelativePath(root_dir, dirpath)
+        headers = [join(dirpath, header) for header in filterFiles(filenames, _suffixes)]
+        target_dir = join(_prefix, relative_path)
+        _headers += env.Install(target_dir, headers)
+    env.Alias(_alias, _headers)
+    return _headers
+
+def installFiles(env, include_dir, _prefix, _alias, _suffixes):
+    _headers = []
+    for dirpath, dirnames, filenames in os.walk(join(include_dir)):
+        headers = [join(dirpath, header) for header in filterFiles(filenames, _suffixes)]
+        _headers += env.Install(_prefix, headers)
+    env.Alias(_alias, _headers)
+    return _headers
+    
+def installLibraries(env, lib_dir, _prefix, _alias):
+    return installSharedLibraries(env, lib_dir, _prefix, _alias) + \
+        installStaticLibraries(env, lib_dir, _prefix, _alias)
+
+def installSharedLibraries(env, lib_dir, _prefix, _alias):
+    _libs = []
+    for dirpath, dirnames, filenames in os.walk(join(lib_dir)):
+        libs = [join(dirpath, _lib) for _lib in filterDynamicLibraries(filenames)]
+        target_dir = join(_prefix, 'bin')
+        _libs += env.Install(target_dir, libs)
+    env.Alias(_alias, _libs)
+    return _libs
+
+def installStaticLibraries(env, lib_dir, _prefix, _alias):
+    _libs = []
+    for dirpath, dirnames, filenames in os.walk(join(lib_dir)):
+        libs = [join(dirpath, _lib) for _lib in filterStaticLibraries(filenames)]
+        target_dir = join(_prefix, 'lib')
+        _libs += env.Install(target_dir, libs)
+    env.Alias(_alias, _libs)
+    return _libs
+
+########################
+# Set up build options #
+########################
+opts = Options('custom.py')
+env = Environment (ENV = os.environ, options=opts)
+# This is the project directory to install everything in
+prefix = ARGUMENTS.get('PREFIX')
+if prefix is None:
+    print "No PREFIX has been specified"
+    sys.exit(-1)
+
+############################################
+#      Build OpenTracker CORBA Stubs       #
+############################################
+env.Append(CPPPATH=['include', join(prefix,'include'), join('idl', 'skeletons')]) 
+env.Append(LIBPATH=[join(prefix,'lib')])
+env.Append(LIBS = ['odbc32', 'odbccp32', 'kernel32', 'user32', 'gdi32',
+                   'winspool', 'comdlg32', 'advapi32', 'shell32', 'ole32'
+                   , 'oleaut32', 'uuid','odbc32', 'odbccp32'])
+env.Append(CPPDEFINES=['WIN32', '__WIN32__','NDEBUG', '_WINDOWS', '_USRDLL'
+                          ,'__x86__','_CRT_SECURE_NO_DEPRECATE', '_WINDLL', 
+                          '_MBCS'])
+try:
+    omniorb_root_dir = env['ENV']['OMNIORBROOT']
+except KeyError:
+    print "No OMNIORBROOT has been specified"
+    sys.exit(-1)
+# Install the omniidl tool and it's dependencies
+omniidl_tool = env.Install(join(prefix, 'bin', 'omniidl', 'bin', 'x86_win32'), join(omniorb_root_dir, 'bin', 'x86_win32', 'omniidl.exe'))
+python_dll   = env.Install(join(prefix, 'bin', 'omniidl', 'bin', 'x86_win32'), join(omniorb_root_dir, 'bin', 'x86_win32', 'python15.dll'))
+omnicpp_exe   = env.Install(join(prefix, 'bin', 'omniidl', 'bin', 'x86_win32'), join(omniorb_root_dir, 'bin', 'x86_win32', 'omnicpp.exe'))
+catior_exe   = env.Install(join(prefix, 'bin'), join(omniorb_root_dir, 'bin', 'x86_win32', 'catior.exe'))
+omniidl_pys  = installRelativeToDirectory(env, omniorb_root_dir, 'lib', join(prefix, 'bin', 'omniidl'), 'omniidl-pys', ['.py', '.pyc'])
+env.Depends(omniidl_tool, omniidl_pys + python_dll + omnicpp_exe)
+# Install the makedeffile.py tool
+makedeffile_py = env.Command(join(prefix, 'bin', 'makedeffile.py'), join(omniorb_root_dir, 'bin', 'scripts', 'makedeffile.py'), [Copy("$TARGET", "$SOURCE"), Chmod("$TARGET", 0755)])
+env.AppendENVPath('PATH', join(prefix, 'bin', 'omniidl', 'bin', 'x86_win32'))
+env.AppendENVPath('PATH', join(prefix, 'bin'))
+os.environ['PATH'] += join(prefix, 'bin', 'omniidl', 'bin', 'x86_win32') + ';'
+# Install the omniORB headers and libraries #
+omniorb_headers = installRelativeToDirectory(env, omniorb_root_dir, 'include', prefix, 'omniorb-headers', ['.hh', 'h'])
+cos_headers = installRelativeToDirectory(env, omniorb_root_dir, 'include', prefix, 'omniorb-headers', ['.hh', 'h'])
+omniorb_libraries  = installLibraries(env, join(omniorb_root_dir, 'lib', 'x86_win32'), prefix, 'omniorb-libs')
+omniorb_libraries += installLibraries(env, join(omniorb_root_dir, 'bin', 'x86_win32'), prefix, 'omniorb-dlls')
+
+  
+# configure environment to the various idl files that need to be compiled to CORBA stubs and skeletons
+import OmniIdlCxx, MakeDefFile
+
+OmniIdlCxx.generate(env)
+MakeDefFile.generate(env)
+
+env.Append(CPPDEFINES=['USE_CORBA'])
+env.Append(CPPDEFINES=['__x86__', '__NT__', '__OSVERSION__=4', '__WIN32__', '_WIN32_WINNT=0x0400'])
+
+env.Append(LIBS=['ws2_32', 'mswsock', 'advapi32', 'omniORB411_rt', 'omniDynamic411_rt', 'omnithread33_rt', 'COS4'])
+env.Append(CPPPATH=[join(prefix, 'idl'), join(prefix, 'idl', 'COS')])
+env.Append(CPPPATH=[join(prefix, 'include'), join(prefix, 'include', 'COS')])
+stubs_and_skeletons = []
+idl_files  = [join('idl', _file) for _file in ['OT_CORBA.idl', 'OTGraph.idl', 'OT_EventChannel.idl']]
+for idl_file in idl_files:
+    stubs_and_skeletons += env.OMNIIDLCXX(idl_file, OMNIIDL_INSTALL_DIRECTORY=join('idl', 'skeletons'))
+
+skeletons = []
+for header in filterFiles(stubs_and_skeletons, ['.hh']):
+    skeletons += env.Install(join(prefix,'include','OpenTracker','skeletons'), header)
+stubs_cxx  = [stub for stub in filterFiles(stubs_and_skeletons, ['.cc'])]
+stubs_copy = env.Install(join('build', 'win32'), stubs_cxx)
+env.Install(join('build', 'win32'), skeletons)
+###################################################
+# We need an explicit dependency between the stubs and
+# the omniidl tool, as we can't compile it unless it is
+# installed
+env.Depends(stubs_and_skeletons, omniidl_tool)
+###################################################
+
+############################################
+#         Set up environments              #
+############################################
+# Make copies of the current Environment
+dllenv = env.Copy()
+libenv = env.Copy()
+dllenv.Append(CCFLAGS=['/O2','/W3', '/EHsc', '/MD', '/Z7', '/FD', '/TP', '/GR'])
+libenv.Append(CCFLAGS=['/O2','/W3', '/EHsc', '/MD', '/Z7', '/GR'])
+dllenv.Append(LINKFLAGS=['/INCREMENTAL:NO', '/NOLOGO', '/DEBUG', 
+                         '/SUBSYSTEM:WINDOWS', '/OPT:REF', '/OPT:ICF', 
+                         '/MACHINE:X86'])
+dllenv.Append(CPPDEFINES=['_OT_LIBRARY'])
+dllenv.Append(CPPDEFINES=['"WIN32"', '__WIN32__','NDEBUG', '_WINDOWS', '_USRDLL_',
+                          '__x86__','_CRT_SECURE_NO_DEPRECATE', "_WINDLL", "_MBCS"])
+libenv.Append(CPPDEFINES=['_OT_LIBRARY'])
+libenv.Append(CPPDEFINES=['"WIN32"', '__WIN32__','NDEBUG', '_WINDOWS', '_USRDLL_',
+                          '__x86__','_CRT_SECURE_NO_DEPRECATE', "_WINDLL", "_MBCS"])
+
+############################################
+#        Build static library              #
+############################################
+static_lib = libenv.StaticLibrary(join(prefix,'lib', 'otstubs_static'), stubs_copy)
+stubs_def = env.MAKEDEFFILE(join(prefix, 'lib', 'otstubs.def'), static_lib)
+dllenv.Append(LINKFLAGS=['-def:'+str(_def) for _def in stubs_def])
+env.Depends(stubs_def, makedeffile_py)
+
+############################################
+#            Build otstubs DLL             #
+############################################
+otlib = dllenv.SharedLibrary(join('lib', 'win32', 'otstubs'), stubs_cxx)
+# Add explicit dependency on def file
+dllenv.Depends(otlib, stubs_def)
+dllenv.Install(join(prefix,'bin'), [_dll for _dll in filterDynamicLibraries(otlib)])
+dllenv.Install(join(prefix,'lib'), [_dll for _dll in filterStaticLibraries(otlib)])
+
+####################################
+# Make sure manifests get embedded #
+####################################
+dllenv.AddPostAction(otlib, 'mt.exe -nologo -manifest ${TARGET}.manifest -outputresource:$TARGET;2')
+
+################################################
+# Install binaries and additional dependencies #
+################################################
+dlls = ['otstubs.dll','omniORB411_rt.dll', 'omniDynamic411_rt.dll', 'omnithread33_rt.dll', 'COS411_rt.dll']
+
+#####################
+# Install IDL files #
+#####################
+installed_idl_files = []
+other_idl_files  = []#join('idl','EventChannelAdmin.idl')]
+other_idl_files += [join('idl','COS', _file) for _file in ['CosEventChannelAdmin.idl', 'CosEventComm.idl', 'CosLifeCycle.idl', 'CosNaming.idl']]
+for idl_file in idl_files + other_idl_files:
+    installed_idl_files += env.Command(join(prefix, str(idl_file)), idl_file, Copy("$TARGET", "$SOURCE"))
+
+############################################
+# Install other files DTDs, XML files, etc #
+############################################
+ot_headers = installRelativeToDirectory(env, 'include', 'OpenTracker', join(prefix, 'include'), 'ot-headers', ['.h'])
+ot_share_files = env.InstallAs(join(prefix, 'share'), 'share')
+misc_files = [catior_exe]
+env.Alias('share-files', ot_share_files)
+env.Alias('install', ot_headers + ot_share_files + installed_idl_files +  misc_files)
+

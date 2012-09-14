@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0 (http://www.xmlspy.com) by gr (gr) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+	<configuration/>
+	<StbSink station="0">
+		<TestSource frequency="10"/>
+	</StbSink>
+	<StbSink station="1">
+		<TestSource frequency="10"/>
+	</StbSink>
+	<StbSink station="2">
+		<TestSource frequency="10"/>
+	</StbSink>
+</OpenTracker>

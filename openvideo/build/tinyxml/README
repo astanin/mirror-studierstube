@@ -1,0 +1,4 @@
+Copy these files into the TinyXml source directory and run:
+
+ scons sharedlibrary=1 program=0 install
+

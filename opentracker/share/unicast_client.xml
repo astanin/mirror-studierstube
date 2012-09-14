@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Network Unicast Test Client" interval="1"/>
+  </configuration>
+  <ConsoleSink comment="NetworkSource 0">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="0" port="12001" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 1">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="1" port="12001" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 2">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="2" port="12001" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 3">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="3" port="12001" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 4">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="4" port="12001" />
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSource 5">
+      <NetworkSource  mode="unicast" address="129.27.201.211" number="5" port="12001" />
+  </ConsoleSink>
+</OpenTracker>

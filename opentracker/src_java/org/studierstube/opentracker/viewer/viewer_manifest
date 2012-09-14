@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Main-Class: org.studierstube.opentracker.viewer.GraphViewerFrame
+Class-Path: OpenTrackerStubs.jar
+ java-getopt-1.0.12.jar
+ vecmath1.2.jar 
+ grappa1_2.jar

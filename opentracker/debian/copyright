@@ -1,0 +1,17 @@
+This is libopentracker packaged for Debian GNU systems.
+
+Upstream source: http://www.studierstube.org/
+
+Upstream Authors: The opentracker Team <reitmayr@ims.tuwiena.ac.at>
+
+Copyright and licensing info:
+
+ *  Copyright (C) 2002-2003 the Icecast team <team@icecast.org>
+ *
+ *  This library is free software; you can redistribute it and/or
+ *  modify it under the terms of the GNU Library General Public
+ *  License as published by the Free Software Foundation; either
+ *  version 2 of the License, or (at your option) any later version.
+
+On Debian systems, the GNU General Public License (GPL) is contained in
+/usr/share/common-licenses/LGPL.

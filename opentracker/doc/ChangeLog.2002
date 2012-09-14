@@ -1,0 +1,707 @@
+2002-12-23 16:09  reitmayr
+
+	* src/input/: SpeechModule.h, SpeechSource.h:
+	
+	fixed include file problems
+
+2002-12-23 16:03  reitmayr
+
+	* src/: input/SpeechCore.cxx, input/SpeechCore.h,
+	input/SpeechDef.h, input/SpeechModule.cxx, input/SpeechModule.h,
+	input/SpeechSet.cxx, input/SpeechSet.h, input/SpeechSource.h,
+	input/SpeechVoice.cxx, input/SpeechVoice.h,
+	input/SpeechVoiceModule.cxx, input/SpeechVoiceModule.h,
+	misc/OpenTracker.cxx:
+	
+	refactored speechmodule to provide a non functional implementation,
+	if no implementation is used.  This allows testing of apps
+	depending on speech input without having support for it in
+	OpenTracker.
+
+2002-12-23 16:02  reitmayr
+
+	* data/test.xml:
+	
+	added speechmodule test
+
+2002-12-23 16:02  reitmayr
+
+	* config.h:
+	
+	some documentation for the defines
+
+2002-12-23 15:33  reitmayr
+
+	* src/input/Makefile:
+	
+	updated makefile for speech input files
+
+2002-12-16 10:20  reitmayr
+
+	* data/opentracker.dtd:
+	
+	fixed StbSource element definition
+
+2002-12-16 10:19  reitmayr
+
+	* src/input/: SpeechModule.h, SpeechSource.h:
+	
+	documentation update from Reinhard Steiner
+
+2002-12-12 18:31  kaufmann
+
+	* src/input/: SpeechModule.h, SpeechSource.h:
+	
+	documentation added
+
+2002-12-11 17:00  kaufmann
+
+	* data/opentracker.dtd:
+	
+	fixed error in DTD
+
+2002-12-10 18:22  kaufmann
+
+	* config.h, opentracker.dsp, data/opentracker.dtd,
+	src/input/SpeechCore.cxx, src/input/SpeechCore.h,
+	src/input/SpeechDef.h, src/input/SpeechInc.h,
+	src/input/SpeechModule.cxx, src/input/SpeechModule.h,
+	src/input/SpeechSet.cxx, src/input/SpeechSet.h,
+	src/input/SpeechSource.cxx, src/input/SpeechSource.h,
+	src/input/SpeechVoice.cxx, src/input/SpeechVoice.h,
+	src/input/SpeechVoiceModule.cxx, src/input/SpeechVoiceModule.h,
+	src/misc/OpenTracker.cxx:
+	
+	Speech interface by using MS SAPI 5.1
+	(http://www.microsoft.com/speech/download/SDK51/) was integrated in
+	Opentracker by Reinhard Steiner.  See documentation on
+	www.studierstube.org/misc/SpeechDocu.html Enable #define
+	USE_SAPISPEECH 1 in config.h and include the path to your MS Speech
+	SDK include directory in the project settings in order to compile
+	with speech support
+
+2002-12-09 17:17  splechtna
+
+	* src/input/: ARTDataTrackerChomp.cxx, ARTDataTrackerChomp.h,
+	ARTDataTrackerModule.cxx:
+	
+	[rcs] some internal changes (memory management, no parsing of
+	marker data)
+
+2002-12-09 17:02  splechtna
+
+	* src/input/ParButtonModule.cxx:
+	
+	[rcs] added hardware hack comments
+
+2002-12-06 19:01  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added definitions for new StbSource node
+
+2002-12-06 19:01  reitmayr
+
+	* src/common/: CommonNodeFactory.cxx, FilterNode.cxx, FilterNode.h:
+	
+	fixed some bugs in Filter and added selective operation on position
+	and orientation
+
+2002-12-04 19:24  flo
+
+	* src/input/FOBModule.cxx:
+	
+	fixed bug with gerhard that rotations were returned inverted.
+
+2002-11-29 17:12  reitmayr
+
+	* doc/contributions.txt:
+	
+	added recent people
+
+2002-11-29 17:09  reitmayr
+
+	* opentracker.dsp, src/misc/OpenTracker.cxx,
+	src/misc/standalone.dsp:
+	
+	added GroupGate node by Michael Knapp for OpenTracker
+
+2002-11-29 17:02  reitmayr
+
+	* src/common/GroupGateModule.cxx, src/common/GroupGateModule.h,
+	src/common/GroupGateNode.cxx, src/common/GroupGateNode.h,
+	src/common/Makefile, data/opentracker.dtd, data/ot2dot.xsl,
+	data/test.xml:
+	
+	added GroupGate node by Michael Knapp for OpenTracker
+
+2002-11-29 17:01  reitmayr
+
+	* src/core/: EventQueueImplementation.cxx,
+	EventQueueImplementation.h, Node.cxx:
+	
+	some code cleanup
+
+2002-11-29 16:56  reitmayr
+
+	* src/: input/InterSenseModule.cxx, input/ParButtonModule.cxx,
+	network/NetworkSinkModule.cxx:
+	
+	some code cleanup
+
+2002-11-29 14:06  bornik
+
+	* src/input/ParButtonModule.cxx:
+	
+	ab: added Linux-Support for ParButtonModule
+
+2002-11-28 15:21  reitmayr
+
+	* src/input/: ParButtonModule.h, ParButtonSource.h:
+	
+	added links to the opentracker lib page for userport information
+
+2002-11-28 15:20  reitmayr
+
+	* src/network/NetworkSinkModule.cxx:
+	
+	a small change to the interface configuration
+
+2002-11-27 16:06  reitmayr
+
+	* src/network/: NetworkSink.h, NetworkSinkModule.cxx,
+	NetworkSinkModule.h:
+	
+	added interface to NetworkSink to specifiy output interface
+
+2002-11-27 16:06  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added ActiveGate and GroupGate added interface to NetworkSink to
+	specifiy output interface
+
+2002-11-11 13:56  reitmayr
+
+	* doc/changes.txt, doc/contributions.txt, doc/opentracker.dxy,
+	CHANGES.TXT, src/OpenTracker.h,
+	src/input/SpaceMouse_OT_Integration.txt, README.TXT,
+	doc/contributions.txt:
+	
+	updated some documentation
+
+2002-11-11 13:30  reitmayr
+
+	* src/core/Context.cxx, src/core/MathUtils.h, src/core/Node.h,
+	src/input/ARTDataTrackerModule.h, doc/opentracker.dxy,
+	doc/images/artsettings.jpg:
+	
+	updated some documentation and cleaned up some todo list topics
+
+2002-11-11 09:02  reitmayr
+
+	* src/input/: SpaceMouseModule.cxx, UltraTrakModule.cxx:
+	
+	added defines for GCC3.x compilation
+
+2002-11-08 22:03  reitmayr
+
+	* src/: OpenTracker.h, core/OSUtils.cxx,
+	input/ARTDataTrackerChomp.h, input/SpaceMouseModule.h:
+	
+	improved OSUtils to only use ACE.  improved some documentation
+
+2002-11-08 15:22  reitmayr
+
+	* src/misc/xml/XMLWriter.h:
+	
+	fixed missing using namespace std. this is really necessary to be
+	working across multiple platforms
+
+2002-11-08 15:19  reitmayr
+
+	* Config.Linux:
+	
+	commented out flag for GCC3 compilation, default is still for old
+	one
+
+2002-11-08 15:17  reitmayr
+
+	* src/: input/Makefile, misc/xml/XMLWriter.cxx,
+	misc/xml/XMLWriter.h:
+	
+	fixed some compilation issues under linux
+
+2002-11-07 18:03  reitmayr
+
+	* src/misc/OpenTracker.cxx:
+	
+	fixed wrong file name
+
+2002-11-07 18:02  reitmayr
+
+	* src/input/SpaceMouseModule.h:
+	
+	fixed windows.h at the wrong place
+
+2002-10-31 21:20  splechtna
+
+	* src/input/: JoystickModule.cxx, JoystickModule.h:
+	
+	[rcs] some fixes
+
+2002-10-31 21:05  splechtna
+
+	* src/input/ARTDataTrackerChomp.cxx:
+	
+	[rcs] fixed memory leak
+
+2002-10-31 21:04  splechtna
+
+	* data/opentracker.dtd:
+	
+	[rcs] added entries for SpaceMouse and Ultratrak modules/sources
+
+2002-10-31 21:02  splechtna
+
+	* src/misc/OpenTracker.cxx:
+	
+	[rcs] added SpaceMouse and Ultratrak modules
+
+2002-10-31 21:01  splechtna
+
+	* config.h, opentracker.dsp:
+	
+	[rcs] added SpaceMouse and Ultratrak code to project;	      added
+	define for SpaceMouse to config.h
+
+2002-10-31 20:53  splechtna
+
+	* src/input/: SpaceMouseModule.cxx, SpaceMouseModule.h,
+	SpaceMouseSource.h, SpaceMouse_OT_Integration.txt,
+	UltraTrakModule.cxx, UltraTrakModule.h, UltraTrakSource.h:
+	
+	[rcs] added SpaceMouse and Ultratrak code
+
+2002-10-22 19:19  reitmayr
+
+	* src/input/: FastTrakModule.cxx, FastTrakModule.h,
+	FastTrakSource.h:
+	
+	fixed documentation and hardware flow for the Fasttrack module
+
+2002-10-04 17:17  bornik
+
+	* Config.Linux:
+	
+	ab: fix for linking problems -> switched from linking using ld
+	directly to linking using g++
+
+2002-09-26 23:32  reitmayr
+
+	* opentracker.dsp, data/debug.xml, data/opentracker.dtd,
+	data/test.xml, src/common/CommonNodeFactory.cxx,
+	src/common/ConsoleModule.cxx, src/common/Makefile,
+	src/common/TimeGateNode.cxx, src/common/TimeGateNode.h:
+	
+	added new TimeGateNode to improve shared tracking
+
+2002-09-26 15:56  bornik
+
+	* Config.Linux, Config.global, src/common/CallbackModule.cxx,
+	src/common/CommonNodeFactory.cxx, src/common/ConsoleModule.cxx,
+	src/common/DynamicTransformation.cxx,
+	src/common/EventQueueNode.cxx, src/common/File.h,
+	src/common/FileModule.cxx, src/common/TimeModule.cxx,
+	src/core/ConfigurationParser.cxx,
+	src/core/DOMTreeErrorReporter.cxx, src/core/DOMTreeErrorReporter.h,
+	src/core/Node.cxx, src/core/OSUtils.cxx, src/core/TestModule.cxx,
+	src/input/ARTDataTrackerChomp.cxx,
+	src/input/ARTDataTrackerModule.cxx, src/input/FOBModule.cxx,
+	src/input/FastTrakModule.cxx, src/input/InterSenseModule.cxx,
+	src/input/Makefile, src/input/ParButtonModule.cxx,
+	src/misc/Makefile, src/misc/serialcomm.cxx, src/misc/test.cxx,
+	src/misc/xml/XMLWriter.cxx, src/misc/xml/XMLWriter.h,
+	src/network/Makefile, src/network/NetworkSinkModule.cxx,
+	src/network/NetworkSourceModule.cxx, src/network/TCPModule.cxx:
+	
+	ab: added changes to support GCC 3.x without warning (ANSI
+	compilant STL)
+
+2002-09-19 18:50  reitmayr
+
+	* src/input/: ParButtonModule.h, ParButtonSource.h:
+	
+	parbutton module documentation updated
+
+2002-09-18 11:10  reitmayr
+
+	* opentracker.dsp:
+	
+	removed deprecated InterTraxModule
+
+2002-09-18 10:57  reitmayr
+
+	* src/common/DynamicTransformation.cxx:
+	
+	updated OpenTracker to use the new XercesC++ API from version 2.1. 
+	There is probably still an issue with correct release of some
+	objects, but it works.
+
+2002-09-17 22:52  reitmayr
+
+	* src/: input/InterTraxModule.cxx, input/InterTraxModule.h,
+	input/InterTraxSource.h, input/Makefile, misc/OpenTracker.cxx:
+	
+	removed deprecated intertrax module
+
+2002-09-17 20:01  reitmayr
+
+	* opentracker.dsp:
+	
+	clean up of projects settings, no dependencies on outside libraries
+	in the default.
+
+2002-09-17 20:00  reitmayr
+
+	* src/misc/serialcomm.cxx:
+	
+	bugfix in serial comm by step
+
+2002-09-17 19:59  reitmayr
+
+	* src/: core/ConfigurationParser.cxx, core/ConfigurationParser.h,
+	core/Context.cxx, core/DOMTreeErrorReporter.cxx,
+	core/DOMTreeErrorReporter.h, core/Node.cxx, core/Node.h,
+	misc/xml/XMLWriter.cxx, misc/xml/XMLWriter.h:
+	
+	updated OpenTracker to use the new XercesC++ API from version 2.1. 
+	There is probably still an issue with correct release of some
+	objects, but it works.
+
+2002-09-10 15:09  reitmayr
+
+	* src/input/ParButtonModule.cxx:
+	
+	disabled _DLPORTIO define because this is not the default
+	implementation for that.
+
+2002-08-26 14:54  bornik
+
+	* src/input/ParButtonModule.cxx:
+	
+	fix for parport-IO using DLPORTIO under Windows 2000
+
+2002-08-26 14:09  bornik
+
+	* opentracker.dsp:
+	
+	Included support for DriverLINX Port I/O Driver
+	
+	The driver can be found at:
+	
+	http://www.driverlinx.com
+	
+	The driver is activated by definition of _DLPORTIO
+	
+	Windows: It is necessary to set a global environment variable
+	PORTIOROOT to the path where dlportio.h and dlportio.lib are
+	installed
+
+2002-08-26 14:07  bornik
+
+	* src/input/ParButtonModule.cxx:
+	
+	Included support for DriverLINX Port I/O Driver
+	
+	The driver can be found at:
+	
+	http://www.driverlinx.com
+	
+	The driver is activated by definition of _DLPORTIO
+
+2002-08-08 09:05  bornik
+
+	* src/common/ConsoleModule.h:
+	
+	... fixed more Windows/Linux incompatibilities
+
+2002-08-08 08:26  bornik
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h:
+	
+	changed keyCodeMap declaration for windows compatibility reasons
+
+2002-08-07 23:23  bornik
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h:
+	
+	fixed keyCodeMap-Bug that caused seg-fault under Linux -> The real
+	reason was: STL-map must not be static.
+
+2002-08-07 23:05  bornik
+
+	* src/common/: ConsoleModule.cxx, ConsoleModule.h:
+	
+	fixed keyCodeMap-Bug that caused seg-fault under Linux -> Reason:
+	keyCodeMap was declared globally. Conclusion: Never, ever use
+	global variables
+
+2002-07-09 18:08  reitmayr
+
+	* data/ot2dot.xsl:
+	
+	updated stylesheet to know all source and sink nodes and some
+	special node ports.
+
+2002-07-09 18:08  reitmayr
+
+	* data/opentracker.dtd:
+	
+	fixed some missing DEFs and removed deprecated InterTraxSource. One
+	should use InterSenseSource instead !
+
+2002-06-20 12:34  reitmayr
+
+	* tools/regcalcs.mws:
+	
+	added a tools directory to contain any kind of helping stuff<br>
+	first input is a maple worksheet to calculate constant offsets
+	between tracking devices
+
+2002-06-14 11:33  flo
+
+	* data/opentracker.dtd:
+	
+	[flo] modified opentracker.dtd to allow DEFs for Merge and
+	Selection nodes.
+
+2002-06-13 15:43  flo
+
+	* src/common/: DynamicTransformation.cxx, DynamicTransformation.h,
+	FilterNode.cxx, FilterNode.h, StaticTransformation.cxx,
+	StaticTransformation.h:
+	
+	[flo] updated some nodes to handle confidence values correctly
+
+2002-06-05 21:12  reitmayr
+
+	* src/input/: ARTDataTrackerChomp.cxx, ARTDataTrackerModule.cxx:
+	
+	updates from Christopher
+
+2002-05-28 16:54  reitmayr
+
+	* src/: common/DynamicTransformation.cxx,
+	core/ConfigurationParser.cxx, core/Context.cxx,
+	core/DOMTreeErrorReporter.cxx, core/DOMTreeErrorReporter.h,
+	core/Node.cxx, misc/OpenTracker.cxx, misc/xml/XMLWriter.cxx:
+	
+	updated for XercesC 1.7 (changed include paths)
+
+2002-03-26 15:02  reitmayr
+
+	* src/common/ConsoleModule.cxx, src/common/Makefile,
+	src/input/ARTDataTrackerModule.cxx,
+	src/input/ARTDataTrackerModule.h, src/input/ARTDataTrackerSource.h,
+	data/opentracker.dtd:
+	
+	fixed some bugs in ARTDataTrackerModule fixed bug in ConsoleModule
+	on unix
+
+2002-03-26 11:55  reitmayr
+
+	* src/: common/Makefile, input/ARTDataTrackerChomp.cxx,
+	input/ARTDataTrackerChomp.h, input/ARTDataTrackerModule.cxx,
+	misc/serialcomm.cxx:
+	
+	some bugfixes in ARTDataTracker fixes for compilation on IRIX
+
+2002-02-27 17:22  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added StbMouseInput elements
+
+2002-02-13 18:33  reitmayr
+
+	* src/common/DynamicTransformation.cxx:
+	
+	timestamp should reflect latest event, also for a base event
+
+2002-02-11 11:41  reitmayr
+
+	* src/common/ButtonFilterNode.cxx, src/common/ButtonOpNode.cxx,
+	src/common/ButtonOpNode.h, src/common/CommonNodeFactory.cxx,
+	src/common/ConsoleModule.cxx, data/opentracker.dtd,
+	opentracker.dsp:
+	
+	added a new ButtonOp filter node that implements boolean operations
+	on button events.
+
+2002-02-08 16:55  reitmayr
+
+	* src/common/: MergeNode.cxx, MergeNode.h:
+	
+	fixed a problem with timestamps in the Merge Node. Read the
+	reference for changed behaviour .
+
+2002-02-05 12:12  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added lost ThresholdFilter definition again
+
+2002-02-05 12:11  reitmayr
+
+	* src/common/: ConsoleSink.h, DynamicTransformation.h,
+	ThresholdFilterNode.cxx:
+	
+	some bugfixes and documentation updates
+
+2002-01-30 12:24  reitmayr
+
+	* src/common/ButtonFilterNode.cxx, src/common/ButtonFilterNode.h,
+	src/common/CommonNodeFactory.cxx, data/opentracker.dtd,
+	opentracker.dsp:
+	
+	added ButtonFilterNode developed by Florian Ledermann
+	<flo@subnet.at>
+
+2002-01-30 11:08  reitmayr
+
+	* src/network/NetworkSinkModule.cxx:
+	
+	fixed multicast sending bug with Linux
+
+2002-01-29 21:29  reitmayr
+
+	* src/: misc/test.cxx, network/NetworkSourceModule.cxx,
+	network/NetworkSourceModule.h:
+	
+	beautified some network stuff
+
+2002-01-29 20:44  reitmayr
+
+	* src/input/: ARTDataTrackerChomp.cxx, FOBModule.cxx, FOBModule.h:
+	
+	forgot to set hemisphere, added that now
+
+2002-01-29 14:35  reitmayr
+
+	* data/magnetic.xml:
+	
+	magnetic is now a test file for the fobmodule
+
+2002-01-29 12:30  reitmayr
+
+	* src/input/: FOBModule.cxx, FOBModule.h, FOBSource.h:
+	
+	updated documentation
+
+2002-01-29 12:30  reitmayr
+
+	* src/common/CallbackModule.h:
+	
+	added default value for data pointer
+
+2002-01-25 16:17  reitmayr
+
+	* src/common/ThresholdFilterNode.h, src/core/MathUtils.cxx,
+	src/core/MathUtils.h, src/input/FOBModule.cxx,
+	src/input/FOBModule.h, src/input/FOBSource.h,
+	src/network/TCPSink.h, data/opentracker.dtd:
+	
+	almost final FOB version, some docu fixes
+
+2002-01-24 18:31  reitmayr
+
+	* src/: input/ARTDataTrackerModule.cxx, input/FOBModule.cxx,
+	input/FOBModule.h, network/NetworkSink.h,
+	network/NetworkSinkModule.cxx, network/NetworkSource.h,
+	network/NetworkSourceModule.cxx:
+	
+	some bugfixes in different modules
+
+2002-01-24 11:58  reitmayr
+
+	* opentracker.dsp, src/misc/OpenTracker.cxx:
+	
+	added ARTDataTrackerModule for the ART Data optical tracking
+	system. this driver was developed by Christopher Schmidt.
+
+2002-01-24 11:54  reitmayr
+
+	* src/input/ARTDataTrackerChomp.cxx,
+	src/input/ARTDataTrackerChomp.h,
+	src/input/ARTDataTrackerModule.cxx,
+	src/input/ARTDataTrackerModule.h, src/input/ARTDataTrackerSource.h,
+	src/input/Makefile, data/opentracker.dtd:
+	
+	added ARTDataTrackerModule for the ART Data optical tracking
+	system. this driver was developed by Christopher Schmidt.
+
+2002-01-18 20:59  reitmayr
+
+	* src/misc/serialcomm.cxx:
+	
+	added missing includes for Linux
+
+2002-01-18 20:58  reitmayr
+
+	* src/core/Node.cxx:
+	
+	added missing include for Linux
+
+2002-01-18 20:58  reitmayr
+
+	* src/input/: FOBModule.cxx, FOBModule.h, FastTrakModule.cxx:
+	
+	a first working FOBModule !
+
+2002-01-18 20:58  reitmayr
+
+	* src/input/Makefile:
+	
+	added missing files
+
+2002-01-18 20:57  reitmayr
+
+	* src/common/ConsoleModule.cxx:
+	
+	added better checks for module startup
+
+2002-01-18 17:25  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	updated ARToolkit input module to use updated ARToolkit version
+	2.52 (with DirectShow)
+
+2002-01-18 17:25  reitmayr
+
+	* data/opentracker.dtd:
+	
+	changed ConsoleConfig attribute active to display
+
+2002-01-12 14:49  reitmayr
+
+	* src/input/: ARToolKitModule.cxx, ARToolKitModule.h:
+	
+	updated for ARToolkit 2.52 DirectShow version ! Currently it uses a
+	hardcoded image size of 320 x 240 and needs a little extension to
+	the ARFrameGrabber class.
+
+2002-01-09 18:13  reitmayr
+
+	* src/input/: FOBModule.cxx, FOBModule.h:
+	
+	almost finished implementation of FOBModule. still needs to be
+	tested.
+
+2002-01-09 18:12  reitmayr
+
+	* data/opentracker.dtd:
+	
+	added scale attribute to FOBConfig
+

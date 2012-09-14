@@ -1,0 +1,8 @@
+#!/usr/bin/python
+SConscript([
+#     'pythonbindings/SConstruct',
+    'avatar/SConstruct',
+#    'shaderPrograms/SConstruct',
+#    'csml/SConstruct',
+#    'haptics/SConstruct'
+    ])

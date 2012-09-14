@@ -1,0 +1,16 @@
+#!/usr/bin/python
+Import ('user_options_dict')
+
+SConscript(['kernel/SConscript',
+            'bootloader/SConscript',
+            'components/SConscript'])
+
+#	    'kernel',
+#	    'components/starlight',
+#	    'components/event',
+#	    'components/viewer',
+#	    'components/video'])
+
+#if user_options_dict['BUILD_EXAMPLE_APP'] == 1:
+#    SConscript (['applications/simple/SConscript'])
+

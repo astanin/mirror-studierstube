@@ -1,0 +1,99 @@
+{VERSION 4 0 "IBM INTEL NT" "4.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 1 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 
+0 0 1 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 1 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 
+2 2 1 1 1 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Heading 1" -1 3 1 
+{CSTYLE "" -1 -1 "Times" 1 18 0 0 0 1 2 1 2 2 2 2 1 1 1 1 }1 1 0 0 8 
+4 1 0 1 0 2 2 0 1 }{PSTYLE "Warning" -1 7 1 {CSTYLE "" -1 -1 "Courier
+" 1 10 0 0 255 1 2 2 2 2 2 1 1 1 3 1 }1 1 0 0 0 0 1 0 1 0 2 2 0 1 }
+{PSTYLE "Maple Output" -1 11 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 
+2 2 2 2 2 2 1 1 1 1 }3 3 0 0 0 0 1 0 1 0 2 2 0 1 }{PSTYLE "Maple Outpu
+t" -1 12 1 {CSTYLE "" -1 -1 "Times" 1 12 0 0 0 1 2 2 2 2 2 2 1 1 1 1 }
+1 3 0 0 0 0 1 0 1 0 2 2 0 1 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "with(linalg):" }}
+{PARA 7 "" 1 "" {TEXT -1 83 "`Warning, the protected names norm and tr
+ace have been redefined and unprotected\\n`" }}}{EXCHG {PARA 0 "> " 0 
+"" {MPLTEXT 1 0 110 "rr:= matrix(2,2,[1,0,0,1]);\nii:=matrix(2,2,[I,0,
+0,-I]);\njj:=matrix(2,2,[0,1,-1,0]);\nkk:=matrix(2,2,[0,I,I,0]);" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#rrG-%'matrixG6#7$7$\"\"\"\"\"!7$F+F
+*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#iiG-%'matrixG6#7$7$^#\"\"\"\"
+\"!7$F,^#!\"\"" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#jjG-%'matrixG6#7$
+7$\"\"!\"\"\"7$!\"\"F*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#kkG-%'mat
+rixG6#7$7$\"\"!^#\"\"\"7$F+F*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 
+0 62 "quat:=proc(a,b,c,d)\nRETURN(evalm(\na*rr+b*ii+c*jj+d*kk));\nend;
+\n" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%quatGR6&%\"aG%\"bG%\"cG%\"dG6
+\"F+F+-%'RETURNG6#-%&evalmG6#,**&9$\"\"\"%#rrGF5F5*&9%F5%#iiGF5F5*&9&F
+5%#jjGF5F5*&9'F5%#kkGF5F5F+F+F+" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 
+1 0 76 "quat2:=proc(a::vector)\nRETURN(evalm(\na[1]*rr+a[2]*ii+a[3]*jj
++a[4]*kk));\nend;" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%&quat2GR6#'%\"a
+G%'vectorG6\"F*F*-%'RETURNG6#-%&evalmG6#,**&&9$6#\"\"\"F6%#rrGF6F6*&&F
+46#\"\"#F6%#iiGF6F6*&&F46#\"\"$F6%#jjGF6F6*&&F46#\"\"%F6%#kkGF6F6F*F*F
+*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 62 "kform:=proc(M,N)\nRETU
+RN(Re(1/2*trace(M&*htranspose(N))));\nend;" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#>%&kformGR6$%\"MG%\"NG6\"F)F)-%'RETURNG6#-%#ReG6#,$-%&t
+raceG6#-%#&*G6$9$-%+htransposeG6#9%#\"\"\"\"\"#F)F)F)" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 159 "qcoeffs:=proc(M)\nlocal ar,ai,aj,a
+k;\nai:=evalc(kform(M,ii));\naj:=evalc(kform(M,jj));\nak:=evalc(kform(
+M,kk));\nar:=evalc(kform(M,rr));\nRETURN([ar,ai,aj,ak]);\nend;" }}
+{PARA 12 "" 1 "" {XPPMATH 20 "6#>%(qcoeffsGR6#%\"MG6&%#arG%#aiG%#ajG%#
+akG6\"F-C'>8%-%&evalcG6#-%&kformG6$9$%#iiG>8&-F26#-F56$F7%#jjG>8'-F26#
+-F56$F7%#kkG>8$-F26#-F56$F7%#rrG-%'RETURNG6#7&FHF0F:FAF-F-F-" }}}
+{SECT 0 {PARA 3 "" 0 "" {TEXT -1 80 "To calculate the Virtual Transfor
+m between two markers - Define Your Data Here !" }}{PARA 0 "" 0 "" 
+{TEXT -1 165 "This calculation transforms the location of *2 to the lo
+cation of *1. It calculates the parameters of your EventVirtualTransfo
+rm node, that you have to wrap *2 with." }}{PARA 0 "" 0 "" {TEXT -1 0 
+"" }}{PARA 0 "" 0 "" {TEXT -1 88 "Don't forget to put the scalar compo
+nent at the first position in this representation ! " }}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 216 "q1:=vector([ -0.313, 0.0386, -0.948, -0.
+0518]):q1:=normalize(q1);\np1:=vector([0, -0.0374, -0.0421, -0.485]);
+\nq2:=vector([-0.948, -0.0633, 0.312, -0.0207 ]):q2:=normalize(q2);\np
+2:=vector([0,-0.0791, -0.0213, -0.407]);" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#>%#q1G-%'vectorG6#7&$!+RlnGJ!#5$\"+syOeQ!#6$!+h:*fZ*F+$!+N(4y<&F
+." }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#p1G-%'vectorG6#7&\"\"!$!$u$!\"
+%$!$@%F,$!$&[!\"$" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#q2G-%'vectorG6
+#7&$!+2'4xZ*!#5$!+b1ZGj!#6$\"++iC>JF+$!+$))*\\p?F." }}{PARA 11 "" 1 "
+" {XPPMATH 20 "6#>%#p2G-%'vectorG6#7&\"\"!$!$\"z!\"%$!$8#F,$!$2%!\"$" 
+}}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 60 "q1m:=quat2(q1);p1m:=quat2
+(p1);q2m:=quat2(q2);p2m:=quat2(p2);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6
+#>%$q1mG-%'matrixG6#7$7$^$$!+RlnGJ!#5$\"+syOeQ!#6^$$!+h:*fZ*F-$!+N(4y<
+&F07$^$$\"+h:*fZ*F-F4^$F+$!+syOeQF0" }}{PARA 11 "" 1 "" {XPPMATH 20 "6
+#>%$p1mG-%'matrixG6#7$7$^$$!\"!\"\"!$!$u$!\"%^$$!$@%F0$!$&[!\"$7$^$$\"
+$@%F0F4^$F+$\"$u$F0" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$q2mG-%'matri
+xG6#7$7$^$$!+2'4xZ*!#5$!+b1ZGj!#6^$$\"++iC>JF-$!+$))*\\p?F07$^$$!++iC>
+JF-F4^$F+$\"+b1ZGjF0" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$p2mG-%'matr
+ixG6#7$7$^$$!\"!\"\"!$!$\"z!\"%^$$!$8#F0$!$2%!\"$7$^$$\"$8#F0F4^$F+$\"
+$\"zF0" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 30 "qrm:=evalm(invers
+e(q2m)&*q1m);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$qrmG-%'matrixG6#7$
+7$^$$!(*QGU!#5$!+:,og?!#6^$$\"+!QLx***F-$!+aQNM`!#77$^$$!+!QLx***F-F4^
+$F+$\"+:,og?F0" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 40 "tm:=evalm
+(inverse(q2m)&*(p1m-p2m)&*q2m);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#
+tmG-%'matrixG6#7$7$^$$\"\"!F,$!+k>\"oF\"!#6^$$!+gzuCKF/$!+K!zzR)F/7$^$
+$\"+gzuCKF/F3^$F+$\"+k>\"oF\"F/" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 
+1 0 51 "'rotation'=qcoeffs(qrm);\n'translation'=qcoeffs(tm);" }}{PARA 
+11 "" 1 "" {XPPMATH 20 "6#/%)rotationG7&$!++!*QGU!#8$!+:,og?!#6$\"+!QL
+x***!#5$!+bQNM`!#7" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%,translationG7
+&$\"\"!F'$!+k>\"oF\"!#6$!+gzuCKF*$!+I!zzR)F*" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 0 "" }}}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 32 "n
+orm([-0.5, -0.5, -0.5, 0.5],2);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"
++++++5!\"*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 32 "q:=quat(0.5, \+
+-0.5, -0.5, -0.5 );" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"qG-%'matrix
+G6#7$7$^$$\"\"&!\"\"$!\"&F-^$F.F.7$F*^$F+F+" }}}{EXCHG {PARA 0 "> " 0 
+"" {MPLTEXT 1 0 15 "qi:=inverse(q);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6
+#>%#qiG-%'matrixG6#7$7$^$$\"+++++]!#5F+F*7$^$$!+++++]F-F+^$F+F0" }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "qcoeffs(%);" }}{PARA 11 "" 
+1 "" {XPPMATH 20 "6#7&$\"+++++]!#5F$F$F$" }}}{EXCHG {PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 21 "pt:=quat(0,0,-160,0);" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#>%#ptG-%'matrixG6#7$7$\"\"!!$g\"7$\"$g\"F*" }}}{EXCHG {PARA 0 ">
+ " 0 "" {MPLTEXT 1 0 36 "qcoeffs(evalm(inverse(qi)&*pt&*qi));" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#7&$\"\"!F%$!+++++;!\"(F$F$" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 54 "rott:=vector([ -0.091, -0.00445,  -
+0.0487,    0.995]);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%%rottG-%'vect
+orG6#7&$!#\"*!\"$$!$X%!\"&$!$([!\"%$\"$&**F+" }}}{EXCHG {PARA 0 "> " 
+0 "" {MPLTEXT 1 0 14 "norm(rott, 2);" }}{PARA 11 "" 1 "" {XPPMATH 20 "
+6#$\"+&o[.+\"!\"*" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "normal
+ize(rott);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'vectorG6#7&$!+t!Go4*!
+#6$!+$*)[%[W!#7$!+'\\-$o[F)$\"+%zJl%**!#5" }}}{EXCHG {PARA 0 "> " 0 "
+" {MPLTEXT 1 0 0 "" }}}}{MARK "6 6 1 0" 0 }{VIEWOPTS 1 1 0 1 1 1803 1 
+1 1 1 }{PAGENUMBERS 0 1 2 33 1 1 }

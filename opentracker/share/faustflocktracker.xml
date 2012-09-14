@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--simple test configuration for the Flock of Birds source module-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="Faust" />
+    <ConsoleConfig headerline="Faust" display="on" interval="20"/>
+    <TimeConfig sleep="10" />
+    <FOBConfig mode="multi" master="1" transmitter="4" hemisphere="forward">
+      <Bird device="COM1" number="1"/>
+      <Bird device="COM2" number="2"/>
+      <Bird device="COM5" number="3"/>
+    </FOBConfig>
+  </configuration>
+  <ConsoleSink comment="1">
+    <NetworkSink name="Bird1+parButton" number="0" multicast-address="224.0.0.10" port="12345">
+      <EventTransform translation="-0.018 -0.282 -1.653">
+        <EventVirtualTransform rotation="0.537 0.525 -0.445 -0.489">
+          <EventTransform rotation="0 0.707 0 -0.707">
+            <EventTransform rotation="0.707 0 0 0.707">
+              <Merge>
+               <MergeDefault>
+                <FOBSource number="1"/>
+               </MergeDefault>
+               <MergeButton>
+                 <ButtonFilter buttonmap="00000000">
+                   <ParButtonSource dev="0x378"/>
+                 </ButtonFilter>
+               </MergeButton>
+    </Merge>
+    </EventTransform>
+    </EventTransform>
+    </EventVirtualTransform>
+    </EventTransform>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="2">
+    <NetworkSink
+name="Bird2" number="1" multicast-address="224.0.0.10" port="12345">
+    <EventTransform translation="-0.018 -0.282 -1.653">
+    <EventVirtualTransform rotation="0.537 0.525 -0.445 -0.489">
+    <EventTransform rotation="0 0.707 0 -0.707">
+    <EventTransform rotation="0.707 0 0 0.707">
+      <FOBSource number="2"/>
+    </EventTransform>
+    </EventTransform>
+    </EventVirtualTransform>
+    </EventTransform>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="3">
+    <NetworkSink name="Bird3" number="2" multicast-address="224.0.0.10" port="12345">
+    <EventTransform translation="-0.018 -0.282 -1.653">
+    <EventVirtualTransform rotation="0.537 0.525 -0.445 -0.489">
+    <EventTransform rotation="0 0.707 0 -0.707">
+    <EventTransform rotation="0.707 0 0 0.707">
+      <FOBSource number="3"/>
+    </EventTransform>
+    </EventTransform>
+    </EventVirtualTransform>
+    </EventTransform>
+    </NetworkSink>
+  </ConsoleSink>
+</OpenTracker>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,436 @@
+Copyright (C) 2000-2003  Vienna University of Technology
+
+THE STUDIERSTUBE BUILD SYSTEM HOWTO
+===================================
+the essential guide for Studierstube build system Rambo's and wannabe's
+(by Tamer Fahmy <tamer@ims.tuwien.ac.at>)
+
+
+Content
+=======
+
+o Abstract
+o Overview
+o Build system specific files and directories
+o Recurring tasks
+  - integrate source files
+    + Conventions regarding Makefile.am editing:
+    + how to add sources
+    + how to add applications
+  - conditional build options
+  - optional libraries
+  - writing automated tests
+  - build targets
+
+
+Abstract
+========
+
+Welcome to the Studierstube autotools build system howto! You probably read
+this document, because you have to deal with our build system or somebody
+told you to read it or you are in a desperate mood disillusioned by life.
+Whatever your motives really are, I will try to make this read worthwhile
+to you.
+
+
+Overview 
+========
+
+First of all I want to event that to give a complete introduction to the
+autotools is universes beyond the scope of this document. A good resource
+for learning about the autotools is "the goat book"[1] which can be read
+online at ** http://sources.redhat.com/autobook/ **.
+
+The info manuals from the tools themselves prove their usefulness (and
+suddenly start to make sense) once you read "the goat book" or other
+tutorials and understand how the different tools correlate.
+
+You will have to do the appropriate RTFM session yourself. Learn by looking
+at other software that use autotools and by experimenting. In the beginning
+nothing is easy and nothing comes for free. But once you master something by
+yourself the feeling is simply unmatched!
+
+Please read the INSTALL file that provides the necessary information in how
+to build Studierstube itself.
+
+See doc/DIRECTORIES.TXT for an overview of the directory structure in
+Studierstube.
+
+--
+[1] "The Goat Book" - GNU Autoconf, Automake and Libtool -
+    http://sources.redhat.com/autobook/
+
+
+Build system specific files and directories
+===========================================
+
+To understand the relationships in the build system the best read is
+** http://sources.redhat.com/autobook/autobook/autobook_276.html#SEC276 **.
+
+Replace every occurence of configure.in with configure.ac as this is new
+naming convention used in newer autoconf versions and used by us in
+Studierstube.
+
+Now to the files, that really bother you regarding Studierstube.
+
+configure.ac:
+  This is the main file that contains all the macro calls and information
+  for autoconf. Out of this the configure script will be created.
+
+cfg/m4/:
+  This directory contains all the additional m4 macros that are used in
+  configure.ac.  The purpose of each macro is explained in the macro
+  itself.
+
+Makefile.am:
+  The Makefile.am files all over the place contain the build targets and
+  rules to create the Makefiles out of the Makefile.in's.
+
+bootstrap:
+  This script calls all the necessary tools if you modify one of the build
+  system files to generate the updated files.
+
+Please read
+** http://sources.redhat.com/autobook/autobook/autobook_43.html#SEC43 **
+for a better understanding.
+
+
+Recurring tasks
+===============
+
+- integrate source files -
+--------------------------
+
+
+Conventions regarding Makefile.am editing:
+------------------------------------------
+
+- 8 spaces no tabs!
+
+  Please fix your editor in this regard. For emacs users this means to set
+  the variable 'indent-tabs-mode' to 'nil'.
+
+- The alphabet was invented for a reason!
+
+  Order the entries in alphabetical order to make it easier to look up the
+  entries.
+
+
+how to add sources:
+-------------------
+
+Let's start simple and assume that you want to add 2 new source files to
+src/stbapi/util namely StbExample.cxx and StbExample.h.
+
+What you need to do is to edit Makefile.am. At the time I wrote this guide
+it contained the following:
+
+## Makefile.am -- Process this file with automake to produce Makefile.in
+
+include $(top_srcdir)/src/Makefile.common
+
+noinst_LTLIBRARIES = libutil.la
+libutil_la_SOURCES = \
+        ReactorTask.cxx \
+        ReactorTask.h \
+        buffer.cxx \
+        buffer.h \
+        container.cxx \
+        container.h \
+        fileBrowser.cxx \
+        fileBrowser.h \
+        ivio.cxx \
+        ivio.h \
+        ivutil.cxx \
+        ivutil.h \
+        lock.cxx \
+        lock.h \
+        multicast.cxx \
+        multicast.h \
+        option.cxx \
+        option.h \
+        os.cxx \
+        os.h \
+        sockets.cxx \
+        sockets.h \
+        sound.cxx \
+        sound.h \
+        timerutility.cxx \
+        timerutility.h \
+        zpthread.cxx \
+        zpthread.h
+
+
+So our new Makefile.am would look like:
+
+## Makefile.am -- Process this file with automake to produce Makefile.in
+
+include $(top_srcdir)/src/Makefile.common
+
+noinst_LTLIBRARIES = libutil.la
+libutil_la_SOURCES = \
+        ReactorTask.cxx \
+        ReactorTask.h \
+        StbExample.cxx \
+        StbExample.h \
+        buffer.cxx \
+        buffer.h \
+        container.cxx \
+        container.h \
+        fileBrowser.cxx \
+        fileBrowser.h \
+        ivio.cxx \
+        ivio.h \
+        ivutil.cxx \
+        ivutil.h \
+        lock.cxx \
+        lock.h \
+        multicast.cxx \
+        multicast.h \
+        option.cxx \
+        option.h \
+        os.cxx \
+        os.h \
+        sockets.cxx \
+        sockets.h \
+        sound.cxx \
+        sound.h \
+        timerutility.cxx \
+        timerutility.h \
+        zpthread.cxx \
+        zpthread.h
+
+The only thing that is left now is to issue the './bootstrap' script and a
+'./configure' in the Studierstube root directory to create the new
+Makefile.in and Makefile.am. You will have to do this btw. for any change
+in the build system to let the changes take effect.
+
+If you issue 'make' now the new source files should build and the autotools
+should worry about the resulting new dependencies automagically.
+
+To remove files issue a 'make clean' in the source directory where the
+files you want to remove reside to get rid of autogenerated files by the
+build system. Edit the corresponding Makefile.am and remove the file
+entries.  Then initiate the bootstrap-configure-make procedure explained
+above again.
+
+
+how to add applications:
+------------------------
+
+Application Makefiles reside in bin/apps/appname and not in
+src/apps/application as one could assume. The reason for is related to the
+nature of the Studierstube directory layout. The resulting dynamic link
+libraries are placed in bin/apps/appname so it was easier to put the lib
+generating tools in the bin/apps dirs too.
+
+Let's look at the animal app Makefile.am residing in
+bin/apps/animal/Makefile.am to discuss in how to write an app Makefile.am.
+
+At the time I wrote this guide it contained the following:
+
+## Makefile.am -- Process this file with automake to produce Makefile.in
+
+include $(top_srcdir)/src/Makefile.common
+
+lib_LTLIBRARIES = animal_stb.la
+
+animal_stb_la_SOURCES = \
+        $(top_srcdir)/src/apps/animal/SoAnimalKit.cxx \
+        $(top_srcdir)/src/apps/animal/SoAnimalKit.h
+
+animal_stb_la_LDFLAGS = -no-undefined -module -avoid-version
+
+
+Line by line dissection:
+
+include $(top_srcdir)/src/Makefile.common
+
+tells the configury that we would like to have the contents of
+Makefile.common - which contains general definitions needed for all
+Makefile.am - to be included.
+
+The $(top_srcdir) variable set by automake points to the Studierstube root
+directory.
+
+
+lib_LTLIBRARIES = animal_stb.la
+
+This line tells libtool what our lib is call. Libtool figures out the
+platform dependent stuff like suffixes and linker flags etc. The suffix for
+libtool libs is .la.
+
+animal_stb_la_SOURCES = \
+        $(top_srcdir)/src/apps/animal/SoAnimalKit.cxx \
+        $(top_srcdir)/src/apps/animal/SoAnimalKit.h
+
+Here we tell automake what files belong to our lib build target. It is the
+library name followed by a _SOURCES suffix. Every occurence of a dot
+character like in animal_stb.la has to be replaced with an underscore.
+Again the files have to be specified relative to the Studierstube root
+directory so that they can be found as they reside in the src/apps/appname
+directory in Studierstube.
+
+
+
+- conditional build options -
+-----------------------------
+
+If the need arises to use flags like USE_DIV to compile code conditionally
+one would have to do the following:
+
+Here is the configury check for Distributed Inventor in configure.ac:
+
+# Check for the use of DIV
+AC_ARG_ENABLE([div],
+              AC_HELP_STRING([--enable-div], [enable Distributed Inventor (default=yes)]),
+              stb_div=$enable_div, stb_div=yes)
+if test "$stb_div" = yes; then
+  AC_DEFINE(USE_DIV, 1, [Enable the use of the Distributed Inventor])
+fi
+SIM_AC_CONFIGURATION_SETTING([Enable Distributed Inventor], [$stb_div])
+
+The relevant part here is the autoconf macro call
+AC_DEFINE(USE_DIV, 1, [Enable the use of the Distributed Inventor])
+which set a compiler flag named USE_DIV.
+
+Now one can use #ifdef USE_DIV <conditional code here #endif preprocessor
+directives in the code as it currently happens in
+src/stbapi/div/divmain.cxx.
+
+
+- optional libraries -
+----------------------
+
+Assume we have a library that Studierstube doesn't necessarily depend on to
+operate properly. I will demonstrate the procedure on the current video
+background situation. You can optionally use libccvt or opentracker to
+handle video background under Linux.
+
+Here is the configury check for this case in configure.ac:
+
+# Check for the use of libccvt
+AC_ARG_ENABLE([libccvt],
+              AC_HELP_STRING([--enable-libccvt], [use libccvt for video background (default=no)]),
+              stb_libccvt=$enable_libccvt, stb_libccvt=no)
+if test "$stb_libccvt" = yes; then
+  AC_DEFINE(PC_USBCAM, 1, [Enable the use of the libccvt])
+else
+  AC_DEFINE(OPENTRACKER_VIDEO, 1, [Enable the use of the libccvt])
+fi
+AM_CONDITIONAL(USE_LIBCCVT, test "$stb_libccvt" = yes)
+SIM_AC_CONFIGURATION_SETTING([Use libccvt], [$stb_libccvt])
+
+The relevant line here is
+AM_CONDITIONAL(USE_LIBCCVT, test "$stb_libccvt" = yes)
+which creates a USE_LIBCCVT conditional flag for automake to be used in a
+Makefile.am.
+
+In src/stbapi/resource/viewer/Makefile.am one can now use the conditional
+to tell it which sources it should compile.
+
+It contains the following:
+
+## Makefile.am -- Process this file with automake to produce Makefile.in
+
+include $(top_srcdir)/src/Makefile.common
+
+if USE_LIBCCVT
+libccvt = VideoDevice.cxx VideoDevice.h
+else
+libccvt = 
+endif
+
+noinst_LTLIBRARIES = libviewer.la
+libviewer_la_SOURCES = \
+        GLtools.cxx \
+        GLtools.h \
+		... 
+        SoVideoOpenTracker.cxx \
+        SoVideoOpenTracker.h \
+        SoVideoPCUSB.cxx \
+        SoVideoPCUSB.h \
+        SoVideoSGIdmedia.cxx \
+        SoVideoSGIdmedia.h \
+        SoVideoSGIVideo.cxx \
+        SoVideoSGIVideo.h \
+        $(libccvt)
+
+Here I set the variable libccvt to additional source file or none depending
+on what the flag is set to by the configury.
+
+A second file which has to be set accordingly is bin/workspace/Makefile.am.
+
+## Makefile.am -- Process this file with automake to produce Makefile.in
+
+include $(top_srcdir)/src/Makefile.common
+
+if USE_LIBCCVT
+libccvt = -lccvt
+else
+libccvt =
+endif
+
+noinst_PROGRAMS = workspace
+
+workspace_SOURCES =  $(top_srcdir)/src/stbapi/workspace/workspace.cxx
+workspace_LDADD = $(top_builddir)/lib/libStbAPI.la $(libccvt) -lGLU @LIBLTDL@ @LIBADD_DL@ @sogui_libs@ @stb_ac_ace_libs@ @stb_ac_opentracker_libs@
+workspace_LDFLAGS = -L$(top_builddir)/lib @sogui_ldflags@ @stb_ac_ace_ldflags@ @stb_ac_opentracker_ldflags@
+
+This also depending on the situation adds the necessary compile flags
+needed to be able to link to the libccvt library if needed.
+
+
+- writing automated tests -
+---------------------------
+
+A test for an option, a library etc. can either be taken out in the
+configure.ac file itself or by creating an m4 file in cfg/m4 for a more
+complicated test.
+
+Say you wanted to check for the availability of the zlib library then the
+readily available autoconf macro AC_CHECK_LIB can be used like so:
+
+AC_CHECK_LIB([z], [deflate], [], [AC_MSG_ERROR([cannot link to the zlib library.])])
+
+Check the autoconf documentation for available macros and their meaning.
+
+This line you would add to configure.ac.
+
+Let's say you wanted to check for OpenTracker and determine it's
+parameters. For this case it is better to write a separate m4 macro as
+this needed to be treated specially and is likely to be reused in other
+projects depending on OpenTracker.
+
+Have a look at cfg/m4/opentracker.m4 in how to accomplish things like that
+and make sure you read the m4 introduction in the "Goat Book" and know how
+to write shell scripts.
+
+After writing a macro like this it can be used in configure.ac to perform a
+check for the availability of OpenTracker.
+
+# Check for OpenTracker.
+STB_AC_HAVE_OPENTRACKER_IFELSE([], [AC_MSG_ERROR([cannot link to the OpenTracker library. consider --with-opentracker=path_to_opentracker])])
+
+AC_SUBST([stb_ac_opentracker_cppflags])
+AC_SUBST([stb_ac_opentracker_ldflags])
+AC_SUBST([stb_ac_opentracker_libs])
+
+SIM_AC_CONFIGURATION_SETTING([OpenTracker root directory], [$stb_ac_opentracker_root])
+
+The AC_SUBST macro replaces occurences of
+e.g. @stb_ac_opentracker_cppflags@ in Makefile.am's with the contents of the
+determined stb_ac_opentracker_cppflags variable.
+
+- build targets -
+-----------------
+
+There is no concept of build targets in the configury. If one would like to
+have an optimized version without any DEBUG code compiled in, one could add
+an option to the configure.ac which sets the specific flags needed like
+described in the "conditional build options" section. At any time compiler
+flags for optimization and additional libraries can be added to the
+'./configure' script as described in the INSTALL file like so:
+
+./configure CXXFLAGS="-O3" LIBS="-lfoo" --disable-div
+

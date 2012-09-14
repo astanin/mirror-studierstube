@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="timer" updateRate="30">
+
+	<DSVLSrc config-file="dsvl.xml" pixelformat="B8G8R8" num-buffers="4" flip-v="true">
+
+		<GLUTSink name="glsink1" pixelformat="B8G8R8"/> 
+		<!-- <GL_TEXTURE_2D_Sink name="stbSink" pixelformat="B8G8R8"/> -->
+
+	</DSVLSrc>
+
+</openvideo>

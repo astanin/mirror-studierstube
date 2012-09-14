@@ -1,0 +1,15 @@
+#! /bin/sh
+##
+# regenerate all files which are constructed by the autoconf, automake and
+# libtool tool-chain.
+#
+# Author: Tamer Fahmy <tamer@tammura.at>
+#
+#&& libtoolize --force --copy \
+
+# set -x -v
+
+aclocal -I cfg/m4 \
+&& autoheader \
+&& automake --add-missing --copy \
+&& autoconf

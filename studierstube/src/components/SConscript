@@ -1,0 +1,10 @@
+#!/usr/bin/python
+Import ('user_options_dict')
+
+SConscript(['starlight/SConscript',
+            'event/SConscript',
+            'viewer/SConscript'])
+
+if user_options_dict['ENABLE_OPENVIDEO'] == 1:
+    SConscript (['video/SConscript'])
+

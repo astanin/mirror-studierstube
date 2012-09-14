@@ -1,0 +1,33 @@
+#!/usr/bin/python
+import sys
+import os
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+
+starlight_env = library_env.Copy ()
+
+# Get all files from directory while applying ignore filter
+source_dir   = Dir('#').abspath + os.sep + '/src/components/starlight'
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+# ACE
+starlight_env.Append (CPPPATH = user_options_dict['ACE_INCLUDE'])
+starlight_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+starlight_env.Append (LIBS    = user_options_dict['ACE_LIBRARY'])
+# Coin
+starlight_env.Append (CPPPATH = user_options_dict['COIN_INCLUDE'])
+starlight_env.Append (LIBPATH = user_options_dict['COIN_LIBPATH'])
+starlight_env.Append (LIBS    = user_options_dict['COIN_LIBRARY'])
+if sys.platform == 'darwin':
+	lfs = user_options_dict['COIN_LDFLAGS'] + ['-Wl,-undefined,dynamic_lookup']
+	starlight_env.Append (LINKFLAGS = lfs)
+else:
+	starlight_env.Append (LINKFLAGS = user_options_dict['COIN_LDFLAGS'])
+
+starlight = starlight_env.SharedLibrary (target='#'+user_options_dict['BUILD_DIR']+'/lib/stbstarlight', source=source_files)
+env.Alias(target = ['install'], source = starlight_env.Install(user_options_dict['INSTALL_ROOT_DIR'] + os.sep + user_options_dict['LIBDIR'], starlight))

@@ -1,0 +1,871 @@
+#!/usr/bin/env python
+import glob
+import sys
+import os
+import buildutils
+import re
+
+# OpenTracker version
+version='2.0.0'
+
+ace_env = Environment (ENV = os.environ)
+x11_env = Environment (ENV = os.environ)
+xerces_env = Environment (ENV = os.environ)
+tinyxml_env = Environment (ENV = os.environ)
+tinyxmlmod_env = Environment (ENV = os.environ)
+muddleware_env = Environment (ENV = os.environ)
+omniorb_env = Environment (ENV = os.environ)
+omnicos_env = Environment (ENV = os.environ)
+omnievents_env = Environment (ENV = os.environ)
+omnithread_env = Environment (ENV = os.environ)
+omnidynamic_env = Environment (ENV = os.environ)
+
+# All the other files 
+main_file = './src/standalones/main.cxx'
+middleware_file = './src/standalones/middleware.cxx'
+file_configurable_file = './src/standalones/file_configurable.cxx'
+corba_configurable_file = './src/standalones/corba_configurable.cxx'
+otqt_configapp_file = './src/otqt/otqt_mem_calib_main.cxx'
+skeletons = []
+
+# name for the dll and program that will be produced by the SConstruct
+dlname = 'opentracker'
+programname = 'opentracker'
+config_file = 'config.opts'
+defines = []
+
+if sys.platform == 'darwin':
+	envvars = os.environ
+	prefix = '/opt/local'
+	root_build_dir = 'build/darwin'
+	install_root_dir = ''
+
+	release_flags = ['-O2']
+	debug_flags = ['-O2', '-g']
+	extra_flags = ['-pipe']
+	defines += ['DARWIN']
+	cxxflags = []
+	warn_flags = ['-Wall', '-W']
+	source_filter = '\.cxx$|\.cpp$|\.cc$'
+	include_filter = '\.h$|\.hh$'
+	ignore_filter = '/ignore/|/ignore$|\.scon|\.svn|\.#|bak|~$|SConscript'
+
+	# BOOST library information
+	boost_cflags = []
+	boost_include = ['/sw/include']
+	boost_lib = []
+	boost_libpath = ['/sw/lib']
+
+	# ACE library information
+	ace_env.ParseConfig ('pkg-config --cflags --libs ACE')
+	ace_cflags = ace_env.Dictionary()['CCFLAGS']
+	ace_include = ace_env.Dictionary()['CPPPATH']
+	ace_lib = ace_env.Dictionary()['LIBS']
+	ace_libpath = ace_env.Dictionary()['LIBPATH']
+	if envvars.has_key('ACE_ROOT'):
+		ace_cflags = []
+		ace_include = [envvars['ACE_ROOT']]
+		ace_libpath = [envvars['ACE_ROOT'] + '/lib']
+		ace_lib = ['ACE']
+
+	# XERCES library information
+	if envvars.has_key('XERCESCROOT'):
+		xerces_cflags = []
+		xerces_include = [envvars['XERCESCROOT'] + '/include']
+		xerces_libpath = [envvars['XERCESCROOT'] + '/lib']
+		xerces_lib = ['xerces-c']
+
+	# X11 library information
+	try:
+		x11_env.ParseConfig('pkg-config --cflags --libs x11')
+		x11_cflags = x11_env.Dictionary()['CCFLAGS']
+		x11_include = x11_env.Dictionary()['CPPPATH']
+		x11_lib = x11_env.Dictionary()['LIBS']
+		x11_libpath = x11_env.Dictionary()['LIBPATH']
+		if x11_lib == []:
+			x11_lib = ['X11']
+			x11_libpath = ['/usr/X11R6/lib']
+	except OSError:
+		print "reverting to X11 defaults"
+		x11_cflags = []
+		x11_include = ['/usr/X11R6/include']
+		x11_lib = ['X11']
+		x11_libpath = ['/usr/X11R6/lib']
+		x11_env['ENV']['CCFLAGS'] = x11_cflags
+		x11_env['ENV']['CPPPATH'] = x11_include
+		x11_env['ENV']['LIBS'] = x11_lib
+		x11_env['ENV']['LIBPATH'] = x11_libpath
+
+	# OMNIORB library information
+	omniorb_env.ParseConfig('pkg-config --cflags --libs omniORB4')
+	omniorb_cflags = omniorb_env.Dictionary()['CCFLAGS']
+	omniorb_include = omniorb_env.Dictionary()['CPPPATH']
+	omniorb_lib = omniorb_env.Dictionary()['LIBS']
+	omniorb_libpath = omniorb_env.Dictionary()['LIBPATH']
+	# OMNICOS4 library information
+	omnicos_env.ParseConfig('pkg-config --cflags --libs omniCOS4')
+	omnicos_cflags = omnicos_env.Dictionary()['CCFLAGS']
+	omnicos_include = omnicos_env.Dictionary()['CPPPATH']
+	omnicos_lib = omnicos_env.Dictionary()['LIBS']
+	omnicos_libpath = omnicos_env.Dictionary()['LIBPATH']
+	# OMNIEVENTS package information
+	omnievents_env.ParseConfig('pkg-config --cflags --libs omniEvents')
+	omnievents_cflags = omnievents_env.Dictionary()['CCFLAGS']
+	omnievents_include = omnievents_env.Dictionary()['CPPPATH']
+#	omnievents_lib = omnievents_env.Dictionary()['LIBS']
+	omnievents_libpath = omnievents_env.Dictionary()['LIBPATH']
+	# OMNITHREAD library information
+	omnithread_env.ParseConfig('pkg-config --cflags --libs omnithread3')
+	omnithread_cflags = omnithread_env.Dictionary()['CCFLAGS']
+	omnithread_include = omnithread_env.Dictionary()['CPPPATH']
+	omnithread_lib = omnithread_env.Dictionary()['LIBS']
+	omnithread_libpath = omnithread_env.Dictionary()['LIBPATH']
+	# OMNIDYNAMIC library information
+	omnidynamic_env.ParseConfig('pkg-config --cflags --libs omniDynamic4')
+	omnidynamic_cflags = omnidynamic_env.Dictionary()['CCFLAGS']
+	omnidynamic_include = omnidynamic_env.Dictionary()['CPPPATH']
+	omnidynamic_lib = omnidynamic_env.Dictionary()['LIBS']
+	omnidynamic_libpath = omnidynamic_env.Dictionary()['LIBPATH']
+
+	# Muddleware library information
+	try:
+		muddleware_env.ParseConfig ('pkg-config --silence-errors --cflags --libs XMLClient')
+		muddleware_cflags = muddleware_env.Dictionary()['CCFLAGS']
+		muddleware_include = muddleware_env.Dictionary()['CPPPATH']
+		muddleware_lib = muddleware_env.Dictionary()['LIBS']
+		muddleware_libpath = muddleware_env.Dictionary()['LIBPATH']
+	except OSError:
+		print "Muddleware package could not be used"
+
+	enable_muddleware = 'false'
+	enable_corba = 'false'
+	enable_pyqt = 'false'
+
+elif sys.platform == 'linux' or sys.platform == 'linux2':
+	envvars = os.environ
+	prefix = '/usr/local'
+	root_build_dir = 'build/linux'
+	install_root_dir = ''
+
+	release_flags = ['-O2']
+	debug_flags = ['-O2', '-g']
+	extra_flags = ['-pipe']
+	defines += ['LINUX']
+	cxxflags = []
+	warn_flags = ['-Wall']
+	source_filter = '\.cxx$|\.cpp$|\.cc$'
+	include_filter = '\.h$|\.hh$'
+	ignore_filter = '/ignore/|/ignore$|\.scon|\.svn|\.#|bak|~$|SConscript'
+	
+	# BOOST library information
+	boost_cflags = []
+	boost_include = []
+	boost_lib = []
+	boost_libpath = []
+
+	# ACE library information
+	ace_env.ParseConfig ('pkg-config --cflags --libs ACE')
+	ace_cflags = ace_env.Dictionary()['CCFLAGS']
+	ace_include = ace_env.Dictionary()['CPPPATH']
+	ace_lib = ace_env.Dictionary()['LIBS']
+	ace_libpath = ace_env.Dictionary()['LIBPATH']
+	if envvars.has_key('ACE_ROOT'):
+		ace_cflags = []
+		ace_include = [envvars['ACE_ROOT']]
+		ace_libpath = [os.path.join(envvars['ACE_ROOT'], 'lib')]
+		ace_lib = ['ACE']
+	# XERCES library information
+	xerces_cflags = []
+	xerces_include = []
+	xerces_libpath = []
+	if envvars.has_key('XERCESCROOT'):
+		xerces_cflags = []
+		xerces_include = [os.path.join(envvars['XERCESCROOT'], 'include')]
+		xerces_libpath = [os.path.join(envvars['XERCESCROOT'], 'lib')]
+	xerces_lib = ['xerces-c']
+	# X11 library information
+	x11_env.ParseConfig('pkg-config --cflags --libs x11')
+	x11_cflags = x11_env.Dictionary()['CCFLAGS']
+	x11_include = x11_env.Dictionary()['CPPPATH']
+	x11_lib = x11_env.Dictionary()['LIBS']
+	x11_libpath = x11_env.Dictionary()['LIBPATH']
+	if x11_lib == []:
+		x11_lib = ['X11']
+		x11_libpath = ['/usr/X11R6/lib']
+
+	# OMNIORB library information
+	omniorb_env.ParseConfig('pkg-config --cflags --libs omniORB4')
+	omniorb_cflags = omniorb_env.Dictionary()['CCFLAGS']
+	omniorb_include = omniorb_env.Dictionary()['CPPPATH']
+	omniorb_lib = omniorb_env.Dictionary()['LIBS']
+	omniorb_libpath = omniorb_env.Dictionary()['LIBPATH']
+	# OMNICOS4 library information
+	omnicos_env.ParseConfig('pkg-config --cflags --libs omniCOS4')
+	omnicos_cflags = omnicos_env.Dictionary()['CCFLAGS']
+	omnicos_include = omnicos_env.Dictionary()['CPPPATH']
+	omnicos_lib = omnicos_env.Dictionary()['LIBS']
+	omnicos_libpath = omnicos_env.Dictionary()['LIBPATH']
+	# OMNIEVENTS package information
+	omnievents_env.ParseConfig('pkg-config --cflags --libs omniEvents')
+	omnievents_cflags = omnievents_env.Dictionary()['CCFLAGS']
+	omnievents_include = omnievents_env.Dictionary()['CPPPATH']
+	omnievents_lib = omnievents_env.Dictionary()['LIBS']
+	omnievents_libpath = omnievents_env.Dictionary()['LIBPATH']
+	# OMNITHREAD library information
+	omnithread_env.ParseConfig('pkg-config --cflags --libs omnithread3')
+	omnithread_cflags = omnithread_env.Dictionary()['CCFLAGS']
+	omnithread_include = omnithread_env.Dictionary()['CPPPATH']
+	omnithread_lib = omnithread_env.Dictionary()['LIBS']
+	omnithread_libpath = omnithread_env.Dictionary()['LIBPATH']
+	# OMNIDYNAMIC library information
+	omnidynamic_env.ParseConfig('pkg-config --cflags --libs omniDynamic4')
+	omnidynamic_cflags = omnidynamic_env.Dictionary()['CCFLAGS']
+	omnidynamic_include = omnidynamic_env.Dictionary()['CPPPATH']
+	omnidynamic_lib = omnidynamic_env.Dictionary()['LIBS']
+	omnidynamic_libpath = omnidynamic_env.Dictionary()['LIBPATH']
+
+	# Muddleware library information
+	#muddleware_env.ParseConfig ('pkg-config --silence-errors --cflags --libs XMLClient')
+	muddleware_cflags = muddleware_env.Dictionary()['CCFLAGS']
+	try:
+		muddleware_include = muddleware_env.Dictionary()['CPPPATH']
+	except KeyError:
+		print "For some reason CPPPATH is missing from the muddleware_env Dictionary"
+	try:
+		muddleware_lib = muddleware_env.Dictionary()['LIBS']
+	except KeyError:
+		print "For some reason LIBS is missing from the muddleware_env Dictionary"
+	try:
+		muddleware_libpath = muddleware_env.Dictionary()['LIBPATH']
+	except KeyError:
+		print "For some reason LIBPATH is missing from the muddleware_env Dictionary"
+
+	enable_muddleware = 'false'
+	enable_corba = 'false'
+	enable_pyqt = 'false'
+
+# windows compile configuration
+elif sys.platform == 'win32':
+	root_build_dir = 'build/win32'
+	# to get the include path for all libraries we need to retrieve 
+	# the environment vars pointing to the root of each lib
+	envvars = os.environ
+
+	corbaLibPath = envvars['OMNIORB'] + '/lib/x86_win32'
+	corbaIncPath = envvars['OMNIORB'] + '/include'
+
+	# build prefix, all object files and targets will be first placed under
+	# the directory designated by this variable
+	if envvars['OTROOT'] != '':
+		root_build_dir=envvars['OTROOT']+'/build/SCons/'
+
+	# Install directories for windows
+	libInstallDir = envvars['OTROOT']+'/lib/win32'
+	binInstallDir = envvars['OTROOT']+'/bin/win32'
+	dlInstallDir  = envvars['OTROOT']+'/bin/win32'
+
+	# flags for console program creation in VS8.0 for windows XP
+	_programCppFlags = '/O2 /Ob1 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_VC80_UPGRADE=0x0710" /D "_MBCS" /GF /FD /EHsc /MD /Gy /Fp".'+root_build_dir+'/standalone.pch" /Fo"'+root_build_dir+'" /Fd"'+root_build_dir+'" /W3 /nologo /c /errorReport:prompt'
+
+	_programIncFlags =[envvars['OTROOT']+ '/src',envvars['OTROOT']+ '/misc',envvars['OTROOT']]
+
+	_programLibs= ['odbc32.lib', 'odbccp32.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib', 'winspool.lib', 'comdlg32.lib', 'advapi32.lib', 'shell32.lib', 'ole32.lib' , 'oleaut32.lib', 'uuid.lib', 'odbc32.lib', 'odbccp32.lib']
+
+	_programLibDirs = [libInstallDir]
+
+	_programLinkFlags = ' /INCREMENTAL:NO /NOLOGO /SUBSYSTEM:CONSOLE /MACHINE:X86 /ERRORREPORT:PROMPT'
+
+	# flags for dll creation in VS8.0 for windows XP
+	_dlCppFlags= '/O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_USRDLL" /D "OPENTRACKER_EXPORTS" /D "__WIN32__" /D "__x86__" /D "_CRT_SECURE_NO_DEPRECATE" /D "TINYXML_MOD_DLL" /D "_WINDLL" /D "_MBCS" /FD /EHsc /MD /Fd"'+ root_build_dir +'/vc80.pdb" /W3 /nologo /Zi /TP /errorReport:prompt'
+
+	_dlIncFlags = [envvars['ACEROOT'], envvars['TINYXMLROOT'], envvars['TINYXMLMODROOT'] + '/src', envvars['OTROOT']+ '/extras', envvars['OTROOT']+ '/extras/intersense', envvars['ARTOOLKITPLUSROOT'] + '/include', envvars['OPENVIDEOROOT'] + '/include', envvars['XERCESCROOT'] + '/include']
+
+	_dlLibs = LIBS = ['ace', 'openvideo',  'kernel32', 'user32', 'gdi32', 'winspool', 'comdlg32', 'advapi32', 'shell32', 'ole32', 'oleaut32', 'uuid', 'odbc32', 'odbccp32'] 
+
+	_dlLibDir = [envvars['ACEROOT']+ '/lib/Win32',envvars['ACEROOT']+ "\\lib", envvars['ACEROOT'], envvars['TINYXMLROOT']+'/lib',envvars['TINYXMLMODROOT'] + '/lib/Win32', envvars['XERCESCROOT']+"\\lib", envvars['ARTOOLKITPLUSROOT']+ '/lib/Win32', envvars['OPENVIDEOROOT']+"\\lib\\Win32"]
+
+	_dlLinkFlags= '/MANIFEST /MANIFESTFILE:"'+ root_build_dir+'/opentracker.dll.intermediate.manifest" /DEBUG  /INCREMENTAL:NO /OPT:REF /OPT:ICF /SUBSYSTEM:WINDOWS /MACHINE:X86 /ERRORREPORT:PROMPT /PDB:'+ root_build_dir +'/' + dlname + '.pdb'
+else:
+	print "Other platforms not supported by scons!"
+	exit
+
+#-----------------------------------------------------------------------------
+# User configurable options to be saved in a config file.
+#-----------------------------------------------------------------------------
+# Checking for an existing config file - use that one if it exists,
+# otherwise create one.
+my_defines = []
+my_ccflags = []
+my_cxxflags = []
+my_ldflags = []
+
+#BuildDir(root_build_dir+ os.sep + 'src', 'src', duplicate=0)
+#env = Environment (ENV = os.environ, tools=['default','qt'])
+env = Environment (ENV = os.environ)
+
+env.CacheDir(os.path.join(os.environ['HOME'], '.scache'))
+
+if os.path.exists (config_file):
+	print "Using config file: " + config_file
+else:
+	print "Creating new config file: " + config_file
+	env_dict = env.Dictionary()
+	config=open (config_file, 'w')
+	config.write ("# Configuration file containing user definable options.\n")
+	config.write ("VERSION = %r\n"%(version))
+	config.write ("BUILD_BINARY = 'release'\n")
+	config.write ("BUILD_DIR = %r\n"%(root_build_dir))
+	#print prefix
+	#print libdir
+	#print install_root_dir
+	config.write ("PREFIX = %r\n"%(prefix))
+	config.write ("INSTALL_ROOT_DIR = %r\n"%(install_root_dir))
+	
+	config.write ("\n# Extra compiler flags can be defined here.\n")
+	config.write ("DEFINES = %s\n"%(my_defines))
+	config.write ("CCFLAGS = %s\n"%(my_ccflags))
+	config.write ("CXXFLAGS = %s\n"%(my_cxxflags))
+	config.write ("LDFLAGS = %s\n"%(my_ldflags))
+
+        config.write ("SOURCE_FILTER = %r\n"%(source_filter))
+	config.write ("INCLUDE_FILTER = %r\n"%(include_filter))
+        config.write ("IGNORE_FILTER = %r\n"%(ignore_filter))
+                
+        config.write ("\n# ACE library.\n")
+        config.write ("ACE_CFLAGS = %r\n"%(ace_cflags))
+	config.write ("ACE_INCLUDE = %r\n"%(ace_include))
+	config.write ("ACE_LIBPATH = %r\n"%(ace_libpath))
+	config.write ("ACE_LIBRARY = %r\n"%(ace_lib))
+
+        config.write ("\n# XERCES library.\n")
+        config.write ("XERCES_CFLAGS = %r\n"%(xerces_cflags))
+	config.write ("XERCES_INCLUDE = %r\n"%(xerces_include))
+	config.write ("XERCES_LIBPATH = %r\n"%(xerces_libpath))
+	config.write ("XERCES_LIBRARY = %r\n"%(xerces_lib))
+        
+	config.write ("\n# Boost library.\n")
+        config.write ("BOOST_CFLAGS = %r\n"%(boost_cflags))
+	config.write ("BOOST_INCLUDE = %r\n"%(boost_include))
+	config.write ("BOOST_LIBPATH = %r\n"%(boost_libpath))
+	config.write ("BOOST_LIBRARY = %r\n"%(boost_lib))
+
+        config.write ("\n# Muddleware library.\n")
+	try:
+		config.write ("MUDDLEWARE_CFLAGS = %r\n"%(muddleware_cflags))
+		config.write ("MUDDLEWARE_INCLUDE = %r\n"%(muddleware_include))
+		config.write ("MUDDLEWARE_LIBPATH = %r\n"%(muddleware_libpath))
+		config.write ("MUDDLEWARE_LIBRARY = %r\n"%(muddleware_lib))
+	except NameError:
+		print "For some reason the muddleware configs didn't get set. Carrying on regardless..."
+
+        config.write ("\n# X11 library.\n")
+	config.write ("X11_CFLAGS = %r\n"%(x11_cflags))
+	config.write ("X11_INCLUDE = %r\n"%(x11_include))
+	config.write ("X11_LIBPATH = %r\n"%(x11_libpath))
+	config.write ("X11_LIBRARY = %r\n"%(x11_lib))
+
+        config.write ("\n# OmniORB4 library.\n")
+        config.write ("OMNIORB_CFLAGS = %r\n"%(omniorb_cflags))
+	config.write ("OMNIORB_INCLUDE = %r\n"%(omniorb_include))
+	config.write ("OMNIORB_LIBPATH = %r\n"%(omniorb_libpath))
+	config.write ("OMNIORB_LIBRARY = %r\n"%(omniorb_lib))
+
+        config.write ("\n# OmniCOS4 library.\n")
+        config.write ("OMNICOS_CFLAGS = %r\n"%(omnicos_cflags))
+	config.write ("OMNICOS_INCLUDE = %r\n"%(omnicos_include))
+	config.write ("OMNICOS_LIBPATH = %r\n"%(omnicos_libpath))
+	config.write ("OMNICOS_LIBRARY = %r\n"%(omnicos_lib))
+
+        config.write ("\n# omniEvents library.\n")
+        config.write ("OMNIEVENTS_CFLAGS = %r\n"%(omnievents_cflags))
+	config.write ("OMNIEVENTS_INCLUDE = %r\n"%(omnievents_include))
+
+        config.write ("\n# OmniThread library.\n")
+        config.write ("OMNITHREAD_CFLAGS = %r\n"%(omnithread_cflags))
+	config.write ("OMNITHREAD_INCLUDE = %r\n"%(omnithread_include))
+	config.write ("OMNITHREAD_LIBPATH = %r\n"%(omnithread_libpath))
+	config.write ("OMNITHREAD_LIBRARY = %r\n"%(omnithread_lib))
+
+        config.write ("\n# OmniDynamic library.\n")
+        config.write ("OMNIDYNAMIC_CFLAGS = %r\n"%(omnidynamic_cflags))
+	config.write ("OMNIDYNAMIC_INCLUDE = %r\n"%(omnidynamic_include))
+	config.write ("OMNIDYNAMIC_LIBPATH = %r\n"%(omnidynamic_libpath))
+	config.write ("OMNIDYNAMIC_LIBRARY = %r\n"%(omnidynamic_lib))
+
+	config.write ("ENABLE_MUDDLEWARE = %r\n"%(enable_muddleware))
+	config.write ("ENABLE_CORBA = %r\n"%(enable_corba))
+	config.write ("ENABLE_OMNIEVENTS = %r\n"%(enable_corba))
+	config.write ("ENABLE_PHANTOM_MIDDLEWARE = %r\n"%(enable_corba))
+	config.write ("ENABLE_PYQT = %r\n"%(enable_pyqt))
+        config.close ()
+
+#-----------------------------------------------------------------------------
+# Read the options from the config file and update the various necessary flags
+#-----------------------------------------------------------------------------
+list_opts = []
+user_options = Options (config_file, ARGUMENTS)
+user_options_env = Environment (ENV = os.environ, options = user_options)
+user_options.AddOptions (
+		('VERSION', 'OpenTracker version', version),
+		(EnumOption ('BUILD_BINARY', 'release',
+					'Select a release or debug binary.',
+					 allowed_values = ('release', 'debug'))),
+		('BUILD_DIR', 'Target directory for intermediate files.',
+					root_build_dir),
+		('PREFIX', 'Target directory for installed files.',
+					prefix),
+		('INSTALL_ROOT_DIR', 'Target directory for building packages.',
+					install_root_dir),
+		('ACE_CFLAGS', 'Necessary CFLAGS when using ACE functionality.'),
+		('ACE_INCLUDE', 'Include directory for ACE header files.'),
+		('ACE_LIBPATH', 'Library path where the ACE library is located.'),
+		('ACE_LIBRARY', 'ACE library name.'),
+		('XERCES_CFLAGS', 'Necessary CFLAGS when using XERCES functionality.'),
+		('XERCES_INCLUDE', 'Include directory for XERCES header files.'),
+		('XERCES_LIBPATH', 'Library path where the XERCES library is located.'),
+		('XERCES_LIBRARY', 'XERCES library name.'),
+		('BOOST_CFLAGS', 'Necessary CFLAGS when using BOOST functionality.'),
+		('BOOST_INCLUDE', 'Include directory for BOOST header files.'),
+		('BOOST_LIBPATH', 'Library path where the BOOST library is located.'),
+		('BOOST_LIBRARY', 'BOOST library name.'),
+		('MUDDLEWARE_CFLAGS', 'Necessary CFLAGS when using MUDDLEWARE functionality.'),
+		('MUDDLEWARE_INCLUDE', 'Include directory for MUDDLEWARE header files.'),
+		('MUDDLEWARE_LIBPATH', 'Library path where the MUDDLEWARE library is located.'),
+		('MUDDLEWARE_LIBRARY', 'MUDDLEWARE library name.'),
+		('X11_CFLAGS', 'Necessary CFLAGS when using X11 functionality.'),
+		('X11_INCLUDE', 'Include directory for X11 header files.'),
+		('X11_LIBPATH', 'Library path where the X11 library is located.'),
+		('X11_LIBRARY', 'X11 library name.'),
+		('OMNIORB_CFLAGS', 'Necessary CFLAGS when using OMNIORB functionality.'),
+		('OMNIORB_INCLUDE', 'Include directory for OMNIORB header files.'),
+		('OMNIORB_LIBPATH', 'Library path where the OMNIORB library is located.'),
+		('OMNIORB_LIBRARY', 'OMNIORB library name.'),
+		('OMNIEVENTS_CFLAGS', 'Necessary CFLAGS when using OMNIEVENTS functionality.'),
+		('OMNIEVENTS_INCLUDE', 'Include directory for OMNIEVENTS header files.'),
+		('OMNICOS_CFLAGS', 'Necessary CFLAGS when using OMNICOS4 functionality.'),
+		('OMNICOS_INCLUDE', 'Include directory for OMNICOS4 header files.'),
+		('OMNICOS_LIBPATH', 'Library path where the OMNICOS4 library is located.'),
+		('OMNICOS_LIBRARY', 'OMNICOS4 library name.'),
+		
+		('OMNITHREAD_CFLAGS', 'Necessary CFLAGS when using OMNITHREAD functionality.'),
+		('OMNITHREAD_INCLUDE', 'Include directory for OMNITHREAD header files.'),
+		('OMNITHREAD_LIBPATH', 'Library path where the OMNITHREAD library is located.'),
+		('OMNITHREAD_LIBRARY', 'OMNITHREAD library name.'),
+		('OMNIDYNAMIC_CFLAGS', 'Necessary CFLAGS when using OMNIDYNAMIC functionality.'),
+		('OMNIDYNAMIC_INCLUDE', 'Include directory for OMNIDYNAMIC header files.'),
+		('OMNIDYNAMIC_LIBPATH', 'Library path where the OMNIDYNAMIC library is located.'),
+		('OMNIDYNAMIC_LIBRARY', 'OMNIDYNAMIC library name.'),
+
+		('DEFINES', 'Extra Preprocessor defines.'),
+		('CCFLAGS', 'Extra C Compiler flags.'),
+		('CXXFLAGS','Extra C++ Compiler flags.'),
+		('LDFLAGS', 'Extra Linker flags.'),
+                ('SOURCE_FILTER', 'Specify the source filter for compiling sources'),
+                ('INCLUDE_FILTER', 'Specify the header files which should be considered'),
+                ('IGNORE_FILTER', 'Specify the ignore filter for excluding source files'),
+		(BoolOption ('USE_TINYXMLMOD',
+					'Set to 1 to use TinyXMLMod instead of TinyXML (disabled by default).',
+					'true')),
+		(BoolOption ('USE_OTQT',
+					'Set to 1 to use TinyXMLMod instead of TinyXML (disabled by default).',
+					'false')),
+		(BoolOption ('ENABLE_MUDDLEWARE',
+			     'Set to 1 to use the Muddleware library.',
+			     'false')),
+		(BoolOption ('ENABLE_CORBA',
+			     'Set to 1 to build the CORBAModule.',
+			     'false')),
+		(BoolOption ('ENABLE_OMNIEVENTS',
+			     'Set to 1 to build in support for omniEvents into the CORBAModule.',
+			     'false')),
+		(BoolOption ('ENABLE_PHANTOM_MIDDLEWARE',
+			     'Set to 1 to build in support for Phantom middleware.',
+			     'false')),
+		(BoolOption ('ENABLE_PYQT',
+			     'Set to 1 to build in pyqt applications.',
+			     'false'))
+	)
+user_options.Update (user_options_env)
+user_options.Save('config.opts', user_options_env)
+user_options_dict = user_options_env.Dictionary()
+Help(user_options.GenerateHelpText(user_options_env))
+root_build_dir = user_options_dict['BUILD_DIR']
+
+print "\n"
+print "============================================================"
+print "=      Configuration options for OpenTracker compile       ="
+print "============================================================"
+
+
+if user_options_dict['ENABLE_PYQT']:
+	# PyQt: build the .ui files
+	from OTSConsBuilders import pyuic
+	pyuic.generate(env)
+	ui_files = ['src_python/ManualTrackerPython/ManualTrackerGUI.ui']
+	for ui_file in ui_files:
+		env.PYUIC(ui_file)
+	# check to see whether there should be a cleanup of these directories
+	#if env.GetOption('clean'):
+	#	print "Cleanup of the python stub directories"
+	#	for pydir in pydirs:
+	#		Execute(Delete(pydir))
+
+# ############################################################
+# Phantom Middleware
+if user_options_dict['ENABLE_PHANTOM_MIDDLEWARE']:
+	env.Append(LIBS = ['phantom'])
+	env.Append (CPPDEFINES = ['USE_PHANTOMMIDDLEWARE'])	
+	print "Phantom support ...... yes"
+else:
+	print "Phantom support ...... no"
+# ############################################################
+# OmniORB
+if user_options_dict['ENABLE_CORBA']:
+	idl_path = Dir('idl')
+	from OTSConsBuilders import omniidl
+	omniidl.generate(env, os.path.join(str(idl_path), 'skeletons'))
+	idl_files = glob.glob(os.path.join(str(idl_path),'*.idl'))
+	idl_dict  = {}
+	for idl_file in idl_files:
+		stem = os.path.basename(idl_file)[:-4]
+		idl_dict[stem] = File(idl_file)
+	pydirs = []
+	for _idl in idl_dict.values():
+		# Call the OMNIIDL builder with the idl file
+		idl_targets = env.OMNIIDL(_idl)
+		header_skeletons = idl_targets[0]
+		included_header_skeletons = os.path.join('include', 'OpenTracker', 'skeletons', os.path.basename(str(header_skeletons)))
+		env.Command(included_header_skeletons, header_skeletons, Copy("$TARGET", "$SOURCE"))
+		stubSK, dynstubSK = idl_targets[1], idl_targets[2]
+		src_stubSK = os.path.join('src', 'skeletons', os.path.basename(str(stubSK)))
+		src_dyn_stubSK = os.path.join('src', 'skeletons', os.path.basename(str(dynstubSK)))		
+		src_header = os.path.join('src', 'skeletons', os.path.basename(str(header_skeletons)))
+		env.Command(src_header, header_skeletons, Copy("$TARGET", "$SOURCE"))
+		env.Command(src_stubSK, stubSK, Copy("$TARGET", "$SOURCE"))
+		env.Command(src_dyn_stubSK, dynstubSK, Copy("$TARGET", "$SOURCE"))		
+		skeletons.append(stubSK)
+		pystubs = idl_targets[4:]
+		env.Depends(header_skeletons, _idl)
+		env.Depends(stubSK, _idl)
+		env.Depends(dynstubSK, _idl)
+		for py in pystubs:
+			pydirs.append(os.path.dirname(str(py)))
+
+# ############################################################
+# Muddleware
+
+if user_options_dict['ENABLE_MUDDLEWARE'] == 1:
+	print "Muddleware support ... yes"
+	defines += ['ENABLE_MUDDLEWARE']
+else:
+	print "Muddleware support ... no"
+
+if user_options_dict['USE_TINYXMLMOD']:
+	print "TinyXML support ...... yes"
+	defines += ['USE_TINYXMLMOD']
+else:
+	print "TinyXML support ...... no"
+
+if user_options_dict['USE_OTQT']:
+	print "OTQt support ......... yes"
+	defines += ['USE_OTQT']
+else:
+	print "OTQt support ......... no"
+
+if user_options_dict['ENABLE_CORBA']:
+	print "CORBA support ........ yes"
+	defines += ['USE_CORBA']
+	if user_options_dict['ENABLE_OMNIEVENTS']:
+		print "omniEvents support ... yes"
+		defines += ['USE_OMNIEVENTS']
+else:
+	print "CORBA support ........ no"
+	print "omniEvents support ... no"	
+
+# ############################################################
+# Debug/Release
+
+if user_options_dict['BUILD_BINARY'] == 'release':
+	cflags = extra_flags + release_flags + warn_flags
+	defines += ['NDEBUG']
+        print "Compile version ... release"
+else:
+	cflags = extra_flags + debug_flags + warn_flags
+	defines += ['_DEBUG']
+        print "Compile version ... debug"
+
+print "============================================================\n"
+
+
+defines += user_options_dict['DEFINES']
+
+cflags += user_options_dict['CCFLAGS']
+cxxflags += user_options_dict['CXXFLAGS']
+
+# Extract defines for pkg-config file
+global_defs = ''
+for gd in defines:
+    global_defs += '-D' + gd + ' '
+
+# Create the build directory. SCons does this automatically, but since we
+# don't want to put scons-generated .sconsign files in the source tree, but in
+# the root_build_dir, we have to create that dir ourselves before SCons tries
+# to access/create the file containing .sconsign data.
+#if os.path.isdir (root_build_dir) == 0:
+#	os.makedirs (root_build_dir)
+#	os.makedirs (root_build_dir+os.sep+'src')
+
+
+def file_walk_visitor(arg, dirname, names):
+	arg += [os.path.join(dirname, name) for name in names]
+
+# Setup Include files
+include_files = []
+include_filter_expression = re.compile(user_options_dict['INCLUDE_FILTER'])
+ignore_filter_expression  = re.compile(user_options_dict['IGNORE_FILTER'])
+os.path.walk('include', file_walk_visitor, include_files)
+include_files = [file for file in include_files if include_filter_expression.search(file)]
+include_files = [file for file in include_files if not ignore_filter_expression.search(file)]
+
+share_dir   = os.path.join(Dir('#').abspath, 'share')
+share_files = buildutils.listtrav(share_dir, share_dir)
+share_files = buildutils.regexpfilter(share_files, '^.*', True)
+share_files = buildutils.regexpfilter(share_files, user_options_dict['IGNORE_FILTER'], False)
+
+#-----------------------------------------------------------------------------
+# Generic library generation environment. This one is the basis for each
+# library.
+#-----------------------------------------------------------------------------
+env.BuildDir (os.path.join(root_build_dir,'src'), 'src', duplicate=0)
+env.Depends(os.path.join(root_build_dir,'src'), skeletons)
+if not user_options_dict['USE_OTQT']:
+	library_env = env.Copy ()
+else:
+	library_env = env.Copy (tools=['default','qt'])
+	library_env.Append (CPPDEFINES = ['QT_NO_DEBUG', 'QT_THREAD_SUPPORT', '_REENTRANT'])
+	library_env['QT_LIB'] = 'qt-mt'
+library_env.Append (CCFLAGS = cflags)
+library_env.Append (CXXFLAGS = cxxflags)
+library_env.Append (LIBPATH = user_options_dict['LDFLAGS'])
+library_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+library_env.Append (LIBS = user_options_dict['ACE_LIBRARY'])
+library_env.Append (LIBPATH = user_options_dict['XERCES_LIBPATH'])
+library_env.Append (LIBS = user_options_dict['XERCES_LIBRARY'])
+library_env.Append (CPPPATH = user_options_dict['XERCES_INCLUDE'])
+library_env.Append (LIBS = user_options_dict['X11_LIBRARY'])
+library_env.Append (LIBPATH = user_options_dict['X11_LIBPATH'])
+if user_options_dict['ENABLE_CORBA']:
+	library_env.Append (CPPPATH = user_options_dict['OMNIORB_INCLUDE'])
+	library_env.Append (LIBPATH = user_options_dict['OMNIORB_LIBPATH'])
+	library_env.Append (LIBS    = user_options_dict['OMNIORB_LIBRARY'])
+
+	library_env.Append (CPPPATH = user_options_dict['OMNIDYNAMIC_INCLUDE'])
+	library_env.Append (LIBPATH = user_options_dict['OMNIDYNAMIC_LIBPATH'])
+	library_env.Append (LIBS    = user_options_dict['OMNIDYNAMIC_LIBRARY'])
+
+	library_env.Append (CPPPATH = user_options_dict['OMNICOS_INCLUDE'])
+	library_env.Append (LIBPATH = user_options_dict['OMNICOS_LIBPATH'])
+	library_env.Append (LIBS    = user_options_dict['OMNICOS_LIBRARY'])
+	
+	library_env.Append (CPPPATH = user_options_dict['OMNIEVENTS_INCLUDE'])
+#if user_options_dict['BUILD_BINARY'] == 'debug' and sys.platform == 'darwin':
+	#library_env.Append (LIBS = 'MallocDebug')
+	#library_env.Append(CFLAGS = ['-fno-common', '-fshort-double'])
+	#library_env.Append(CCFLAGS = '-fshort-double')
+
+library_env.SConsignFile (os.path.join(root_build_dir,'scons-signatures'))
+
+#-----------------------------------------------------------------------------
+# Settings to be exported to other SConscript files
+#-----------------------------------------------------------------------------
+library_env.BuildDir (os.path.join(root_build_dir,'src'), 'src', duplicate=0)
+
+Export ('cflags')
+Export ('defines')
+Export ('user_options_dict')
+Export ('library_env')
+Export ('env')
+
+#****************************************************************************
+# Build by executing SConscript file
+#****************************************************************************
+
+# Print welcoming message that makes you feel warm and fuzzy inside;)
+print "... Building Library ...\n"
+
+if sys.platform =='win32':
+	install_root_dir = ""
+	defs = _dlCppFlags
+	_libs = _dlLibs
+	_cpppath = _dlIncFlags
+	_lpath = _dlLibDir
+	_linkflags = _dlLinkFlags
+
+BuildDir(root_build_dir, '.', duplicate=0)
+otlib = SConscript (os.path.join(root_build_dir,'src', 'SConscript'))[0]
+
+if sys.platform == 'win32':
+	_linkflags = _programLinkFlags
+	_libs = _programLibs
+	_lpath = _programLibDirs
+	_cpppath = _programIncFlags
+	defs = _programCppFlags
+	env['PDB']= buildPrefix+ 'standalone.pdb'
+
+print "... Building Executables ...\n"
+
+# Build OpenTracker standalone
+executables = []
+
+if not user_options_dict['USE_OTQT']:
+	standalone_env = env.Copy ()
+else:
+	standalone_env = env.Copy (tools=['default','qt'])
+	standalone_env.Append (CPPDEFINES = ['QT_NO_DEBUG', 'QT_THREAD_SUPPORT', '_REENTRANT'])
+	standalone_env['QT_LIB'] = 'qt-mt'
+	standalone_env.Append(CPPPATH = '.')
+standalone_env.Append(CPPPATH = 'include')
+#standalone_env.Append(CPPPATH = os.path.join('extras'))
+
+standalone_env.Append (CPPDEFINES = defines)
+standalone_env.Append(LIBS = dlname)
+standalone_env.Append(LIBPATH = os.path.join(root_build_dir,'lib')
+)
+
+ot = standalone_env.Program(os.path.join('#', 'bin', programname), main_file)
+executables.append(ot)
+
+# I still don't know how to compile middleware in windows
+if sys.platform=='win32':
+	middleware = []
+else:
+	#standalone_env.Moc('../include/OpenTracker/otqt/OTQt.h')
+	middleware = standalone_env.Program(os.path.join('#', 'bin', 'middleware'), middleware_file )
+
+# Build CORBA based Ubitrack Client
+if user_options_dict['ENABLE_CORBA']:
+	standalone_env.Append (CPPPATH = user_options_dict['OMNIORB_INCLUDE'])
+	standalone_env.Append (LIBPATH = user_options_dict['OMNIORB_LIBPATH'])
+	standalone_env.Append (LIBS    = user_options_dict['OMNIORB_LIBRARY'])
+
+	standalone_env.Append (CPPPATH = user_options_dict['OMNIDYNAMIC_INCLUDE'])
+	standalone_env.Append (LIBPATH = user_options_dict['OMNIDYNAMIC_LIBPATH'])
+	standalone_env.Append (LIBS    = user_options_dict['OMNIDYNAMIC_LIBRARY'])
+	
+	standalone_env.Append (CPPPATH = user_options_dict['OMNICOS_INCLUDE'])
+	standalone_env.Append (LIBPATH = user_options_dict['OMNICOS_LIBPATH'])
+	standalone_env.Append (LIBS    = user_options_dict['OMNICOS_LIBRARY'])
+	
+	standalone_env.Append (CPPPATH = user_options_dict['OMNIEVENTS_INCLUDE'])
+	corba_configurable = standalone_env.Program(os.path.join('#bin', 'corba_configurable'), [corba_configurable_file] )
+	executables.append(corba_configurable)
+else:
+	corba_configurable = []
+
+# Build Muddleware based Ubitrack Client
+if user_options_dict['ENABLE_MUDDLEWARE']:
+	muddleware_configurable = standalone_env.Program(os.path.join('#', 'bin', 'muddleware_configurable'), source=muddleware_configurable_file )
+else:
+	muddleware_configurable = []
+
+# Build OTQt configuration Application
+
+if user_options_dict['USE_OTQT']:
+	otqt_configapp = standalone_env.Program(os.path.join('#', 'bin', 'otqt_mem_calib'), otqt_configapp_file)
+
+#****************************************************************************
+# Set project details used in the package-config (.pc) file
+#****************************************************************************
+env['OT_PROJECT_NAME']        = "OpenTracker"
+env['OT_PROJECT_DESCRIPTION'] = "OpenTracker - The Tracking Data Flow Network"
+env['OT_PROJECT_VERSION']     = version
+env['OT_PROJECT_LIBNAME']     = "opentracker"
+env['OT_PREFIX']              = user_options_dict['PREFIX']
+env['OT_LIBDIR']              = os.path.join(user_options_dict['PREFIX'], 'lib')
+env['OT_PROJECT_DEFINES']     = global_defs
+
+BuildDir(root_build_dir+'/src', 'src', duplicate=0)
+
+buildutils.appendbuilders(env)
+outname = env.AlwaysBuild(env.Substitute('ot.pc', 'ot.pc.in'))
+
+# read out library prefix
+lib_prefix = env.subst('$SHLIBPREFIX')
+lib_file =  os.path.join('lib', lib_prefix + dlname + library_env['SHLIBSUFFIX'])
+
+#create all installation directories necessary
+#def directory_create_function(target, source, env):
+#	#print 'target: ' + str(target[0])
+#	#print 'source: ' + str(source)
+#	if os.path.isdir (str(target[0])) == 0:
+#		print "creating directory " + str(target[0])
+#		os.makedirs(str(target[0]))
+#	else:
+#		print str(target[0]) + ' already exists.'
+#	return None
+
+#def directory_create_string(target, source, env):
+#    return "creating directory '%s'" % (target[0])
+
+
+install_dir_name = lambda x: os.path.join(install_root_dir, user_options_dict['PREFIX'], x)
+install_dir  = {}
+alias_dir    = {}
+
+for d in ['lib', 'bin', 'include', 'share', os.path.join('share','opentracker'), os.path.join('lib','pkgconfig')]:
+	i_dir = env.Dir(install_dir_name(d))
+	print "creating " + str(i_dir) + ' install directory if necessary: ',
+	if not i_dir.exists():
+		print 'necessary'
+		dir_name = str(i_dir)
+		env.Execute(Mkdir(dir_name))
+		install_dir[d] = i_dir
+	else:
+		print 'unnecessary'
+		install_dir[d] = i_dir
+# Make a copy of the library with the suffix '.2.0.0'
+minor_versions = 3
+target_lib = lib_file + buildutils.get_version_string(version, minor_versions)
+env.Command(target_lib, lib_file, Copy("$TARGET", "$SOURCE"))
+# Install copy of library in install directory
+lib_inst = env.Install(install_dir['lib'], target_lib)
+
+# Make symbolic links to the installed copy of the library
+def make_sym_link(target, source, env):
+	lncommand = 'ln -s ' + os.path.basename(source[0].abspath) + ' ' + str(target[0])
+	#print lncommand
+	env.Execute(lncommand)
+	return None
+
+target_lib_symlinks = []
+for i in [i for i in range(0,2) if i!= minor_versions]:
+	target_installed_symlink = os.path.join(install_dir_name('lib'), os.path.basename(lib_file) + buildutils.get_version_string(version, i))
+	#print str(os.path.basename(lib_inst[0].abspath)) 
+	if not os.path.islink(target_installed_symlink):
+		print "target_installed_symlink = ", target_installed_symlink
+		target_lib_symlinks += env.Command(target_installed_symlink , lib_inst, make_sym_link)
+	else:
+		print "existing_symlink = ", target_installed_symlink
+	
+bin_inst = env.Install(install_dir['bin'], executables)
+cfg_inst = env.Install(install_dir[os.path.join('lib', 'pkgconfig')], outname )
+
+inc_inst = []
+for include_file in include_files:
+	inc_inst.append(env.Install(os.path.join(user_options_dict['PREFIX'], os.path.dirname(include_file)), include_file))
+
+shr_inst = []
+for share_file in share_files:
+	s_file = os.path.join('share', str(share_file))
+	#print (os.path.join(str(install_dir['share']), 'opentracker'), s_file)
+	#shr_inst.append(env.Install(os.path.join(str(install_dir['share']), 'share/opentracker'), s_file))
+	shr_inst.append(env.Install(os.path.join(str(install_dir['share']), 'opentracker'), s_file))
+
+icfg = env.Alias('install-config', cfg_inst)
+ilib = env.Alias('install-lib', lib_inst)
+ibin = env.Alias('install-bin', bin_inst)
+ihdr = env.Alias('install-header', inc_inst)
+ishr = env.Alias('install-share', shr_inst)
+symlinks = env.Alias('install-symlinks', target_lib_symlinks)
+env.Alias('install', [icfg, ilib, ibin, ihdr, ishr, symlinks])
+

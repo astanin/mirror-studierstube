@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="NWSB"/>
+  </configuration>
+  
+  <NetworkSink  mode="unicast" name="ClientB" number="0" port="12102"> 
+    <Callforward name="clientBInput"/>
+  </NetworkSink>
+  <Callback name="clientAInput">
+    <NetworkSource mode="unicast" address="127.0.0.1" number="0" port="12101" />
+  </Callback>
+
+</OpenTracker>

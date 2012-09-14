@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v3.0.7 NT (http://www.xmlspy.com) by merlin (blue sky) -->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+	<configuration>
+		<NetworkSinkConfig name="Super Duper Server"/>
+		<ARToolKitConfig camera-parameter="../data/camera_para.dat"/>
+		<ConsoleConfig headerline="Supder Duper Server"/>
+	</configuration>
+	<!-- Two markers to track each side of the pip, in the workstations users manual space -->
+	<ConsoleSink comment="pip">
+		<NetworkSink port="6666" name="Pip" multicast-address="224.100.200.101" number="1">
+			<EventTransform translation="0.04 0 0.1">
+				<EventVirtualTransform rotation="-0.70710678 0 0 0.70710678">
+					<EventVirtualTransform rotation="0 0 -0.70710678 0.70710678">
+						<ARToolKitSource tag-file="test.tag" vertex="20 20 20 20 20 20 20 20 20"/>
+					</EventVirtualTransform>
+				</EventVirtualTransform>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+	<!-- this station just puts the camera into the right position -->
+	<ConsoleSink comment="camera">
+		<NetworkSink port="6666" name="camera" multicast-address="224.100.200.101" number="2">
+			<EventTransform rotation="1 0 0 0">
+				<TestSource/>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+	<!-- this station tracks the pen ( also two sided ) -->
+	<ConsoleSink comment="pen">
+		<NetworkSink port="6666" name="pen" multicast-address="224.100.200.101" number="3">
+			<EventTransform translation="0 0 0.1">
+				<EventVirtualTransform translation="0.05 0.2 0"/>
+			</EventTransform>
+		</NetworkSink>
+	</ConsoleSink>
+</OpenTracker>

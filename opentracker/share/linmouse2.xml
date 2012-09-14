@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Test LinMouse" interval="1"/> 
+    <LinmouseConfig />
+  </configuration>
+  <ConsoleSink comment="LinMouse console">
+      <LinmouseSource dev="/dev/input/event2" DEF="linmouse"/>
+  </ConsoleSink>
+  <NetworkSink name="Linmouse" number="11" multicast-address="224.100.200.101" port="12346">
+    <Ref USE="linmouse" />
+  </NetworkSink>
+</OpenTracker>

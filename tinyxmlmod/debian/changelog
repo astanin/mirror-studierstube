@@ -1,0 +1,6 @@
+tinyxmlmod (1.0.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Alexander Bornik <bornik@icg.tu-graz.ac.at>  Mon, 31 Jul 2006 10:40:04 +0200
+

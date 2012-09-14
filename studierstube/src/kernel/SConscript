@@ -1,0 +1,45 @@
+#!/usr/bin/python
+import sys
+import os
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+
+kernel_env = library_env.Copy ()
+
+# Get all files from directory while applying ignore filter
+source_dir   = Dir('#').abspath + os.sep + '/src/kernel'
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+source_files += ['../base/string.cxx', '../base/OS.cxx']
+
+# ACE
+kernel_env.Append (CPPPATH = user_options_dict['ACE_INCLUDE'])
+kernel_env.Append (LIBPATH = user_options_dict['ACE_LIBPATH'])
+kernel_env.Append (LIBS    = user_options_dict['ACE_LIBRARY'])
+# TinyXMLMod
+try:
+    kernel_env.Append (CPPPATH = user_options_dict['TINYXMLMOD_INCLUDE'])
+    kernel_env.Append (LIBPATH = user_options_dict['TINYXMLMOD_LIBPATH'])
+    kernel_env.Append (LIBS    = user_options_dict['TINYXMLMOD_LIBRARY'])
+except KeyError:
+    pass
+# TinyXML
+try:
+    kernel_env.Append (CPPPATH = user_options_dict['TINYXML_INCLUDE'])
+    kernel_env.Append (LIBPATH = user_options_dict['TINYXML_LIBPATH'])
+    kernel_env.Append (LIBS    = user_options_dict['TINYXML_LIBRARY'])
+except KeyError:
+    pass
+# Coin
+kernel_env.Append (CPPPATH = user_options_dict['COIN_INCLUDE'])
+kernel_env.Append (LIBPATH = user_options_dict['COIN_LIBPATH'])
+kernel_env.Append (LIBS    = user_options_dict['COIN_LIBRARY'])
+kernel_env.Append (LINKFLAGS = user_options_dict['COIN_LDFLAGS'])
+
+kernel = kernel_env.SharedLibrary (target='#'+user_options_dict['BUILD_DIR']+'/lib/stbkernel', source=source_files)
+env.Alias(target = ['install'], source = kernel_env.Install(user_options_dict['INSTALL_ROOT_DIR'] + os.sep + user_options_dict['LIBDIR'], kernel))

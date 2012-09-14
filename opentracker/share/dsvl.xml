@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dsvl_input>
+	<camera friendly_name="QuickCam" frame_width="320" frame_height="240" frame_rate="30.0">
+		<pixel_format>
+			<RGB24 />
+		</pixel_format>
+	</camera>
+</dsvl_input>

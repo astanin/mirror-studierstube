@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--DOCTYPE OpenTracker SYSTEM "opentracker.dtd"-->
+<OpenTracker>
+  <configuration>
+    <!--ConsoleConfig headerline="My Output" interval="1"/-->
+          <ARToolKitPlusConfig camera-parameter="QuickCamNotebookPro2.dat" 
+                           undist-mode="lut" marker-mode="idbased" border-width="0.125" 
+			   treshold="auto" pose-estimator="cont"/>
+  </configuration>
+
+
+
+    <EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0"> 
+
+   <EventTransform scale="0.1 0.1 0.1" rotationtype="euler"
+                    rotation="3.141592654 0 0" translation="0 0 0">
+
+	<!--TestSource frequency="0.2" offset="500000" noise="0.1" /--> 
+                <ARToolKitPlusMultiMarkerSource cfg-file="markerboard.cfg"/>
+ 
+    </EventTransform>      
+
+    </EventTransform>
+
+
+
+
+</OpenTracker>

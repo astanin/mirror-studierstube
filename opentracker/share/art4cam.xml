@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--simple test configuration for ART source module-->
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="ARTVISCenter" />
+    <ConsoleConfig headerline="ART Trackerserver" interval="1"/>
+    <ARTDataTrackerConfig port="5000"/>
+    
+  </configuration>
+ 
+  <ConsoleSink comment="0" active="off">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform0">
+		<ARTDataTrackerSource number="0"/>    
+	</EventTransform>
+  </ConsoleSink>
+	
+  <!-- Pen -->
+ <ConsoleSink comment="1" active="off">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform1">
+		<ARTDataTrackerSource number="1"/>    
+	</EventTransform>
+  </ConsoleSink> 
+  <!-- OLDER BUTTON !!!!!!! <ConsoleSink comment="1">
+	<Merge DEF="transform1">
+		<MergeDefault>
+			<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001">
+				<ARTDataTrackerSource number="1"/>    
+			</EventTransform>
+		</MergeDefault>
+		<MergeButton>
+		  <ButtonHoldFilter onDuration="13">
+              <ButtonFilter
+                 validtrans="_1______"
+               radiobuttons="1_______"
+                 buttonmask="11000000"
+                  buttonmap="07777777"
+              >
+                <ParButtonSource dev="0x378"/>
+              </ButtonFilter>
+		  </ButtonHoldFilter>
+		</MergeButton>
+	</Merge>
+  </ConsoleSink> -->
+
+  <!-- Pip -->
+  <ConsoleSink comment="2" active="on">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform2">
+		<ARTDataTrackerSource number="2"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+   <!-- Camera -->
+   <ConsoleSink comment="3" active="off">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform3">
+		<ARTDataTrackerSource number="3"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Shutterglas -->
+  <ConsoleSink comment="4" active="on">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform4">
+		<ARTDataTrackerSource number="4"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Messbecher -->
+  <ConsoleSink comment="5" active="off">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform5">
+		<ARTDataTrackerSource number="5"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Lineal -->
+  <ConsoleSink comment="6" active="off">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform6">
+		<ARTDataTrackerSource number="6"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Turntable -->
+  <ConsoleSink comment="7" active="off">
+	<EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform7">
+		<ARTDataTrackerSource number="7"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Haptic workstation -->
+  <ConsoleSink comment="8" active="on">
+	   <EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform8" >
+		<ARTDataTrackerSource number="8"/>    
+	   </EventTransform>
+  </ConsoleSink>
+
+  <!-- Tablet PC Pen -->
+  <ConsoleSink comment="9" active="off">
+	<EventVirtualOrientationTransform rotation="1.57 0.0 0.0" rotationtype="euler" DEF="transform9" >
+	   <EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >
+		<ARTDataTrackerSource type="pen" number="0"/>    
+	   </EventTransform>
+	</EventVirtualOrientationTransform>	
+  </ConsoleSink>
+
+  <!-- Eye of Ra (right handed) -->
+  <ConsoleSink comment="10" active="on">
+	<EventVirtualOrientationTransform rotation="1.57 0.0 0.0" rotationtype="euler" DEF="transform10" >
+	   <EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >
+		<ARTDataTrackerSource type="pen" number="1"/>    
+	   </EventTransform>
+	</EventVirtualOrientationTransform>	
+  </ConsoleSink>
+
+  <!-- Eye of Ra (right handed) -->
+  <ConsoleSink comment="11" active="on">
+	<EventVirtualOrientationTransform rotation="1.57 0.0 0.0" rotationtype="euler" DEF="transform11" >
+	   <EventTransform translation="0 0.00001 0" rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >
+		<ARTDataTrackerSource type="pen" number="2"/>    
+	   </EventTransform>
+	</EventVirtualOrientationTransform>	
+  </ConsoleSink>
+
+  <!-- Tablet PC -->
+   <ConsoleSink comment="12" active="on">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform12">
+		<ARTDataTrackerSource number="10"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Leber -->
+  <ConsoleSink comment="13" active="on">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform13">
+		<ARTDataTrackerSource number="12"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Endocam -->
+  <ConsoleSink comment="14" active="off">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform14">
+		<ARTDataTrackerSource number="13"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Box -->
+  <ConsoleSink comment="15" active="off">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform15">
+		<ARTDataTrackerSource number="14"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+  <!-- Endoskop -->
+  <ConsoleSink comment="16" active="off">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform16">
+		<ARTDataTrackerSource type="pen" number="3"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+
+  <!-- InkJet -->
+  <ConsoleSink comment="17" active="off">
+	<EventTransform translation="0 0.00001 0"  rotation="-1.57 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" DEF="transform17">
+		<ARTDataTrackerSource number="15"/>    
+	</EventTransform>
+  </ConsoleSink>
+
+
+<!-- **************************************************************************************** -->
+<!--                                                                                          -->
+<!-- UDP Network                                                                              -->
+<!--                                                                                          -->
+<!-- **************************************************************************************** -->
+
+  <NetworkSink name="ARTUDP00" number="0" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform0"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP01" number="1" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform1"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP02" number="2" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform2"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP03" number="3" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform3"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP04" number="4" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform4"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP05" number="5" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform5"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP06" number="6" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform6"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP07" number="7" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform7"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP08" number="8" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform8"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP09" number="9" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform9"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP10" number="10" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform10"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP11" number="11" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform11"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP12" number="12" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform12"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP13" number="13" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform13"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP14" number="14" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform14"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP15" number="15" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform15"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTUDP16" number="16" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform16"/>
+  </NetworkSink>
+
+
+  <NetworkSink name="ARTUDP17" number="17" mode="multicast" multicast-address="224.100.200.101" port="12346" interface="129.27.201.31">
+	<Ref USE="transform17"/>
+  </NetworkSink>
+
+
+<!-- **************************************************************************************** -->
+<!--                                                                                          -->
+<!-- TCP Network                                                                              -->
+<!--                                                                                          -->
+<!-- **************************************************************************************** -->
+<!--
+  <NetworkSink name="ARTTCP00" number="20" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform0"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP01" number="21" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform1"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP02" number="22" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform2"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP03" number="23" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform3"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP04" number="24" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform4"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP05" number="25" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform5"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP06" number="26" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform6"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP07" number="27" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform7"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP08" number="28" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform8"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP09" number="29" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform9"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP10" number="30" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform10"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP11" number="31" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform11"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP12" number="32" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform12"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP13" number="33" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform13"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP14" number="34" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform14"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP15" number="35" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform15"/>
+  </NetworkSink>
+
+  <NetworkSink name="ARTTCP16" number="36" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform16"/>
+  </NetworkSink>
+
+
+  <NetworkSink name="ARTTCP17" number="37" mode="unicast"  port="12001" interface="129.27.201.31">
+	<Ref USE="transform17"/>
+  </NetworkSink>
+
+-->
+
+
+</OpenTracker>

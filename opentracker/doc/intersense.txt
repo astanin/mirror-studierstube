@@ -1,0 +1,54 @@
+/**
+
+@page intersenseinstall InterSense Driver installation
+
+The DLL included in this distribution provides an easy to use API that
+can detect, configure and retrieve data from all models of InterSense 
+trackers. A sample application is provided to illustrate the use of most
+functions. See isense.h for explanations and function prototypes. Significant
+portion of the API and the sample application is not relevant when used with
+the InterTrax. 
+
+
+COMPATIBILITY
+Windows version supports all InterSense trackers. Irix and Linux is limited
+to serial port models. USB support on Linux is planned for future releases.
+
+
+IMPORTANT
+When running InertiaCube2 on Linux and Irix platforms it is necessary to 
+maintain a minimal call rate of the ISD_GetData function at 10Hz, otherwise
+tracking quality can't be guaranteed. 
+
+
+INSTALATION
+
+The necessary files are in extras/intersense/.
+
+1. Windows9x
+   Copy isense.dll to C:\Windows\System
+
+2. Windows NT/2000/XP
+   Login as Administrator
+   Copy isense.dll to C:\WINNT\SYSTEM32
+
+3. Linux
+   Login as root
+   Copy Linux/libisense.so to /lib directory
+
+4. IRIX
+   Login as root
+   Copy Irix/libisense.so to /usr/lib32 directory
+
+
+InterSense Inc.
+1 North Avenue
+Burlington, MA
+01803 USA
+
+Tel. 781-270-0090
+Fax. 781-229-8995
+
+www.isense.com
+
+*/

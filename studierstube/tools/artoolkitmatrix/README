@@ -1,0 +1,15 @@
+The ARToolKit camera matrix (which is used in the
+artoolkit2offaxis.m script to calculate the
+SoOffAxisCamera parameters) is built up like this:
+
+[ fcx 0.0 ccx ; 0.0 fcy ccy ; 0.0 0.0 1.0 ]
+
+where fcx and fcy are the focal length and
+ccx and ccy are the coordinates of the principal point.
+
+This data can be directly taken from the MATLab camera
+calibration toolbox results.
+
+Alternatively, this tool allows reading an existing
+ARToolKit camera file (both old binary and new ASCII
+style) and outputs this matrix.

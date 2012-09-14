@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARToolKitPlus", "ARToolKitPlus.vcproj", "{255014C8-CF00-48A8-AE7C-D9AC83F3AE67}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simple", "..\..\sample\simple\build\vc.net\simple.vcproj", "{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "multi", "..\..\sample\multi\build\VC.NET\multi.vcproj", "{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{255014C8-CF00-48A8-AE7C-D9AC83F3AE67}.Debug.ActiveCfg = Debug|Win32
+		{255014C8-CF00-48A8-AE7C-D9AC83F3AE67}.Debug.Build.0 = Debug|Win32
+		{255014C8-CF00-48A8-AE7C-D9AC83F3AE67}.Release.ActiveCfg = Release|Win32
+		{255014C8-CF00-48A8-AE7C-D9AC83F3AE67}.Release.Build.0 = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug.ActiveCfg = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug.Build.0 = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release.ActiveCfg = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release.Build.0 = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug.ActiveCfg = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Debug.Build.0 = Debug|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release.ActiveCfg = Release|Win32
+		{C9C8947C-F25F-48E3-BFB7-CD14295FF7C6}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

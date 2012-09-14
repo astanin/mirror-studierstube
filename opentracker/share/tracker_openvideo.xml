@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+		<ARToolKitPlusConfig camera-parameter="quickcampro400.dat" marker-mode="idbased" border-width="0.125" treshold="auto" pose-estimator="cont"/>
+		<OpenVideoConfig ov-config="openvideo.xml" ov-sink="OpenTrackerSink"/>
+		<ConsoleConfig headerline="Sample Tracking Input" interval="1" dispay="on"/>
+  </configuration>
+		
+  <ConsoleSink comment="ARTK+">
+    <ARToolKitPlusSource center="0 0" size="1 1" tag-id="200"/>
+  </ConsoleSink>
+
+</OpenTracker>

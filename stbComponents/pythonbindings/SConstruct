@@ -1,0 +1,267 @@
+#!/usr/bin/env python
+
+import sys
+import os
+sys.path.append('ICGBuilder')
+import icgConfig
+
+
+#***************************************************************************************
+#
+#                  BUILD TARGETS DEFINITION
+# This section defines the build targets as dictionaries containing the relevant
+# information. The targets could also be loaded from an external file, this is to be
+# implemented in the next version of the build system.
+# The available fields to provide information about a target are as follows:
+#
+#   name :      string representing the name of the compiled target without extension.
+#   type :      string, depends on the kind of compile, available values are
+#                      DL  for dynamic libraries
+#                      LIB for static libraries
+#                      PRG for consonle applications
+#   libs :      list of libraries that will be linked with the target, the builder
+#               will attempt to find the appropriate include path, and libpath for
+#               these libraries, failure to get this information will result in
+#               a script error.
+#   use  :      dictionary of other libraries on which the target depends. Each of these
+#               will result in the inclusion of one defines flag and the addition of
+#               an include path to the compilation. Failure to find include paths
+#               for USE variables will result in a script warning
+#   src_root:   [Optional] the root directory of the source tree, if missing it
+#               will be set by the ConfigurationBuilder
+#   src_ignore: [Optional] list of directories or files inside the src_root tree
+#               that must be ignored for this target
+#   src_use:    [Optional] list of directories or files inside the src_root tree
+#               that must be used to build the target. If not defined, all folders
+#               and files inside the src_root will be used to build the target
+#
+#***************************************************************************************
+
+# if you want the builder to use a custom setup for targets, you can create a
+# custom.py file specifying the whole setup. 
+if os.path.exists('custom.py'):
+    from custom import *
+else:
+    #****************** default configuration ********************************
+    #   if you want to use a custom.py, start by copying the following block
+    #   then change the definitions to whatever you like.
+    #*************************************************************************
+    project = { 'version' : '1.0.0',
+                'name'    : 'stb4pythonbindings',
+                'description' : 'stb4pythonbindings',
+                'mainlib'      : 'stbpythonbindings',
+                'installDir': os.path.abspath('..'),
+                'includeDir': os.path.abspath('include'),
+                'buildDir'  : os.path.join(os.getcwd(), 'build', sys.platform),
+                'src'       : os.path.abspath('src'),
+                'prefix'    : os.path.abspath('..'),
+		'destdir'   : '',
+		'libdir'    : '',
+		'sourceFilter' : '\.cxx$|\.cpp$|\.cc$|\.c$',
+		'includeFilter': '\.h$|\.hh$|\.cxx',
+		'ignoreFilter' : '/ignore/|/ignore$|\.scon|\.svn|\.#|bak|~$|SConscript',
+		'buildType' : 'release'
+                }
+
+pythonbindings = {
+    'name' : 'stbpythonbindings',
+    'type' : 'DL',
+    'src_use' : [ 'ALL' ],
+    'incpath': [ project['includeDir'] ],
+    'libs' : [ 'python', 'stb4', 'coin' ]
+    }
+
+## NOTE: this script was NOT tested with Win32 yet!
+if sys.platform == 'win32':
+    pythonbindings['libs'] += "Coin2"
+
+
+# This is the list of targets the script will build. Each target is 
+# a dictionary that defines how to build the target itself.
+targetList = [ pythonbindings ]
+
+# This is required by the library scanning functions. The libraryList will
+# first be filled with the names defined in the 'libs' key of all the target'S
+# dictionaries. The libraryDict is used to order the resulting list to
+# optimize searching.
+libraryDict= {}
+libraryList= [ ]
+
+    #****************** default configuration ********************************
+    #   Copy up to here into your custom.py to create your own configuration
+    #*************************************************************************    
+
+env = Environment(ENV = os.environ)        
+
+# check whether we have to read configurations from a file and 
+# reconfigure the project, and target dictionaries accordingly
+if ARGUMENTS.has_key("READ_CONFIG_FILE"):
+    options = {}
+    if os.path.exists(ARGUMENTS["READ_CONFIG_FILE"]):
+        execfile(ARGUMENTS["READ_CONFIG_FILE"], options)
+        options.update(ARGUMENTS)
+        ARGUMENTS=options
+    else:
+        "File %s not found, configuring with COMMAND LINE arguments" %(ARGUMENTS["READ_CONFIG_FILE"])
+
+icgConfig.addConfigurationFromOpts(ARGUMENTS, project, targetList)
+
+#****************************************************************************
+#
+#     The following loop is the CONFIGURATION PIPELINE.
+#     Each target in targetList goes through a series of stages
+#     to get the apropriate configuration for its build
+#
+#****************************************************************************
+for target in targetList:
+    #***   NORMALIZE STAGE ***#
+    # normalize all targets so that they contain the required dictionary keys
+    icgConfig.normalizeTargetDict(target)
+
+    #***   ADD BUILD FLAGS STAGE ***#
+    # set default build flags for target
+    icgConfig.addDefaultBuildFlags(target, project['buildType'])
+
+    #***   ADD FLAGS FOR LIBRARIES STAGE  ***#
+    # get a list of necessary libraries from targets declarations
+    libraryList += target['libs']
+    target['libs'] = []
+    # search for the libraries 
+    libraryDict = icgConfig.scanForLibraries(libraryList, ARGUMENTS)
+
+    # add the libraries to be built in the dictionary
+    for t in targetList:
+        if t['name'] in libraryList:
+            libraryDict[t['name']] = {
+                'incpath' : [project['includeDir']],
+                'libpath' : [os.path.join(project['buildDir'], 'dll')],
+                'libs' : [t['name']],
+                'cflags': [],
+                'ldflags': []}
+
+    # add library flags to target
+    for keys in libraryDict:
+        target['cflags']  += libraryDict[keys]['cflags']
+        target['incpath'] += libraryDict[keys]['incpath']
+        target['libpath'] += libraryDict[keys]['libpath']
+        target['ldflags'] += libraryDict[keys]['ldflags']
+        target['libs']    += libraryDict[keys]['libs']
+
+    print "target.libs = ", target['libs']
+
+
+
+    #***  SEARCH FOR SOURCES STAGE  ***#
+    # find the sources for each target according to the predefined src_use and src_ignore
+    target['sources'] += icgConfig.findSources(project['src'], target['src_use'], target['src_ignore'], project['sourceFilter'], project['ignoreFilter'])
+
+if (sys.platform == 'win32' and project['buildType']=='debug'):
+    for target in targetList:
+        target['name'] += 'd'
+        if target.has_key('libs'):
+            for lib in target['libs']:
+                lib+='d'
+
+
+
+#***    ADD THE CONFIGURATION TO THE Scons Environment DICTIONARY  ***#
+#
+#write the options to the ARGUMENTS dictionary
+optionList = icgConfig.generateOptions(project, libraryDict, targetList)
+# create an options object and add the configuration to it
+autoOpts= Options( ARGUMENTS )
+
+
+#***    WRITE CONFIGURATION FILE IF REQUESTED   ***#
+#
+# write the default configuration to a file if necessary
+if ARGUMENTS.has_key('WRITE_CONFIG_FILE'):
+    for each in optionList:
+        # Because we want to write the default configuration to file,
+        # we need to trick scons to believe the defaults for everything
+        # are empty strings. 
+        autoOpts.Add(key=each[0], help=each[1], default='')
+        
+    autoOpts.Update(env)
+
+    for each in optionList:
+        # we add the defaults values to the environment itself
+        # after adding keys and strings
+        env[each[0]] = each[2]
+    
+    emptyenv= Environment(ENV = os.environ)
+    autoOpts.Save(ARGUMENTS['WRITE_CONFIG_FILE'], env)
+# just put the configuration in the environment otherwise
+else:
+    # we just want to add the values to the environment and provide
+    # a way to get help on the options. add the generated list to
+    # options and update the environment
+    for each in optionList:
+        autoOpts.Add(each)
+
+    autoOpts.Update(env)
+
+# generate help text for the command line options
+Help(autoOpts.GenerateHelpText(env))
+
+#==================    BUILD SECTION    ====================================
+#
+# In this section, the targets are compiled using the options from Scons options
+# dictionary.
+#
+#===========================================================================
+
+
+print "\n"
+print "============================================================"
+print "=      Configuration options for "+ project['name'] +" compile ="
+print "============================================================"
+
+################################################################################
+#### Generate swigpyrun.h C++ header file depending on locally installed SWIG version
+
+## Generates new swigpyrun.h C++ header file needed by Stb python binding
+def generate_swigpyrun_header():
+
+    from subprocess import call
+
+    target = os.path.abspath(project['includeDir'] + '/stb/components/pythonbindings/swigpyrun.h')
+    if os.path.isfile(target):
+        return 0
+    
+    swig_cmd = ((sys.platform == "win32" and "swig.exe") or "swig")
+    
+    try:
+        command = swig_cmd + ' -python -external-runtime ' + str(target)
+        ret = call(command, shell = True)
+        if ret != 0:
+            raise OSError('Command "' + command + '" returned with retval = ' + retval)
+
+    except OSError, e:
+        print >>sys.stderr, "--- ERROR: Generating SWIG python runtime header failed: ", e
+        return -1
+
+    return 0
+
+## the header file to generate
+generate_swigpyrun_header()
+
+## NOTE: The icgInstaller determines the header files to be installed by scanning the
+## include directory recursively. Cannot use a Command builder at this point, because the
+## file is generated "too late" and therefore not recognized during installation.
+
+################################################################################ END
+
+import icgCompile
+
+# compiling section
+
+[libs, dlls, prgs] = icgCompile.buildAll (env, env.Dictionary())
+
+# installing section
+
+import icgInstall
+
+if "install" in BUILD_TARGETS:
+    icgInstall.installAll(env, env.Dictionary(), libs, dlls, prgs)
+

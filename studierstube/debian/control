@@ -1,0 +1,26 @@
+Source: studierstube
+Priority: extra
+Maintainer: Alexander Bornik <bornik@icg.tugraz.at>
+Build-Depends: debhelper (>= 5), d-shlibs (>= 0.18), scons (>= 0.96), dh-buildinfo, pkg-config, libtinyxmlmod-dev, libartoolkitplus-dev, libopenvideo-dev, libopentracker2-dev
+Standards-Version: 3.7.2
+Section: libs
+
+Package: studierstube-dev
+Section: libdevel
+Architecture: any
+Depends: studierstube4 (= ${Source-Version}), ${devlibs:Depends}, pkg-config
+Description: Studierstube AR framework 
+  STUDIERSTUBE is a leading framework for the development of mobile, collaborative and ubiquitous AR applications. The development of the STUDIERSTUBE software platform started at Vienna University of Technology in 1996. Since 2004, the main research and development activities are carried out at Graz University of Technology.
+
+Package: studierstube4
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+Description: Studierstube AR framework 
+  STUDIERSTUBE is a leading framework for the development of mobile, collaborative and ubiquitous AR applications. The development of the STUDIERSTUBE software platform started at Vienna University of Technology in 1996. Since 2004, the main research and development activities are carried out at Graz University of Technology.
+
+Package: studierstube-doc
+Section: documentation
+Architecture: any
+Description: Studierstube AR framework 
+  STUDIERSTUBE is a leading framework for the development of mobile, collaborative and ubiquitous AR applications. The development of the STUDIERSTUBE software platform started at Vienna University of Technology in 1996. Since 2004, the main research and development activities are carried out at Graz University of Technology.

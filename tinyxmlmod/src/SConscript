@@ -1,0 +1,30 @@
+#!/usr/bin/python
+import glob
+import sys
+import os
+import re
+import buildutils
+
+Import ('user_options_dict')
+Import ('library_env')
+Import ('env')
+Import ('dlname')
+
+source_dir   = Dir('#').abspath + os.sep + 'src'
+source_files = buildutils.listtrav(source_dir, source_dir)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['SOURCE_FILTER'], True)
+source_files = buildutils.regexpfilter(source_files, user_options_dict['IGNORE_FILTER'], False)
+
+if sys.platform == 'darwin':
+	source_files.remove(os.path.join('TinyXML','TinyXMLMemManager.cpp'))
+
+all_source_files = source_files
+
+txmllib_env = library_env.Copy ()
+txmllib_env.Append(CPPPATH = ['..' + os.sep])
+txmllib_env.Append(CPPPATH = ['..' + os.sep + 'include'])
+
+if sys.platform == 'xx':
+	txmllib_env.Append(SHLINKFLAGS = otlib_env['SHLINKFLAGS'] + ' -Wl,-soname=$TARGET')
+
+txmllib = txmllib_env.SharedLibrary (target='#'+'lib'+ os.sep + dlname, source = all_source_files)

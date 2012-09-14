@@ -1,0 +1,76 @@
+// OTGraph.idl
+#ifndef _OTGRAPH_IDL
+#define _OTGRAPH_IDL
+
+// OpenTracker specific pragma to insert extra includes into the stub header.
+#pragma hh #include <OpenTracker/skeletons/OT_sysdep.h>
+
+module OTGraph {
+  exception IndexOutOfRange {};
+  exception GraphRulesViolation {};
+  exception NotChildNode {};
+  exception AttributeNonExistent {};
+  exception UnsupportedAttribute {};
+  exception InvalidAttribute {};
+  exception NodesNotConnected {};
+  exception NodeNonExistent {};
+  exception EdgeNonExistent {};
+  exception PropertyNonExistent {};
+
+  struct KeyValuePair {
+    string Key;
+    string Value;
+  };
+  
+  typedef sequence<KeyValuePair> StringTable;
+  typedef float Position3f[3];
+  typedef float Quaternion4f[4];
+
+  interface Node {
+    string get_type();
+    string get_name();
+    string get_id();
+    string get_attribute(in string key) raises (UnsupportedAttribute);
+    StringTable get_attributes();
+    void set_attribute(in string key, in string value) raises (UnsupportedAttribute, InvalidAttribute);
+  };
+
+  interface StaticTransformation : Node {
+    void set_translationXYZ(in float x, in float y, in float z);
+    void set_translation(in Position3f pos);
+    Position3f get_translation();
+    void get_translationXYZ(out float x, out float y, out float z);
+    void set_quaternion(in Quaternion4f ori);
+    void set_quaternionXYZW(in float qx, in float qy, in float qz, in float qw);
+    Quaternion4f get_quaternion();
+    void get_quaternionXYZW(out float qx, out float qy, out float qz, out float qw);
+    Position3f get_scale();
+    void get_scaleXYZ(out float sx, out float sy, out float sz);
+    void set_scaleXYZ(in float sx, in float sy, in float sz);
+    void set_scale(in Position3f scale);
+  };
+
+  struct Edge {
+    Node sender;
+    Node receiver;
+  };
+
+  typedef sequence<Node> NodeVector;
+  typedef sequence<Edge> EdgeVector;
+
+  interface DataFlowGraph {
+    Node create_node(in string name, in StringTable attributes);
+    Node get_node(in string id) raises (NodeNonExistent);
+    void remove_node(in Node removalNode) raises (NodeNonExistent);
+    string getXMLString();
+    string getDot();
+    Edge connect_nodes(in Node sendingNode, in Node receivingNode) raises (NodeNonExistent);
+    void disconnect_nodes(in Node sendingNode, in Node receivingNode) raises (NodeNonExistent, NodesNotConnected);
+    void remove_edge(in Edge e) raises (NodeNonExistent, NodesNotConnected);
+    EdgeVector get_edges();
+    NodeVector get_nodes();
+  };
+
+};
+
+#endif

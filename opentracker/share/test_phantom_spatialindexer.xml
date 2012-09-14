@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <CORBAConfig/>
+  </configuration>
+  <PushSupp name="EventChannel">
+    <PhantomZoneSource group="225.0.2.2" zid="110" oid="100" enterid="7" exitid="8"/>
+  </PushSupp>
+  <PushSupp name="EventChannel">
+    <PhantomZoneSource group="225.0.2.2" zid="128" oid="100" enterid="7" exitid="8"/>
+  </PushSupp>
+</OpenTracker>

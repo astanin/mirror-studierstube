@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project XSL_XMLUseSet="Yes" XSL_XMLUseFile=".\ot2dot.xsl" XSL_XSLUseSet="Yes" XSL_XSLUseFile=".\test.xml" XSL_DestFolderSet="Yes" XSL_DestFolder=".\" XSL_DestFileExtSet="Yes" XSL_DestFileExt=".txt">
+	<Folder FolderName="XML Files" ExtStr="xml;cml;math;mtx;rdf;smil;svg;wml">
+		<File FilePath=".\calc.xml" HomeFolder="Yes"/>
+		<File FilePath=".\debug.xml" HomeFolder="Yes"/>
+		<File FilePath=".\magnetic.xml" HomeFolder="Yes"/>
+		<File FilePath=".\mobile.xml" HomeFolder="Yes"/>
+		<File FilePath=".\test.xml" HomeFolder="Yes"/>
+		<File FilePath=".\workstation.xml" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="XSL Files" ExtStr="xsl;xslt">
+		<File FilePath=".\ot2dot.xsl" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="HTML Files" ExtStr="html;htm;xhtml;asp"/>
+	<Folder FolderName="DTD/Schemas" ExtStr="dtd;dcd;xdr;biz;xsd">
+		<File FilePath=".\opentracker.dtd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="Entities" ExtStr="ent"/>
+</Project>

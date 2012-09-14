@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.145.114" debug="on" />-->
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="129.27.201.211" debug="on" />-->
+     <!--<MobilabConfig dev="/dev/ttyUSB0" logfile="rawlog.dat" loghost="192.168.123.101" debug="on" />-->
+     <MobilabConfig dev="/dev/rfcomm0"  debug="on" loghost="129.27.201.211"/>
+
+  </configuration>
+  
+  <NetworkSink mode="unicast" 
+	       name="heartrate station" 
+	       number="0" 
+	       port="12002" >
+    <EEGFilter 
+        frequencies = "6.25 8.0"
+	inattrname="bcidata4"
+	outattrname="eegdecision" 
+	samplerate="256.0"
+	harmonics="3"
+	prepause="4000"
+	postpause="2000"
+	interpause="1000"
+	codeduration="4000"
+	threshold="1.0"
+	hitpercentage="80.0"
+	consume="false">
+      <MobilabSource channel="4" datatype="DOUBLE" attname="bcidata4"/>
+    </EEGFilter>
+  </NetworkSink>
+
+  <!--<NetworkSink mode="unicast" 
+	       name="EEG station" 
+	       number="1" 
+	       port="12002" >
+      <MobilabSource channel="0" datatype="FLOAT" attname="bcidata0"/>
+  </NetworkSink>-->
+  
+</OpenTracker>

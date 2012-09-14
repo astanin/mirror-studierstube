@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="My Output" interval="1"/>
+  </configuration>
+
+  <ConsoleSink comment="Test Source 1">
+    <NetworkSource mode="unicast" address="127.0.0.1" number="1" port="12101" />
+    <!--<NetworkSource mode="unicast" address="127.0.0.1" number="1" port="12103" />-->
+  </ConsoleSink>
+  <ConsoleSink comment="Test Source 2">
+     <TestSource frequency="10" noise="0.1" />
+  </ConsoleSink>
+
+
+</OpenTracker>

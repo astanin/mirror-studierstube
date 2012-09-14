@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">-->
+<OpenTracker>
+  <configuration>
+    <NetworkSourceConfig />
+    <EventConfig keyevents="on" mouseevents="on"/>
+    <ConsoleConfig headerline="Network Output" interval="1"/>
+  </configuration>
+  
+  <ConsoleSink comment="Test Source 0" active="on">
+  	<!--<EventTransform translation="1 1 1">
+      		<TestSource offset="0" frequency="10"/>
+    	</EventTransform>-->
+    	<NetworkSource number="0" mode="unicast" address="10.0.0.1" port="123450"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 1" active="on">
+    	<NetworkSource number="1" mode="unicast" address="10.0.0.1" port="123451"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 2" active="on">
+    	<NetworkSource number="2" mode="unicast" address="10.0.0.1" port="123452"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 3" active="on">
+    	<NetworkSource number="3" mode="unicast" address="10.0.0.1" port="123453"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 4" active="on">
+    	<NetworkSource number="4" mode="unicast" address="10.0.0.1" port="123454"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 5" active="on">
+    	<NetworkSource number="5" mode="unicast" address="10.0.0.1" port="123455"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="Test Source 6" active="on">
+    	<NetworkSource number="6" mode="unicast" address="10.0.0.1" port="123456"/>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="PTU Viewer Location" active="on">
+    	<NetworkSource number="20" mode="unicast" address="10.0.0.1" port="1234520"/>
+  </ConsoleSink>
+  
+  
+  
+</OpenTracker>

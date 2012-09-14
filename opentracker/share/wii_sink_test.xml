@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="My Output" interval="1"/>
+    <CallforwardConfig></CallforwardConfig>
+  </configuration>
+
+  <ConsoleSink comment="WiiSource 1" active="on">
+    <EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0"> 
+      
+	<WiiSource />
+    </EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0">
+  </ConsoleSink>
+	
+  <WiiSink >
+    <Callforward name="cf1"/>
+  <WiiSink/>
+ 
+  <ConsoleSink comment="Test Source 2">
+    <EventTransform translation="1 1 1" scale="1 1 1"
+    rotationtype="euler" rotation="0 0 0"> 
+      
+	<TestSource frequency="0.2" offset="500000" noise="0.1" />
+    </EventTransform>
+  </ConsoleSink>
+
+</OpenTracker>

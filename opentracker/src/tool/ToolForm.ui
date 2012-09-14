@@ -1,0 +1,73 @@
+<!DOCTYPE UI><UI>
+<class>ToolForm</class>
+<comment>This form contains two parts. 
+The upper table displays consolesinks
+and the lower text field displays log messages.</comment>
+<author>Gerhard Reitmayr</author>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>ToolForm</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>732</width>
+            <height>617</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>OpenTracker Tool</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <widget>
+            <class>QTable</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>output</cstring>
+            </property>
+            <property stdset="1">
+                <name>numCols</name>
+                <number>6</number>
+            </property>
+        </widget>
+        <widget>
+            <class>QTextView</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>log</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>StyledPanel</enum>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+</UI>

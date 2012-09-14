@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <ConsoleConfig headerline="Network Unicast Test Server" interval="1"/>
+  </configuration>
+  <ConsoleSink comment="NetworkSink 0">
+    <NetworkSink  mode="unicast" name="UCNS0" number="0" port="12001"> 
+      <EventUtility create="string debugstr this_is_a_debug_string">
+	<TestSource position="0 0 0" noise="0.5" frequency="10"/>
+      </EventUtility>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSink 1">
+    <NetworkSink  mode="unicast"  name="UCNS1" number="1" port="12001">
+      <TestSource position="1 1 1" noise="0.5" frequency="10"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSink 2">
+    <NetworkSink  mode="unicast"  name="UCNS2" number="2" port="12001">
+      <TestSource position="2 2 2" noise="0.5" frequency="10"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSink 3">
+    <NetworkSink  mode="unicast"  name="UCNS3" number="3" port="12001">
+      <TestSource position="3 3 3" noise="0.5" frequency="10"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSink 4">
+    <NetworkSink  mode="unicast"  name="UCNS4" number="4" port="12001">
+      <TestSource position="4 4 4" noise="0.5" frequency="10"/>
+    </NetworkSink>
+  </ConsoleSink>
+  <ConsoleSink comment="NetworkSink 5">
+    <NetworkSink  mode="unicast" name="UCNS5" number="5" port="12001">
+       <TestSource position="5 5 5" noise="0.5" frequency="10"/>
+    </NetworkSink>
+  </ConsoleSink>
+</OpenTracker>

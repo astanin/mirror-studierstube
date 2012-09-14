@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+      <CORBAConfig/>
+  </configuration>
+  <PushSupp name="EventChannel">
+      <TestSource position="0 1 2" noise="0.5" frequency="10"/>
+  </PushSupp>
+  <FileSink file="test.out">
+      <PushCons name="EventChannel"/>
+  </FileSink>
+</OpenTracker>

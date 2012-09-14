@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE OpenTracker SYSTEM "opentracker.dtd">
+<OpenTracker>
+  <configuration>
+    <NetworkSinkConfig name="bla"/>
+    <ConsoleConfig headerline="Sample Output" interval="1" display="on"/>
+     <ARTDataTrackerConfig port="5000"/>
+  </configuration>
+<!--TestSource frequency="10000" noise="10"/-->		
+  <ConsoleSink comment="ART SRC 0">
+      <NetworkSink  mode="multicast" name="station name" number="0" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="0 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="0"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+  
+  <ConsoleSink comment="ART SRC 1">
+      <NetworkSink  mode="multicast" name="station name" number="1" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="0 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="1"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+  
+    <ConsoleSink comment="ART SRC 2">
+      <NetworkSink  mode="multicast" name="station name" number="2" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="0 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="2"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+ 
+   <ConsoleSink comment="ART SRC 3">
+      <NetworkSink  mode="multicast" name="station name" number="3" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="0 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="3"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+  
+    <ConsoleSink comment="ART SRC 4">
+      <NetworkSink  mode="multicast" name="station name" number="4" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="3.14 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="4"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+  
+    <ConsoleSink comment="ART SRC 5">
+      <NetworkSink  mode="multicast" name="station name" number="5" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3">
+        <EventTransform translation="0 0.00001 0" rotation="0 0 0" rotationtype="euler"  scale="0.001 0.001 0.001" >			 
+				<ARTDataTrackerSource number="5"/> 
+        </EventTransform>
+      </NetworkSink>
+  </ConsoleSink>
+  
+
+ <!--NetworkSink  mode="multicast" name="station name" number="1" multicast-address="224.0.0.10" port="12345" interface="192.168.0.3" >
+    <Ref USE="trdata1" />
+  </NetworkSink-->
+ 
+  
+</OpenTracker>

@@ -1,0 +1,46 @@
+Install Guide for Linux:
+========================
+
+The build system of Studierstube 4.0 is based on SCons. Please,
+download and install SCons first before starting the Studierstube
+compilation. SCons is available from this website http://www.scons.org.
+
+The Studierstube 4.0 relies on the following 3rd party libraries which
+must also be installed first:
+
+- ACE (http://deuce.doc.wustl.edu/Download.html)
+- TinyXML (http://www.grinninglizard.com/tinyxml/)
+- Coin and SoQt (http://www.coin3d.org)
+- OpenTracker (http://www.studierstube.org/opentracker)
+- boost 1.3.1.0 (http://www.boost.org/)
+
+Optionally:
+
+- OpenVideo (SVN repository only, contact <denis@icg.tu-graz.ac.at>)
+
+The above libraries should preferably be installed
+system-wide. However, default locations can be changed in the file
+config.opts, which is generated after calling SCons first.
+
+For starting the compile process, only type
+
+scons
+
+in the command prompt and you should result in having the basic
+Studierstube libraries and an executable. Both can be found in
+the build/linux directory. For installing the Studierstube
+system-wide, just write
+
+scons install
+
+with root privileges. To clean up the source use
+
+scons -c
+
+If you have any questions concerning the Linux build system for
+Studierstube 4.0, write to <breiting@icg.tu-graz.ac.at>.
+
+For general dependencies please also read INSTALL_win32.txt
+
+Have fun,
+Bernhard Reitinger

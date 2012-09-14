@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openvideo scheduleMode="timer" updateRate="30">
+
+	<ImageSrc pixelformat="R8G8B8" width="320" height="240" delay="0.5"
+	  image0="image0.jpg"
+	  image1="image1.jpg"
+	>
+
+		<GLUTSink name="glsink1" pixelformat="R8G8B8"/> 
+		<!-- <GL_TEXTURE_2D_Sink name="stbSink" pixelformat="B8G8R8"/> -->
+
+	</ImageSrc>
+
+</openvideo>
